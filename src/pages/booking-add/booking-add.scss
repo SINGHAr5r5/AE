@@ -1,0 +1,248 @@
+page-booking-add {
+    ion-calendar .calendar-row .today{
+        color: #989898 !important;
+        background: #eee !important;
+        box-shadow: unset !important;
+    }
+    .module-border-wrap {
+        max-width: 250px;
+        padding: 1rem;
+        position: relative;
+        background: linear-gradient(to right, #d92e6e , #c7429d);
+        padding: 2px;
+      }
+    .module-border-wrap span.button-inner{
+        padding: 0px 2.6rem;
+        background: #fff;
+        color: #565656;
+        border-radius: 50px;
+    }
+    
+    .module {
+        background: #222;
+        color: white;
+        padding: 2rem;
+    }
+    .tagText{
+        color: #888;
+        font-size: 14px;   
+    }
+    .nameStore{
+        color: #3e3e3e;
+        font-size: 20px;
+    }
+    .inlineBlog{
+        display: inline-block;
+    }
+    .banner{
+        padding: 10px !important;
+    }
+    .slideImg{
+        background-size: cover !important;
+        background-position: center !important;
+    }
+    .imgBorder{
+        padding: 15px !important;
+    }
+    .imgSlide{
+        height: 170px;
+    }
+    .nameBooking{
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        color: #7f47c6;
+        font-size: 18px;
+    }
+    .times{
+        color: #888;
+        font-size: 16px;    
+    }
+    .container {
+        margin-right: 5px !important;
+        display: inline-block;
+        text-align: center;
+        margin-top: 30px;
+      }
+      .button_border {
+        color: #8855d6;
+        background: linear-gradient(to right, #c9407a , #7f47c6);
+        border-radius: 8px;
+        display: inline-block;
+        font-size: 8px;
+        padding: 1px;
+        text-decoration: none;
+        vertical-align: middle;
+      }
+      .button_border span {
+        background: #fff;
+        display: block;
+        padding: 0px 10px;
+        border-radius: 6px;
+        
+      }
+    .locationBooking{
+        padding-top: 5px !important;
+        color: #8c8c8c;
+        font-size: 13px;
+        border-bottom: solid 0.5px #c1c1c1;
+        margin-left: 15px !important;
+        margin-right: 15px !important;
+        padding-bottom: 15px !important;
+    }
+    .captionpost{
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: 100% 0.6px;
+        background-image: linear-gradient(to right, #c9407a 0%, #7f47c6 100%);
+    }
+    .borderimgage{
+        width: 39px;
+        height: 39px;
+        position: relative;
+        border-radius: 50%;
+        background-image: linear-gradient(to right, #7f47c6 , #c9407a);
+    }
+    
+    .imgpro{
+        border-radius: 50% !important;
+        width: 35px !important;
+        height: 35px !important;
+        position: absolute !important;
+        right: 0;
+        left: 0;
+        top: 0 !important;
+        bottom: 0 !important;
+        margin: auto !important;
+        object-fit: cover !important;
+        border: unset;
+    }
+    .nameOfficial{
+        font-size: 18px;
+        color: #4c4c4c;
+    }
+    .activateTime{
+        color: #8c8c8c;
+        font-size: 14px;
+    }
+    .padding15{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .borderTag {
+        position: relative;
+        border-radius: 16px;
+        background: #fff;
+        display: inline-block;
+        padding: 1px 10px !important;
+        font-size: 10px;
+        color: #7f47c6;
+    }
+    .Tag{
+        font-size: 11px;
+        color: #8d8d8d;
+        padding-right: 0px;
+        margin: auto !important;
+    }
+    .borderTag::after {
+        position: absolute;
+        top: -1px;
+        bottom: -1px;
+        left: -1px;
+        right: -1px;
+        background: linear-gradient(to right, #c9407a 0%, #7f47c6 100%);
+        content: '';
+        z-index: -1;
+        border-radius: 16px;
+    }
+    .borderBottom{
+        border-bottom: 0.6px solid #c1c1c1;
+        padding-bottom: 10px;
+    }
+    .textTitle{
+        font-size: 17px;
+        color: #6f6f6f;
+    }
+    .tripDateframe{
+        border: solid #c1c1c1 1px;
+        border-radius: 20px;
+        padding: 10px !important; 
+        text-align: center;
+    }
+    .textInput{
+        font-size: 15px;
+        color: #919191;
+    }
+    .textCard{
+        font-size: 16px;
+        color: #6f6f6f;
+
+    }
+    .textLeft{
+        text-align: left;
+    }
+    .textRight{
+        text-align: right;
+    }
+    .not-this-month{
+        pointer-events: none;
+    }
+    .calendar{
+        text-align: center;
+    }
+    .btnCalendar{
+        min-width: 120px;
+    }
+    .iconCount::before{
+        width: unset !important;
+        height: unset !important;
+        padding: 15px;
+        margin: -15px;
+    }
+    .iconRemove{
+        margin-left: 15px;
+        float: left;
+    }
+    .iconAdd{
+        margin-right: 15px;
+        float: right;
+    }
+    .borderItem{
+        border: solid 1px #c1c1c1 !important;
+        border-radius: 25px;
+    }
+    .selectPoint{
+        text-align: center;
+        width: 97%;
+    }
+    .icon-arrow-right:before {
+        margin-top: -12px;
+        right: 20px;
+    }
+    .autosearchList{
+        background: transparent;
+        margin: auto !important;
+        padding: 0px 15px;
+        height: 250px;
+        overflow: scroll;
+        position: absolute !important;
+        z-index: 111;
+        left: 0;
+        right: 0;
+        box-shadow: unset !important;
+    }
+    .cardmeet{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    ion-calendar > .grid > .row > .col > .ion-ios-arrow-back:before {
+        width: unset !important;
+    }
+    ion-calendar > .grid > .row > .col > .ion-md-arrow-back:before{
+        background-image: unset;
+        position: unset !important;
+        height: unset !important;
+        width: unset !important;
+        margin: unset !important;
+        content: "\f27d";
+    }
+}

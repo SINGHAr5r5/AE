@@ -1,0 +1,98 @@
+page-bookingdetail {
+    .scroll-content{
+        background: #F8F8F8 !important;
+    }
+    .ion-ios-arrow-back:before{
+        color: #212121;
+    }
+    .toolbar-background{
+        background-image: unset !important;
+    }
+    .ion-md-arrow-back:before{
+        content: "\f3cf" !important;
+        position: relative !important;
+        background-repeat: unset !important;
+        background-position: unset !important;
+        background-image: unset !important;
+        background-size: unset !important;
+        width: unset !important;
+        height: unset !important;
+        margin-top: unset !important;
+        left: unset;
+    }
+    .back-button{
+        margin: 0;
+        width: 30px;
+        min-width: 20px;
+    }
+    #map {
+        width: 100%;
+        height: 250px;
+    }
+    .Imgs{
+        background-position: center !important;
+        background-size: cover !important;
+        width: 100% !important;
+        padding-top: 100% !important;
+    }
+    p{
+        margin: 5px;
+    }
+   
+    ion-icon::before{
+        width: unset !important;
+        height: unset !important;
+        display: inline-block !important;
+    }
+    .pingIcon{
+        width: 15px;
+        margin: auto;
+        margin-left: 0;
+    }
+    .seeMore{
+        font-size: 18px;
+        color: #E82064;
+        font-weight: bold;
+    }
+    .textcenter{
+        text-align: center;
+    }
+    .textcemment{
+        color: #8F8F8F;
+    }
+    .starActive:before {
+        color: #FFDD00 !important;
+    }
+    .slidePrev{
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        font-size: 25px;
+        z-index: 2;
+        color: #696969;
+        border-radius: 50%;
+        background: #ffffffb3;
+        width: 35px;
+        height: 35px;
+        display: inline-flex;
+    }
+    .slideNext{
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        font-size: 25px;
+        z-index: 2;
+        color: #696969;
+        border-radius: 50%;
+        background: #ffffffb3;
+        width: 35px;
+        height: 35px;
+        display: inline-flex;
+    }
+}
+ion-app.md page-bookingdetail [padding] .scroll-content {
+    background: #F8F8F8;
+    padding-top: 0px!important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}

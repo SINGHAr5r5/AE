@@ -1,0 +1,234 @@
+<ion-header style="box-shadow: unset;">
+    <ion-navbar>
+        <button ion-button small clear (click)="back()">
+      <ion-icon name="ios-arrow-back"></ion-icon>
+    </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+
+
+    <ion-slides>
+
+
+
+
+
+        <ion-slide *ngIf="dataFB == undefined && dataApple == undefined">
+            <div class="Title">Sign up</div>
+            <form [formGroup]="dataGroup1" (ngSubmit)="check1()">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label stacked>
+                                    <span class="textField">E-mail</span>
+                                    <span class="requeid" *ngIf="!dataGroup1.value.email">*</span>
+                                    <br>
+                                    <span class="detailField">Email ( in case you forgot your Username and Password )</span>
+                                </ion-label>
+                                <ion-input type="text" formControlName="email">
+                                </ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>
+                                    <span class="textField">Username</span>
+                                    <span class="requeid" *ngIf="!dataGroup1.value.username">*</span>
+                                    <br>
+                                    <span class="detailField">At least 6 - 20 characters for Username and Password</span>
+                                </ion-label>
+                                <ion-input type="text" formControlName="username"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>
+                                    <span class="textField">Password</span>
+                                    <span class="requeid" *ngIf="!dataGroup1.value.password">*</span>
+                                </ion-label>
+                                <ion-input type="password" formControlName="password"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>
+                                    <span class="textField">Conﬁrm your Password</span>
+                                    <span class="requeid" *ngIf="!dataGroup1.value.conpassword">*</span>
+                                </ion-label>
+                                <ion-input type="password" formControlName="conpassword"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-12 style="text-align: center;padding-top: 100px;">
+                            <div style="font-size: 12px;color: #A53C60;" *ngIf="typeRegister == 2">For Business Owner</div>
+                            <button style="background: linear-gradient(90deg, rgba(232,32,100,1) 0%, rgba(233,43,107,1) 35%, rgba(174,82,158,1) 100%);width: 200px;
+            border-radius: 10px;" ion-button type="submit" [disabled]="!dataGroup1.valid">Next</button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </form>
+        </ion-slide>
+
+
+        <ion-slide *ngIf="statusPage">
+            <form [formGroup]="dataGroup2" (ngSubmit)="check2()">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <div style="text-align: center;">
+                                <div class="imgPost">
+                                    <div style="margin: auto;" *ngIf="!dataGroup2.value.imageData" (click)="presentActionSheet()">
+                                        <img src="./assets/icon/imgIconss.svg" alt="" style="width: 40%;">
+                                        <div style="font-size: 12px;color: #656565;">Proﬁle Picture <span class="requeid">*</span></div>
+                                    </div>
+                                    <div class="imagePro" style="margin: auto;width: 100%;height: 100%;background-size: cover !important;background-position: center !important;border-radius: 50%;" *ngIf="dataGroup2.value.imageData" [ngStyle]="{'background': 'url('+ dataGroup2.value.imageData +')'}">
+                                    </div>
+                                    <ion-icon name="add-circle" style="position: absolute;bottom: 15px;right: 0;" (click)="presentActionSheet()"></ion-icon>
+                                </div>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <!-- <ion-input type="text" formControlName="country"> </ion-input> -->
+                            <ion-item>
+                                <ion-label stacked>
+                                    <span class="textField">Country</span>
+                                    <span class="requeid" *ngIf="STHide == 0">*</span>
+                                    <span class="detailField" *ngIf="STHide == 1">(optional)</span>
+                                </ion-label>
+                                <div item-content style="width: 100%;">
+                                    <select class="js-example-basic-single" [(ngModel)]="countryChooser" id="country" formControlName="country" style="padding: 2px;border-bottom: 1px; border-bottom-style: solid; margin-bottom: 10px;" (change)="onChangeHandler('country',$event)">
+                                        <option *ngFor="let country of country;let i = index" [attr.data-index]='i' selected [value]="country.country_id">{{country.country_name_en}}</option>
+                                    </select>
+
+                                    <!--
+                                    <ion-select id="country" interface="popover" [(ngModel)]="countryChooser" id="country" formControlName="country" style="padding: 2px;border-bottom: 1px; border-bottom-style: solid; margin-bottom: 10px;" (onchange)="onChangeHandler($event)">
+                                        <ion-option *ngFor="let country2 of country" [value]="country2.country_name_en"> {{country2.country_name_en}}</ion-option>
+                                    </ion-select> -->
+
+                                    <!-- <select class="js-example-basic-single" [(ngModel)]="countryChooser" id="country" formControlName="country" style="padding: 2px;border-bottom: 1px; border-bottom-style: solid; margin-bottom: 10px;" (onchange)="onChangeHandler($event)">
+                                      <option *ngFor="let country of country;let i = index" [attr.data-index]='i' [value]="country.country_id">{{country.country_name_en}} 22222</option>
+                                  </select>
+                                    <select class="js-example-basic-single" [(ngModel)]="countryChooser" id="country" formControlName="country" style="padding: 2px;border-bottom: 1px; border-bottom-style: solid; margin-bottom: 10px;" (onchange)="onChangeHandler($event)">
+                                    <option *ngFor="let country of country;let i = index" [attr.data-index]='i' [ngValue]="country.country_name_th">{{country.country_name_en}} 333333</option>
+                                </select> -->
+                                </div>
+                            </ion-item>
+
+                            <ion-item>
+                                <ion-label stacked>
+                                    <span class="textField">First Name</span>
+                                    <span class="requeid">*</span>
+                                </ion-label>
+                                <ion-input type="text" formControlName="fname">
+                                </ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>
+                                    <span class="textField">Last Name</span>
+                                    <span class="requeid">*</span>
+                                </ion-label>
+                                <ion-input type="text" formControlName="lname">
+                                </ion-input>
+                            </ion-item>
+                            <ion-item *ngIf="typeRegister == 2">
+                                <ion-label stacked>
+                                    <span class="textField">Experience by</span>
+                                    <span class="requeid">*</span>
+                                </ion-label>
+                                <ion-input type="text" formControlName="storeName">
+                                </ion-input>
+                            </ion-item>
+                            <ion-item *ngIf="typeRegister == 2">
+                                <ion-label stacked>
+                                    <span class="textField">Your store location</span>
+                                    <span class="requeid">*</span>
+                                </ion-label>
+                                <div item-content style="width: 100%;position: relative;" (click)="more()">
+                                    <div for="country" class="divnone width100 page2" *ngIf="!data.location">{{locationSet}}</div>
+                                    <div for="country" class="divnone width100" *ngIf="data.location">{{locationSet}}</div>
+                                    <ion-icon class="iconDown pingIcon"></ion-icon>
+                                    <ion-input type="hidden"></ion-input>
+                                </div>
+                            </ion-item>
+                            <ion-item *ngIf="typeRegister == 2">
+                                <ion-label stacked>
+                                    <span class="textField">Telephone Number</span>
+                                    <span class="requeid">*</span>
+                                </ion-label>
+                                <ion-input type="tel" formControlName="phone" maxlength="10" pattern="[0-9]+([\,|\.][0-9]+)?" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                </ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label stacked>
+                                    <span class="textField">Gender</span>
+                                    <span class="requeid" *ngIf="STHide == 0">*</span>
+                                    <span class="detailField" *ngIf="STHide == 1">(optional)</span>
+                                </ion-label>
+                                <ion-grid item-content style="padding: 0px;" class="genders">
+                                    <ion-row radio-group ngControl="sex" (ionChange)="onChangeHandler('gender',$event)">
+                                        <ion-col col-6 style="padding: 0;">
+                                            <ion-item no-lines style="background: transparent;padding-bottom: 10px;">
+                                                <ion-label stacked>
+                                                    <span class="textField">Male</span>
+                                                </ion-label>
+                                                <ion-radio item-left mode="md" [value]="1"></ion-radio>
+                                            </ion-item>
+                                        </ion-col>
+                                        <ion-col col-6 style="padding: 0;">
+                                            <ion-item no-lines style="background: transparent;padding-bottom: 10px;">
+                                                <ion-label stacked>
+                                                    <span class="textField">Female</span>
+                                                </ion-label>
+                                                <ion-radio item-left mode="md" [value]="2"></ion-radio>
+                                            </ion-item>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-item>
+
+                            <ion-item>
+                                <ion-label stacked>
+                                    <span class="textField">Date of Birth</span>
+                                    <span class="requeid" *ngIf="STHide == 0">*</span>
+                                    <span class="detailField" *ngIf="STHide == 1">(optional)</span>
+                                </ion-label>
+                                <ion-datetime class="padding5" id='dateBirth' displayFormat="DD/MM/YYYY" formControlName="date" style="padding: 0px;"></ion-datetime>
+                            </ion-item>
+
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <table style="margin-left: auto;margin-right: auto;margin-bottom: 20px;margin-top: 20px;">
+                                <tr>
+                                    <td id="btnNone">
+                                        <ion-checkbox ngControl="termsAccepted" (ionChange)="onTermsChecked($event)"></ion-checkbox>
+                                    </td>
+                                    <td style="vertical-align: top;padding-left: 5px;">
+                                        <div style="color: #8e8c8c;" class="font15" (click)="gd.nextpage(navCtrl, 'TermsandPolicyPage',{})">
+                                            I Accept
+                                            <span style="color: #1b75bb;text-decoration: underline;">Terms and Policies</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-12 style="text-align: center;">
+                            <div style="font-size: 12px;color: #A53C60;" *ngIf="typeRegister == 2">For Business Owner</div>
+                            <button style="background: linear-gradient(90deg, rgba(232,32,100,1) 0%, rgba(233,43,107,1) 35%, rgba(174,82,158,1) 100%);width: 200px;
+              border-radius: 10px;" ion-button type="submit" [disabled]="!dataGroup2.valid">Finish</button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </form>
+        </ion-slide>
+
+    </ion-slides>
+
+
+
+</ion-content>

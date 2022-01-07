@@ -1,0 +1,278 @@
+<ion-header>
+  <ion-navbar>
+    <!-- <ion-buttons start style="order: 0;" (click)="scrollTopFN()">
+      <button ion-button icon-only style="" class="">
+        <img style="position: relative;width: 20px;" src="./assets/icon/logotree.svg" alt="">
+      </button>
+      <button ion-button icon-only style="" class="">
+        <div style="position: relative;color: #000;font-weight: bold;font-size: 14px;">Adventure Earth</div>
+      </button>
+    </ion-buttons> -->
+    <ion-buttons end>
+      <button ion-button icon-only style="" class="" (click)="goProfile(gd.userProfile)">
+        <img style="position: relative !important;;margin-right: 10px !important;;height: 30px !important;;width: 30px !important;;"
+          id="img_profile" class="imgpro" [src]="gd.userProfile.user_path_img" />
+      </button>
+      <button ion-button icon-only style="" class="" (click)="presentPopover($event)">
+        <img style="position: relative;margin-right: 10px;" src="./assets/icon/menu-icon.svg" alt="">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding style="background: #F8F8F8;">
+  <!-- <img src="http://www.myadventureearth.com/data/data_photos/1013/img_resize/1544259800.2018-12-08-16-03-2035527.jpg" alt=""> -->
+  <ion-grid style="padding: 0;    background: transparent;">
+    <ion-row style="    background: #fff;">
+      <ion-col>
+        <div>
+          <div class="slidePrev" (click)="slidePrev()">
+            <ion-icon name="ios-arrow-back" style="margin: auto;"></ion-icon>
+          </div>
+          <div class="slideNext" (click)="slideNext()">
+            <ion-icon name="ios-arrow-forward" style="margin: auto;"></ion-icon>
+          </div>
+          <ion-slides slidesPerView='1' #slideP *ngIf="getData.length != 0">
+            <ion-slide *ngFor="let images of getData.img">
+              <div class="Imgs" [ngStyle]="{'background': 'url('+images.img_resize+')'}"></div>
+            </ion-slide>
+          </ion-slides>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="font-size: 17px;">
+        {{getData.packet_name}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <img class="pingIcon" style="margin-left: 0;vertical-align: middle;" src="./assets/icon/ping-icon.svg" alt="">
+        <span *ngIf="getData.length != 0" style="color: #1B75BB;vertical-align: middle;">{{getData.province.province_name_en}}</span>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col>
+
+      </ion-col>
+    </ion-row> -->
+    <ion-row style="background: #F2EEF2;margin: 0 -5px;margin-bottom: 10px;">
+      <ion-col col-2 style="display: inline-flex;">
+        <img *ngIf="getData.length != 0" style="margin-right: 10px;height: 50px;width: 50px;margin: auto;" [src]="getData.user.user_path_img"
+          id="img_profile" class="imgpro" />
+      </ion-col>
+      <ion-col col-6 style="display: inline-flex;" (click)="goProfile(getData.user)">
+        <span style="margin: auto;margin-left: 0;">
+          <div>Experience by</div>
+          <div *ngIf="getData.length != 0" style="color: #1B75BB;">{{getData.user.user_firstname}} {{getData.user.user_lastname}}
+          </div>
+        </span>
+      </ion-col>
+      <ion-col col-4 style="display: inline-flex;">
+        <div style="margin: auto;" (click)="goChat()" *ngIf="gd.userProfile.user_id != getData.user.user_id">
+          <img src="./assets/icon/iconMessage.svg" class="" alt="" style="vertical-align: middle;width: 20px;">
+          <span style="color: #1B75BB;vertical-align: middle;">Message</span>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row style="text-align: center;" style="text-align: center;border: 1px solid #A6ADB4;color: #A6ADB4;    margin: 5px;
+    margin-left: 15px; margin-right: 15px;padding-top: 10px;padding-bottom: 10px;">
+      <ion-col col-4>
+        <img src="./assets/icon/icon-clock.svg" class="" alt="" style="vertical-align: middle;width: 20px;">
+        <div>Starting time</div>
+        <div *ngIf="getData.length != 0">{{getData.timeable[0].timeable_time}}</div>
+      </ion-col>
+      <ion-col col-4>
+        <img src="./assets/icon/icon-sand.svg" class="" alt="" style="vertical-align: middle;width: 20px;">
+        <div>Duration</div>
+        <div>{{getData.package_time}}</div>
+      </ion-col>
+      <ion-col col-4>
+        <img src="./assets/icon/icon-peple.svg" class="" alt="" style="vertical-align: middle;width: 20px;">
+        <div *ngIf="getData.tour_private == 1">Private</div>
+        <div *ngIf="getData.tour_private == 0">Public</div>
+        <div>{{getData.package_qly}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row style="background: #fff;margin-top: 10px;border-top: 1px solid #e6e6e6;">
+      <ion-col style="padding-top: 15px;font-weight: bold;font-size: 16px;">
+        Detail
+      </ion-col>
+    </ion-row>
+    <ion-row style="color: #8F8F8F;font-size: 16px;background: #fff;">
+      <ion-col style="padding-left: 15px;">
+        {{getData.packet_detail}}
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col>
+
+      </ion-col>
+    </ion-row> -->
+    <ion-row style="    background: #fff;">
+      <ion-col style="padding-top: 15px;font-weight: bold;font-size: 16px;">
+        Scheddute
+      </ion-col>
+    </ion-row>
+    <ion-row style="font-size: 16px;    background: #fff;">
+      <ion-col style="padding-left: 15px;">
+        <span *ngFor="let Scheddute of getData.timeable">
+          <div>{{Scheddute.timeable_time}}</div>
+          <div style="color: #8F8F8F;margin-bottom: 15px;">{{Scheddute.timeable_activity}}</div>
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row style="    margin-top: 15px;">
+      <ion-col>
+        <img class="pingIcon" style="margin-left: 0;vertical-align: middle;" src="./assets/icon/ping-icon.svg" alt="">
+        <span style="vertical-align: middle;font-weight: bold;">Experience Location</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div #map id="map"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid style="background: #fff;margin-top: 15px;">
+    <ion-row>
+      <ion-col style="color: #7A7A7A;font-size: 16px;">
+
+        <div style="font-weight: bold;">
+          <span style="float: right;">
+            <i class="iconStar-star" [ngClass]="1 <= rate_review.Average ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="2 <= rate_review.Average ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="3 <= rate_review.Average ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="4 <= rate_review.Average ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="5 <= rate_review.Average ? 'starActive' : ''"></i>
+            <div style="color: #000;min-width: 25px;max-width: 25px;display: inline-block;margin-left: 5px;">
+              {{rate_review.Average}}</div>
+          </span>
+          <span>
+            <span style="color: #000;">Reviews</span> ({{reviewCount}})
+          </span>
+        </div>
+        <!-- <div style="margin-top: 15px;">
+          Friendliness
+          <span style="float: right;">
+            <i class="iconStar-star" [ngClass]="1 <= rate_review.Friendly ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="2 <= rate_review.Friendly ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="3 <= rate_review.Friendly ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="4 <= rate_review.Friendly ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="5 <= rate_review.Friendly ? 'starActive' : ''"></i>
+            <div style="color: #000;min-width: 25px;max-width: 25px;display: inline-block;margin-left: 5px;">{{rate_review.Friendly}}</div>
+          </span>
+        </div>
+        <div style="margin-top: 10px;">
+          Area Expert
+          <span style="float: right;">
+            <i class="iconStar-star" [ngClass]="1 <= rate_review.Area ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="2 <= rate_review.Area ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="3 <= rate_review.Area ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="4 <= rate_review.Area ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="5 <= rate_review.Area ? 'starActive' : ''"></i>
+            <div style="color: #000;min-width: 25px;max-width: 25px;display: inline-block;margin-left: 5px;">{{rate_review.Area}}</div>
+          </span>
+        </div>
+        <div style="margin-top: 10px;">
+          Language Proficiency
+          <span style="float: right;">
+            <i class="iconStar-star" [ngClass]="1 <= rate_review.Language ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="2 <= rate_review.Language ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="3 <= rate_review.Language ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="4 <= rate_review.Language ? 'starActive' : ''"></i>
+            <i class="iconStar-star" [ngClass]="5 <= rate_review.Language ? 'starActive' : ''"></i>
+            <div style="color: #000;min-width: 25px;max-width: 25px;display: inline-block;margin-left: 5px;">{{rate_review.Language}}</div>
+          </span>
+        </div> -->
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div style="border: 1px solid #c1c1c1;border-radius: 5px;padding: 10px;color: #6f6f6f;margin-top: 20px;" (click)="swiftSort(1)">
+          <span>Sort : Most Recent</span>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="border-bottom: 1px solid #c1c1c1;margin-bottom: 10px;">
+        <div style="border: 1px solid #c1c1c1;border-radius: 5px;padding: 10px;color: #6f6f6f;margin-bottom: 10px;" *ngIf="sortST == '1'"
+          [@myAnimation]>
+          <div style="margin-bottom: 10px;">Sort : Most Recent</div>
+          <div>Sort : Most Recent</div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col>
+        <div style="margin-bottom: 10px;">Comment</div>
+        <div style="margin-bottom: 10px;font-size: 20px;">
+          <i class="iconStar-star" [ngClass]="1 <= commentRate ? 'starActive' : ''" (click)="sendRate(1)"></i>
+          <i class="iconStar-star" [ngClass]="2 <= commentRate ? 'starActive' : ''" (click)="sendRate(2)"></i>
+          <i class="iconStar-star" [ngClass]="3 <= commentRate ? 'starActive' : ''" (click)="sendRate(3)"></i>
+          <i class="iconStar-star" [ngClass]="4 <= commentRate ? 'starActive' : ''" (click)="sendRate(4)"></i>
+          <i class="iconStar-star" [ngClass]="5 <= commentRate ? 'starActive' : ''" (click)="sendRate(5)"></i>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <div style="background: #fff;border: 1px solid #c1c1c1;border-radius: 8px;padding: 5px 10px;">
+            <textarea style="width:100%;resize: none;min-height: 40px;border: none;margin: 0px !important;" placeholder="Comment..."
+              [(ngModel)]="commentText" autocomplete="on" autocorrect="on"></textarea>
+          </div>
+        </div>
+        <button ion-button full (click)="saveComment()">Save Comment</button>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row *ngFor="let comment of arrayComment">
+      <ion-col>
+        <div>
+          <img style="vertical-align: top;margin-right: 10px;height: 50px;width: 50px;margin: auto;" [src]="comment.userUrl" id="img_profile"
+            class="imgpro" />
+          <div style="display: inline-block;vertical-align: middle;">
+            <p>{{comment.fullname}}</p>
+            <p class="textcemment">{{comment.dateTime}}</p>
+            <p>
+              <i class="iconStar-star" [ngClass]="1 <= comment.rate ? 'starActive' : ''"></i>
+              <i class="iconStar-star" [ngClass]="2 <= comment.rate ? 'starActive' : ''"></i>
+              <i class="iconStar-star" [ngClass]="3 <= comment.rate ? 'starActive' : ''"></i>
+              <i class="iconStar-star" [ngClass]="4 <= comment.rate ? 'starActive' : ''"></i>
+              <i class="iconStar-star" [ngClass]="5 <= comment.rate ? 'starActive' : ''"></i>
+            </p>
+          </div>
+          <div></div>
+        </div>
+        <div class="textcemment">{{comment.comment}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="reviewCount > limitComment">
+      <ion-col class="textcenter seeMore">
+        See all reviews
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div style="height: 150px;"></div>
+
+
+
+</ion-content>
+<ion-footer style="bottom: 84px;background: #fff;box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-7>
+        <div>
+          <div>
+            <span style="color: #16B53A;">THB {{getData.package_price[0].price}} </span>
+            <span style="color: #8F8F8F;">/ person</span>
+          </div>
+          <div style="color: #8F8F8F;"> 100% Satisfaction guaranteed</div>
+        </div>
+      </ion-col>
+      <ion-col col-5>
+        <button ion-button full style="background-color: #16B53A;" (click)="booking()">Book</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

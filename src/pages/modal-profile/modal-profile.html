@@ -1,0 +1,74 @@
+<ion-content padding style="background: rgba(0, 0, 0, 0.7);" (click)="close()">
+
+</ion-content>
+<ion-footer style="background: #fff;height: 75%;background: rgba(0, 0, 0, 0);">
+  <div style="position: relative;margin: 10px;border-radius: 5px;background: transparent;">
+    <div class="profileHeader" style="border-radius: 10px;background: transparent;">
+      <div
+        style="background: url('./assets/imgs/header-profile.jpg');background-size: cover;background-position: center;width: 100%;height: 100%;border-top-right-radius: 10px;border-top-left-radius: 10px;"
+        *ngIf="dataGet.user_coverImg == 'http://myadventureearth.com/'"></div>
+      <div
+        [ngStyle]="{'background': 'url('+dataGet.user_coverImg+')','background-size': 'cover','background-position': 'center'}"
+        *ngIf="coverImage != ''" style="width: 100%;height: 100%;border-top-right-radius: 10px;border-top-left-radius: 10px;"></div>
+    </div>
+    <div class="detail" style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <div class="profileImage"
+              [ngStyle]="{'background': 'url('+dataGet.user_path_img+')', 'background-size': 'cover', 'background-position': 'center'}">
+            </div>
+          </ion-col>
+          <ion-col col-8 style="padding-top: 0px;">
+            <div class="fullname" style="padding-left: 15px;">
+              <span [innerHTML]="dataGet.user_firstname"> </span>
+              <span [innerHTML]="dataGet.user_lastname"> </span>
+            </div>
+            <div class="fromname" style="padding-left: 15px;">
+              from {{dataGet.country_name_en}}
+            </div>
+            <ion-grid class="gridFrame" style="    margin-top: 10px;">
+              <ion-row>
+                <ion-col col-4>
+                  <div class="valueFollow">{{dataGet.followers}}</div>
+                  <div class="fontFollow">Followers</div>
+                </ion-col>
+                <ion-col col-4 style="border-right: 1px solid;border-left: 1px solid;">
+                  <div class="valueFollow">{{dataGet.following}}</div>
+                  <div class="fontFollow">Following</div>
+                </ion-col>
+                <ion-col col-4>
+                  <div class="valueFollow">{{dataGet.post}}</div>
+                  <div class="fontFollow">Post</div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+        <ion-row style="text-align: center;" style="margin-top: 10px;">
+          <ion-col col-6 (click)="goDismiss(1)" style="text-align: right;">
+            <button ion-button small style="width: 130px;margin-right: 10px;    border-radius: 25px;" class="btnView">
+              View Profile
+            </button>
+          </ion-col>
+          <ion-col col-6 (click)="goDismiss(2)" style="text-align: left;">
+            <button ion-button small style="width: 130px;    border-radius: 25px;" class="btnView">
+              <!-- <ion-icon name="ios-chatbubbles" style="margin-right: 10px;"></ion-icon> -->
+              <img style="width: 15px;margin-right: 5px;" src="./assets/icon/iconMessage-white.svg" alt="">
+              Chat
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- <img class="img_follow" src="./assets/icon/follow_icon+.png" alt="">
+      <img class="img_follow" src="./assets/icon/follow_icon-.png" alt=""> -->
+    </div>
+
+  </div>
+  <div style="height: 100%;" (click)="close()">
+
+  </div>
+
+</ion-footer>

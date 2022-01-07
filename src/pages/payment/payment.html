@@ -1,0 +1,545 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start style="order: 0;">
+      <button ion-button icon-only style="" class="">
+        <img style="position: relative;width: 20px;" src="./assets/icon/logotree.svg" alt="">
+      </button>
+      <button ion-button icon-only style="" class="">
+        <div style="position: relative;color: #000;font-weight: bold;font-size: 14px;">Adventure Earth</div>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only style="" class="" (click)="goProfile(gd.userProfile)">
+        <img
+          style="position: relative !important;;margin-right: 10px !important;;height: 30px !important;;width: 30px !important;;"
+          id="img_profile" class="imgpro" [src]="gd.userProfile.user_path_img" />
+      </button>
+      <button ion-button icon-only style="" class="" (click)="presentPopover($event)">
+        <img style="position: relative;margin-right: 10px;" src="./assets/icon/menu-icon.svg" alt="">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding style="background: #F8F8F8;">
+  <div style="background: #fff;padding-bottom: 15px;">
+    <div style="text-align: center;">
+      <div class="titlePage">Book now</div>
+      <div class="subTitlePage">Book now to reserve the tour.</div>
+      <hr class="borderTitle">
+    </div>
+    <ion-grid class="package">
+      <ion-row>
+        <ion-col class="title">
+          <div>
+            {{dataget.packet_name}}
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="dateTrip != ''">
+        <ion-col col6>
+          Date
+        </ion-col>
+        <ion-col col6 class="value">
+          {{dateTrip}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="dateTrip != ''">
+        <ion-col col6>
+          Time
+        </ion-col>
+        <ion-col col6 class="value">
+          {{timeTour}}
+        </ion-col>
+      </ion-row>
+      <ion-row class="borderSegment" style="border-bottom: 1px solid #A6ADB4;" *ngIf="textGuest != ''">
+        <ion-col col6>
+          Guest
+        </ion-col>
+        <ion-col col6 class="value">
+          {{textGuest}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let guestPrice of GuestArray">
+        <ion-col col6>
+          {{guestPrice.text}}
+        </ion-col>
+        <ion-col col6 class="value">
+          {{guestPrice.price}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="Tax != ''">
+        <ion-col col6>
+          Tax Fee
+        </ion-col>
+        <ion-col col6 class="value">
+          <div>THB {{Tax}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="dataget.tour_private == 1 && totalP != 0 && totalP < dataget.tour_less">
+        <ion-col col6>
+          Private Activity
+        </ion-col>
+        <ion-col col6 class="value">
+          <div>{{dataget.tour_extra_price}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="" *ngIf="dataget.accident.accident_chooser">
+        <ion-col col6>
+          Accident Insurance
+        </ion-col>
+        <ion-col col6 class="value">
+          <span *ngIf="dataget.accident.accident_price != 0"> THB {{dataget.accident.accident_price}}</span>
+          <span *ngIf="dataget.accident.accident_price == 0"> (FREE)</span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="" *ngIf="meetingLocation.meet_tyep == 3">
+        <ion-col col6>
+          {{meetingLocation.name_meet}}
+        </ion-col>
+        <ion-col col6 class="value">
+          <span>THB {{meetingLocation.meet_price}}</span>
+        </ion-col>
+      </ion-row>
+      <ion-row style="border-top: 1px solid #A6ADB4;margin-top: 5px;padding-top: 5px;" *ngIf="total_price != ''">
+        <ion-col col6>
+          Total
+        </ion-col>
+        <ion-col col6 class="value">
+          <div class="packagePrice">THB {{total_price}}</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+  <ion-segment [(ngModel)]="mainSegment" (ionChange)="test()">
+    <ion-segment-button value="1" style="height: unset;" [ngClass]="mainSegment == 3 ? 'classNoclick':''">
+      <div class="icb-info" style="height: 20px;"></div>
+      1 Trip info
+    </ion-segment-button>
+    <ion-segment-button value="2" style="height: unset;"
+      [ngClass]="(mainSegment == 3 || mainSegment == 1) ? 'classNoclick':''">
+      <div class="icb-lock" style="height: 20px;"></div>
+      2 Payment
+    </ion-segment-button>
+    <ion-segment-button value="3" style="height: unset;" class="classNoclick">
+      <div class="icb-ticket" style="height: 20px;"></div>
+      3 Ticket
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="mainSegment == '1'" [@AnimationWidth]>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item (click)="swiftCalendar(showCalendar)">
+            <ion-label stacked>Trip date {{stockText}}</ion-label>
+            <ion-input type="text" placeholder="Trip date" [(ngModel)]="dateTrip" disabled (click)="test()"></ion-input>
+          </ion-item>
+          <div *ngIf="showCalendar" [@myAnimation]>
+            <ion-calendar #calendar (onDaySelect)="onDaySelect($event)" (onMonthSelect)="onMonthSelect($event)">
+            </ion-calendar>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let gusets of dataget.package_price">
+        <ion-col col-7>
+          <ion-item>
+            <ion-label stacked>{{gusets.price_name}} ( {{gusets.price}} per person )</ion-label>
+            <ion-input type="text" [(ngModel)]="gusets.num_of_peple" class="guest" disabled
+              (click)="openSelect(gusets)"></ion-input>
+          </ion-item>
+          <div *ngIf="gusets.price_st" [@myAnimation] class="gusetFame">
+            <div item-content class="contentSelect" style="background: #fff;">
+              <div class="selectChil" *ngFor="let peple of pepleArray" (click)="selectPeple(gusets,peple)">{{peple}}
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <span *ngIf="dataget.accident.accident_name">
+        <ion-row>
+          <ion-col>
+            <ion-item style="min-height: 0;">
+              <ion-label stacked>Accident Insurance</ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row radio-group>
+          <ion-col>
+            <ion-item class="radioMeeting">
+              <div item-content style="width: 100%;">
+                <!-- <ion-radio style="display: inline-block;margin: 0;vertical-align: middle;" class="chkAdditional"></ion-radio> -->
+                <ion-checkbox [(ngModel)]="dataget.accident.accident_chooser" (ionChange)="updateAccident(dataget.accident)"
+                  style="display: inline-block;margin: 0;vertical-align: middle !important;" class="Circle">
+                </ion-checkbox>
+                <ion-label class="additional" *ngIf="dataget.accident.accident_name != 0"
+                  style="vertical-align: middle;">
+                  {{dataget.accident.accident_name}}
+                  <span *ngIf="dataget.accident.accident_price != 0"> ({{dataget.accident.accident_price}} THB)</span>
+                  <span *ngIf="dataget.accident.accident_price == 0"> (FREE)</span>
+                </ion-label>
+              </div>
+            </ion-item>
+            <ion-item style="min-height: 0;">
+              <ion-label class="additional">{{dataget.accident.accident_detail}}</ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </span>
+      <ion-row>
+        <ion-col>
+          <ion-item style="min-height: 0;">
+            <ion-label stacked>Meeting Point</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let meeting of dataget.packet_meeting" radio-group [(ngModel)]="meetingSelect">
+        <ion-col>
+          <ion-item class="radioMeeting">
+            <div item-content style="width: 100%;">
+              <ion-radio style="display: inline-block;margin: 0;vertical-align: middle;" value="{{meeting.id_meet}}"
+                class="chkAdditional" (click)="selectMeeting(meeting)"></ion-radio>
+              <ion-label class="additional">{{meeting.name_meet}}</ion-label>
+              <div *ngIf="meetingLocation.id_meet == meeting.id_meet && meeting.meet_tyep == 3"
+                style="margin-top: 10px;">
+                <ion-textarea style="min-height: 60px;border: none;margin: 0px !important;border: 1px solid #EBEDED;"
+                  placeholder="" [(ngModel)]="hotelname" autocomplete="on" autocorrect="on"></ion-textarea>
+              </div>
+            </div>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="text-align: center;">
+          <img src="./assets/icon/book.svg" alt="" style="width: 200px;margin-top: 15px;" (click)="BookingPayment('2')">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- ///////////////////////////////////////////////////////////////////// Payment /////////////////////////////////////////////////////////////////////////// -->
+  <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+  <div *ngIf="mainSegment == '2'" [@AnimationWidth]>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label stacked>First Name</ion-label>
+            <ion-input type="text" [(ngModel)]="firstName" maxlength="20"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label stacked>Last Name</ion-label>
+            <ion-input type="text" [(ngModel)]="lastName" maxlength="20"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label stacked>Email</ion-label>
+            <ion-input type="text" [(ngModel)]="email" maxlength="100"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4 style="padding-right: 0;">
+          <ion-item class="mobile">
+            <ion-label stacked>Mobile</ion-label>
+            <ion-input type="text" [(ngModel)]="phoneCode" disabled class="arrowDown" disabled (click)="openCountry()">
+            </ion-input>
+          </ion-item>
+          <div *ngIf="countryST" [@myAnimation] class="gusetFame"
+            style="z-index: 5;padding-right: 0; width: 240px; height: 250px; overflow: auto;">
+            <div item-content class="contentSelect" style="background: #fff;">
+              <div class="selectChil" *ngFor="let country of countries" (click)="selectCountry(country)">
+                {{country.fullCountry}}
+              </div>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col col-8>
+          <ion-item style="padding-left: 0;">
+            <ion-label stacked style="color: transparent !important;">Mobile</ion-label>
+            <ion-input type="tel" maxlength="15" pattern="[0-9]+([\,|\.][0-9]+)?" onkeypress='return event.charCode >= 48 && event.charCode <= 57' [(ngModel)]="mobileNumber" class="mobilePhone"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label stacked>Country of Passport</ion-label>
+            <ion-input type="text" placeholder="Please select" [(ngModel)]="countryName" disabled
+              (click)="chooserCountry()" class="arrowDown"></ion-input>
+          </ion-item>
+          <div *ngIf="chooseCountry" [@myAnimation] class="gusetFame" style="z-index: 5;height: 250px; overflow: auto;">
+            <div item-content class="contentSelect" style="background: #fff;">
+              <div class="selectChil" *ngFor="let country of countries" (click)="ChoosersCountry(country)">
+                {{country.fullCountry}}
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <!-- ///////////////////////////////////////////////////////////////////// Credit/paypal ///////////////////////////////////////////////////////////////////// -->
+    <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+    <div style="background: #fff;margin-top: 15px;">
+      <ion-segment [(ngModel)]="paymentSegment" (ionChange)="test()" class="segmentPayment">
+        <ion-segment-button value="{{data.type}}" *ngFor="let data of dataget.type_pay">
+          <span *ngIf="data.type == '1'">
+            <img src="./assets/icon/creditcard.svg" style="width: 18px;vertical-align: middle;margin-right: 8px;"
+              *ngIf="">
+            <span style="vertical-align: middle;">Credit Card</span>
+          </span>
+          <span *ngIf="data.type == '2'">
+            <img src="./assets/icon/paypal.svg" style="width: 14px;vertical-align: middle;margin-right: 8px;">
+            <span style="vertical-align: middle;">Paypal</span>
+          </span>
+
+
+
+        </ion-segment-button>
+        <!-- <ion-segment-button value="2" style="margin-left: -1px;">
+          <img src="./assets/icon/paypal.svg" style="width: 14px;vertical-align: middle;margin-right: 8px;">
+          <span style="vertical-align: middle;">Paypal</span>
+        </ion-segment-button> -->
+      </ion-segment>
+      <ion-grid style="border: 1px solid;border-top: 0;border-color: #488aff;" *ngIf="paymentSegment == '1'"
+        [@myAnimation]>
+        <ion-row>
+          <ion-col>
+            <div style="display: inline-block;position: absolute; top: 3px; right: 10px; z-index: 1;">
+              <img src="./img/visa_false.png" alt="" *ngIf="typeCard != 'Visa'" class="iconPayVisa">
+              <img src="./img/visa.png" alt="" *ngIf="typeCard == 'Visa'" class="iconPayVisa">
+              <img src="./img/mastercard.png" alt="" *ngIf="typeCard == 'MasterCard'" class="iconPayMas">
+              <img src="./img/mastercard_false.png" alt="" *ngIf="typeCard != 'MasterCard'" class="iconPayMas">
+            </div>
+
+            <ion-item>
+              <ion-label stacked>Card number</ion-label>
+              <ion-input type="text" [(ngModel)]="cardNumber" placeholder="xxxx xxxx xxxx xxxx" (input)="getType()"
+                maxlength="19"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>Name on card</ion-label>
+              <ion-input type="text" [(ngModel)]="nameCard"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            <ion-item class="mobile">
+              <ion-label stacked>Date exp.</ion-label>
+              <ion-datetime displayFormat="MM/YY" min="2019-10-25" max="2029-10-31" placeholder="MM/YY"
+                class="datePicker" [(ngModel)]="dateEXP"></ion-datetime>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item class="mobile" style="padding-left: 0px;">
+              <ion-label stacked>CVV</ion-label>
+              <ion-input type="text" [(ngModel)]="cvvCode" placeholder="_ _ _" maxlength="3"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="padding-left: 26px; ">
+            <ion-checkbox [(ngModel)]="rememberCard" style="display: inline-block;margin: 0;vertical-align: middle;"
+              class="Circle">
+            </ion-checkbox>
+            <ion-label class="additional">Remember this card</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="padding-left: 26px; ">
+            <ion-checkbox [(ngModel)]="agreeST" style="display: inline-block;margin: 0;vertical-align: middle;"
+              class="Circle">
+            </ion-checkbox>
+            <ion-label class="additional">I agree to Adventure Earth
+              <span class="blue">T&Cs</span> &
+              <span class="blue">Cancellation Policy</span>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="text-align: center;">
+            <img src="./assets/icon/paymentBTN.svg" style="width: 200px;" (click)="BookingPayment(3)">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="additional">
+            <span>Note: Your card won’t be charged until the tour is confirmed.</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+      <!-- ///////////////////////////////////////////////////////////////////// Credit/paypal ///////////////////////////////////////////////////////////////////// -->
+      <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+      <ion-grid style="border: 1px solid;border-top: 0;border-color: #488aff;" *ngIf="paymentSegment == '2'"
+        [@myAnimation]>
+        <ion-row>
+          <ion-col style="padding-left: 26px; ">
+            <ion-checkbox [(ngModel)]="agreeST" style="display: inline-block;margin: 0;vertical-align: middle;"
+              class="Circle">
+            </ion-checkbox>
+            <ion-label class="additional">I agree to Adventure Earth
+              <span class="blue">T&Cs</span> &
+              <span class="blue">Cancellation Policy</span>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="text-align: center;">
+            <img src="./assets/icon/paypalBTN.svg" style="width: 200px;" (click)="BookingPayment(3)">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="additional">
+            <span>Note: Your card won’t be charged until the tour is confirmed.</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+
+  <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- ///////////////////////////////////////////////////////////////////////// Ticket //////////////////////////////////////////////////////////////////////// -->
+  <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+  <div class="ticketMain" id="container" *ngIf="mainSegment == '3'" [@AnimationWidth]>
+    <div class="ticketTitle">
+      <img src="./assets/imgs/treecoconut.svg" alt="" style="vertical-align: middle;">
+      <div class="textAve" style="vertical-align: middle;">ADVENTURE EARTH</div>
+      <div class="textTicket">Your Ticket</div>
+    </div>
+    <img src="./assets/imgs/cutSecsion.svg" class="imgSection" alt="">
+    <ion-grid class="ticketNext">
+      <ion-row>
+        <ion-slides>
+          <ion-slide *ngFor="let img of dataget.img">
+            <img [src]="img.img_resize" alt="">
+          </ion-slide>
+        </ion-slides>
+      </ion-row>
+      <ion-row style="font-size: 12px;">
+        <ion-col col-9>
+          <div>{{dataget.packet_name}} </div>
+          <div>
+            <img src="./assets/icon/ping-icon.svg" class="" alt="" style="vertical-align: middle;width: 16px;">
+            <span style="vertical-align: middle;">Choonburi</span>
+          </div>
+        </ion-col>
+        <ion-col col-3 style="display: grid;">
+          <div class="btnDatail" (click)="showDetail()">
+            Detail
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid class="ticketNext" style="font-size: 12px;background: #EBEDED;">
+      <ion-row>
+        <ion-col col-8>
+          <img style="width: 30px;height: 30px;border-radius: 50%;vertical-align: middle;"
+            [src]="dataget.user.user_path_img" alt="">
+          <div style="display: inline-block;vertical-align: middle;">
+            <div>Experience by</div>
+            <div style="color: #1B75BB;">{{dataget.user.user_firstname}} {{dataget.user.user_lastname}}</div>
+          </div>
+        </ion-col>
+        <ion-col col-4 style="display: grid;">
+          <div style="margin: auto;" *ngIf="gd.userProfile.user_id != dataget.user.user_id">
+            <img src="./assets/icon/iconMessage.svg" class="" alt="" style="vertical-align: middle;width: 20px;">
+            <span style="color: #1B75BB;vertical-align: middle;">Message</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <img src="./assets/imgs/cutSecsion.svg" class="imgSection" alt="" style="top: -35px;">
+    <ion-grid class="ticketEnd" style="top: -50px;font-size: 12px;">
+      <ion-row>
+        <ion-col col-6>
+          <div style="font-size: 16px;text-align: center;border: 1px solid #CBD0D3;width: 80%;margin: auto;">
+            <div id="qrcodeFrames" style="width: 90%;margin: auto;padding: 3px 0;"></div>
+            <div
+              style="border-top: 1px solid #CBD0D3;background: #EBEDED;padding-top: 5px;padding-bottom: 5px;font-size: 12px;">
+              {{order_id}}</div>
+          </div>
+        </ion-col>
+        <ion-col col-6 style="font-size: 14px;">
+          <div class="textGray">Date</div>
+          <div style="margin-bottom: 5px">{{dateTrip}}</div>
+          <div class="textGray">Time</div>
+          <div style="margin-bottom: 5px">{{dataget.timeable[0].timeable_time}} -
+            {{dataget.timeable[dataget.timeable.length - 1].timeable_time}}</div>
+          <div class="textGray">Guest(s)</div>
+          <div style="margin-bottom: 5px">{{textGuest}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="dataget.packet_condition">
+        <ion-col>
+          <div class="textGray">Condition</div>
+          <div>{{dataget.packet_condition}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="textGray">Activity Location</div>
+          <div>
+            <span class="vertical-middle">{{dataget.address}}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="textGray">Meetpoint</div>
+          <div>
+            <span class="vertical-middle">{{meetingLocation.name_meet}}</span>
+            <span style="color: #FA6980;">
+              {{meetingLocation.time_meeting}}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="textGray" *ngIf="dataget.user.store_telephone"> Call us {{dataget.user.store_telephone}} </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button block (click)="imageTo()">
+            <img src="./assets/imgs/save-icon.svg" alt="" class="vertical-middle" style="margin-right: 10px;"> Save
+            Image
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div style="height: 150px;"></div>
+
+
+
+
+
+</ion-content>

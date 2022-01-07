@@ -1,0 +1,86 @@
+page-save-image {
+    .scroll-content{
+        margin-top: 0px !important;
+        display: grid;
+    }
+    .ticketMain{
+        // margin: 20px 5px 5px 5px;
+        margin: auto;
+        width: 300px;
+        margin-top: 100px;
+    }
+    .ticketTitle{
+        background: #fcfcfc;
+        height: 25px;
+        border-radius: 5px;
+        border: 1px solid #eaeaea;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-bottom: none;
+        position: relative;
+        z-index: 1;
+        font-size: 13px;
+        margin-top: 5px;
+        padding: 2px 5px;
+    }
+    .ticketNext{
+        background: #fcfcfc;
+        border: 1px solid #eaeaea;
+        border-top: none;
+        border-bottom: none;
+        position: relative;
+        z-index: 1;
+        top: -30px;
+    }
+    .ticketEnd{
+        background: #fcfcfc;
+        border: 1px solid #eaeaea;
+        border-top: none;
+        position: relative;
+        z-index: 1;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .textAve{
+        margin-top: 5px;
+        display: inline-block;
+    }
+    .textTicket{
+        float: right;
+        margin-right: 15px;
+        margin-top: 5px;
+        display: inline-block;
+
+    }
+    .imgSection{
+        width: 100%;
+        position: relative;
+        top: -10px;
+        z-index: 0;
+    }
+    .textGray{
+        color: #7A7A7A;
+    }
+    .detailPeple{
+        width: 48%;
+        display: inline-block;
+    }
+    .vertical-middle{
+        vertical-align: middle;
+    }
+    .button-block{
+        background-color: #FA6980 !important;
+        margin-top: 25px;
+    }
+    .textReview{
+        vertical-align: middle;
+        font-size: 18px;
+        color: #7A7A7A;
+    }
+    .starActive:before {
+        color: #FFDD00 !important;
+    }
+    .textBold{
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,123 @@
+<!--
+  Generated template for the EditprofilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar >
+       <ion-buttons start style="position: absolute;" class="Montserrat">
+          <button ion-button (click)="dismiss()" style="color:white;">Cancel</button>
+    </ion-buttons>
+    <ion-title>
+
+        <table style=" width: 100%; ">
+            <tr>
+              <td class="Museo">Edit Profile</td>
+            </tr>
+            <tr>
+              <td style="font-size: 10px;opacity: .7;" class="Montserrat"><i>Share your freedom</i></td>
+            </tr>
+          </table>
+
+    </ion-title>
+    <ion-buttons start style="position: absolute;    right: 0;" class="Montserrat">
+        <button ion-button  style="color:white;" (click)="send()">Done</button>
+  </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="Montserrat">
+    <ion-list class="center list" style=" width: 90%;">
+
+
+        <div style="height: 150px;">
+            <!-- <i class="img position" id="profile"></i> -->
+            <img [src]="data.user_img" class="img position" id="profile" />
+            <i class="btn_push icon30" id="positionpush" (click)="presentActionSheet()"></i>
+        </div>
+        <div class="inputlogin center" style="margin-bottom: 15px;">
+            <ion-label stacked>First Name</ion-label>
+            <!-- <ion-input type="text" placeholder="First Name *"></ion-input> -->
+            <label for="fname" class="page2"  *ngIf="!data.fname">First Name </label>
+            <input type="text" id="fname" [(ngModel)]="data.fname" required="required" style="padding-left: 0px;" />
+        </div>
+        <div class="inputlogin center" style="margin-bottom: 15px;">
+            <ion-label stacked>Last Name</ion-label>
+            <!-- <input type="text" placeholder="Last Name *"> -->
+            <label for="lname" class="page2"  *ngIf="!data.lname">Last Name </label>
+            <input type="text" id="lname" [(ngModel)]="data.lname" required="required" style="padding-left: 0px;" />
+        </div>
+        <div class="inputlogin" style="margin-bottom: 15px;">
+            <ion-label stacked>E-mail </ion-label>
+            <label for="email" class="page1" *ngIf="!data.email">E-mail</label>
+            <input type="email" id="email" email [(ngModel)]="data.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required style="padding-left: 0px;" />
+            <!-- <ion-input type="text" placeholder="E-mail *"></ion-input> -->
+        </div>
+        <div class="" style="">
+            <ion-label stacked>Country</ion-label>
+            <label for="country" class="page2"  *ngIf="!data.country">Country </label>
+            <ion-select [(ngModel)]="data.country" id="country" style="padding: 2px;border-bottom: 1px #ccc; border-bottom-style: solid; margin-bottom: 10px;">
+                <ion-option *ngFor="let country of country;let i = index" [attr.data-index]='i' value="{{country.country_id}}">{{country.country_name_en}}</ion-option>
+            </ion-select>
+        </div>
+       
+        <div class="" style="">
+            <ion-label stacked >Date of Birth *</ion-label>
+            <label for="dateBirth" class="page2" style="margin-top: 0px;" *ngIf="!data.date">
+                Date of Birth
+            </label>
+            <i class="icon_dateRe icon25"></i>
+            <ion-datetime id='dateBirth' displayFormat="DD/MM/YYYY" [(ngModel)]="data.date" style="    padding: 0px;border-bottom: 1px #ccc; border-bottom-style: solid; margin-bottom: 10px;"
+                required="required"></ion-datetime>
+        </div>
+        <div class=" center" style="">
+            <ion-label stacked>Gender
+                <span style="color:red;">*</span>
+                <span class="page2" *ngIf="!data.sex" style="color:transparent;">Gender</span>
+                
+            </ion-label>
+            <!-- <ion-input type="text" placeholder="Last Name *"></ion-input> -->
+            <ion-grid style="padding: 0px;" class="roles">
+                <ion-row style="    width: 70%;">
+                    <ion-col>
+                        <input type="radio" [(ngModel)]="data.sex" name="data.sex" value="1" id="one">
+                        <label class="redio">Male </label>
+                    </ion-col>
+                    <ion-col>
+                        <input type="radio" [(ngModel)]="data.sex" name="data.sex" value="2" id="two">
+                        <label class="redio">Female</label>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </div>
+        <div class=" center" style="margin-bottom: 15px;">
+            <ion-label stacked style="margin-top: 0;margin-bottom: 12px;">Interested In
+                <span style="color:red;">*</span>
+                <span class="page2" *ngIf="!data.interestedin1&&!data.interestedin2" style="color:transparent;">Interested In</span>
+                
+            </ion-label>
+            <!-- <ion-input type="text" placeholder="Last Name *"></ion-input> -->
+            <ion-grid style="padding: 0px; margin-left: 5px;    margin-top: 5px;">
+                <ion-row style="    width: 70%;">
+                    <ion-col style="padding: 0px;">
+                        <div class="checkbox">
+                            <input id="chkTest" [(ngModel)]="data.interestedin1" type="checkbox" />
+                            <label class="redio" for="chkTest" style="margin-left: 0px;">Men </label>
+                        </div>
+                    </ion-col>
+                    <ion-col style="padding: 0px;">
+                        <div class="checkbox">
+                            <input id="chkTest1" [(ngModel)]="data.interestedin2" type="checkbox" />
+                            <label class="redio" for="chkTest1" style="margin-left: 0px;">Women</label>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-list>
+</ion-content>

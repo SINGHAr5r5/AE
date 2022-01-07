@@ -1,0 +1,505 @@
+page-payment {
+    .ion-ios-arrow-back:before{
+        color: #212121;
+    }
+    .radio-ios .radio-checked .radio-inner{
+        left: 0px;
+        top: 0px;
+        border: 1px solid #fff;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+    }
+    .radio-ios .radio-icon {
+        position: relative;
+        display: block;
+        border: 1px solid #2ec95c;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+    }
+    .item-ios.item-block .item-inner{
+        border: none !important;
+    }
+    .checkbox-ios .checkbox-checked .checkbox-inner{
+        top: 0px;
+    }
+    .toolbar-background{
+        background-image: unset !important;
+    }
+    .ion-md-arrow-back:before{
+        content: "\f3cf" !important;
+        position: relative !important;
+        background-repeat: unset !important;
+        background-position: unset !important;
+        background-image: unset !important;
+        background-size: unset !important;
+        width: unset !important;
+        height: unset !important;
+        margin-top: unset !important;
+        left: unset;
+    }
+    .back-button{
+        margin: 0;
+        width: 30px;
+        min-width: 20px;
+    }
+    .classNoclick{
+        pointer-events: none;
+    }
+    .radio .radio-icon{
+        border-color: #16B53A;
+    }
+    .radio .radio-checked .radio-inner{
+        background-color: #16B53A;
+    }
+    .radioMeeting.item-block{
+        min-height: unset;
+    }
+    .datePicker{
+        border: 1px solid #EBEDED;
+        border-radius: 4px;
+        padding: 5px 8px 6px 0;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .chkAdditional .checkbox-icon{
+        border-radius: 50%;
+
+    }
+    .chkAdditional .checkbox-checked{
+        background: #16B53A;
+        border-color: #16B53A;
+    }
+    .chkAdditional .checkbox-checked .checkbox-inner {
+        border-radius: 50%;
+        left: 0px;
+        top: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-width: 2px;
+        /* border-top-width: 0; */
+        /* border-left-width: 0; */
+        border-style: solid;
+        border-color: #fff;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    .package{
+        color: #707070;
+        border: 1px solid #FFC9D2;
+        width: 85%;
+        border-radius: 4px;
+    }
+    .packagePrice{
+        color: #16B53A;
+    }
+    .package .title{
+        color: #202124;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .package .value{
+        text-align: right;
+    }
+    .package .borderSegment{
+        // border-bottom: 1px solid #A6ADB4;
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+    }
+
+    .titlePage{
+        padding-top: 20px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .subTitlePage{
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .borderTitle{
+        margin-bottom: 15px;
+        width: 85%;
+    }
+    ion-calendar > .grid > .row > .col > .ion-ios-arrow-back:before {
+        width: unset !important;
+    }
+    ion-calendar > .grid > .row > .col > .ion-md-arrow-back:before{
+        background-image: unset;
+        position: unset !important;
+        height: unset !important;
+        width: unset !important;
+        margin: unset !important;
+        content: "\f27d";
+    }
+    .segment-button{
+        // border-color: #343638 !important;
+        color: #343638 !important;
+    }
+    .segment-button.segment-activated{
+        border-color: #E82064 !important;
+        color: #E82064 !important;
+    }
+    .segment-ios .segment-button{
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border: none;
+        border-bottom: 2px solid;
+        background-color: transparent !important;
+        border-bottom-color: rgba(0, 0, 0, 0.1);
+        height: 4.2rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 4rem;
+    }
+    .label-md-primary{
+        color: #7A7A7A !important;
+    }
+    .item-md.item-block .item-inner{
+        border-bottom: none !important;
+    }
+    .item-input ion-input, .item-input ion-textarea{
+        border: 1px solid #EBEDED;
+        border-radius: 4px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .guest , .meeting{
+        position: relative;
+    }
+    .guest::before{
+        position: absolute;
+        background-repeat: no-repeat;
+        content: "";
+        background-position: center;
+        background-image: url(../assets/icon/arrowdown.svg);
+        background-size: cover;
+        height: 12px;
+        width: 12px;
+        margin: auto;
+        right: 10px;
+        top: 0;
+        bottom: 0;
+    }
+    .guest::after{
+        position: absolute;
+        background-repeat: no-repeat;
+        content: "";
+        background-position: center;
+        background-image: url(../assets/icon/person.svg);
+        background-size: cover;
+        height: 12px;
+        width: 12px;
+        margin: auto;
+        left: 10px;
+        top: 0;
+        bottom: 0;
+    }
+    .meeting::before{
+        position: absolute;
+        background-repeat: no-repeat;
+        content: "";
+        background-position: center;
+        background-image: url(../assets/icon/arrowleft.svg);
+        background-size: cover;
+        height: 12px;
+        width: 7px;
+        margin: auto;
+        right: 10px;
+        top: 0;
+        bottom: 0;
+    }
+    .meeting{
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-radius: 0px !important;
+    }
+    item-content .item-inner{
+        max-width: 40% !important;
+    }
+    .additional{
+        font-size: 1.2rem;
+        width: 87%;
+        margin: auto;
+        display: inline-block;
+        vertical-align: middle;
+        color: #A6ADB4 !important;
+        white-space: normal !important;
+    }
+    .checkbox{
+        display: inline-block !important;
+        margin: 0 !important;
+        vertical-align: top !important;
+    }
+    ion-segment, ion-grid{
+        background: #fff;
+    }
+    .not-this-month{
+        pointer-events: none;
+    }
+    ion-calendar .calendar-row .today{
+        color: #989898 !important;
+        background: #eee !important;
+        box-shadow: unset !important;
+        pointer-events: none;
+    }
+    .contentSelect{
+        width: 100%;
+        border: 1px solid #EBEDED;
+        border-radius: 3px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-top: 0px;
+    }
+    .selectChil{
+        padding: 5px 10px;
+    }
+    .guest .text-input{
+        padding-left: 20px;
+    }
+    .gusetFame{
+        padding-left: 21px;
+        padding-right: 13px;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        left: 0;
+    }
+    .arrowDown::before{
+        position: absolute;
+        background-repeat: no-repeat;
+        content: "";
+        background-position: center;
+        background-image: url(../assets/icon/arrowdown.svg);
+        background-size: cover;
+        height: 12px;
+        width: 12px;
+        margin: auto;
+        right: 10px;
+        top: 0;
+        bottom: 0;
+    }
+    .input-wrapper{
+        display: inline-block !important;
+    }
+
+    .arrowDown{
+        position: relative;
+    }
+    .mobile .item-inner{
+        padding-right: 0px !important;
+    }
+    .label{
+        margin-top: 0px !important; 
+    }
+    .segmentPayment{
+        // display: inline-block !important;
+        background: transparent;
+        position: relative;
+        z-index: 2;
+    }
+    .segmentPayment .segment-button{
+        display: inline-block !important;
+        width: unset !important;
+        border: 1px solid #488aff;
+    }
+    .segmentPayment .segment-button.segment-activated{
+        border-color: #488aff!important;
+        color: #488aff !important;
+        border-top: 3px solid;
+        border-bottom: none;
+        background: #fff;
+    }
+    .iconPayVisa{
+        width: 30px;
+        display: inline-block;
+        margin: 0px 6px;
+    }
+    .iconPayMas{
+        width: 20px;
+        display: inline-block;
+        margin: 0px 6px;
+    }
+    .Circle .checkbox-icon{
+        border-radius: 50% !important;
+        border: 1px solid #A6ADB4;
+    }
+    .Circle .checkbox-icon .checkbox-inner{
+        border-radius: 50%;
+        border: 2px solid;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        border-color: #fff;
+    }
+    .blue{
+        color: #488aff;
+    }
+    .toolbar-background{
+        background-image: unset !important;
+    }
+    .ion-md-arrow-back:before{
+        content: "\f3cf" !important;
+        position: relative !important;
+        background-repeat: unset !important;
+        background-position: unset !important;
+        background-image: unset !important;
+        background-size: unset !important;
+        width: unset !important;
+        height: unset !important;
+        margin-top: unset !important;
+        left: unset;
+    }
+    .btnDatail{
+        margin: auto;
+        text-align: center;
+        color: #1B75BB;
+        font-size: 14px;
+    }
+    #map {
+        width: 100%;
+        height: 250px;
+        margin-top: 15px;
+      }
+    .ticketMain{
+        margin: 20px 5px 5px 5px;
+    }
+    .ticketTitle{
+        background: #fcfcfc;
+        height: 25px;
+        border-radius: 5px;
+        border: 1px solid #eaeaea;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-bottom: none;
+        position: relative;
+        z-index: 1;
+        font-size: 13px;
+        margin-top: 5px;
+        padding: 2px 5px;
+    }
+    .ticketNext{
+        background: #fcfcfc;
+        border: 1px solid #eaeaea;
+        border-top: none;
+        border-bottom: none;
+        position: relative;
+        z-index: 1;
+        top: -30px;
+    }
+    .ticketEnd{
+        background: #fcfcfc;
+        border: 1px solid #eaeaea;
+        border-top: none;
+        position: relative;
+        z-index: 1;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .textAve{
+        margin-top: 5px;
+        display: inline-block;
+    }
+    .textTicket{
+        float: right;
+        margin-right: 15px;
+        margin-top: 5px;
+        display: inline-block;
+
+    }
+    .imgSection{
+        width: 100%;
+        position: relative;
+        top: -10px;
+        z-index: 0;
+    }
+    .textGray{
+        color: #7A7A7A;
+    }
+    .detailPeple{
+        width: 48%;
+        display: inline-block;
+    }
+    .vertical-middle{
+        vertical-align: middle;
+    }
+    .button-block{
+        background-color: #FA6980 !important;
+        margin-top: 25px;
+    }
+    .textReview{
+        vertical-align: middle;
+        font-size: 18px;
+        color: #7A7A7A;
+    }
+    .starActive:before {
+        color: #FFDD00 !important;
+    }
+    .textBold{
+        font-weight: bold;
+    }
+    .ticket_id{
+        font-size: 16px;
+        font-weight: 500;
+        color: #7e48c0;
+        font-size: 20px;
+    }
+    .borderBottom{
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: 100% 0.6px;
+        background-image: linear-gradient(to right, #c9407a 0%, #7f47c6 100%);
+    }
+    .borderimgage{
+        width: 27px;
+        height: 27px;
+        position: relative;
+        border-radius: 50%;
+        background-image: linear-gradient(to right, #7f47c6 , #c9407a);
+    }
+    
+    .imgpro{
+        border-radius: 50% !important;
+        width: 25px !important;
+        height: 25px !important;
+        position: absolute !important;
+        right: 0;
+        left: 0;
+        top: 0 !important;
+        bottom: 0 !important;
+        margin: auto !important;
+        object-fit: cover !important;
+        border: unset;
+    }
+    .inlineBlog{
+        display: inline-block !important;
+    }
+    .nameStore{
+        color: #3e3e3e;
+        font-size: 12px;
+    }
+    .dateSelect{
+        font-size: 30px;
+        color: #7e48c0;
+        font-weight: bold;
+    }
+    .nameTours{
+        font-size: 20px;
+        font-weight: 500;
+        color: #7e48c0;
+    }
+    .icon-arrow-right:before {
+        margin-top: -12px;
+        right: 20px;
+    }
+}
+ion-app.md page-payment [padding] .scroll-content {
+    background: #F8F8F8;
+    padding-top: 0px!important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}

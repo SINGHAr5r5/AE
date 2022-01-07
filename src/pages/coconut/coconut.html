@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let data of data;let i = index;">
+
+      <ion-thumbnail item-start (click)="NextPage('ProfilePage',data)">
+        <img id="profile" [src]="data.user_path_img">
+      </ion-thumbnail>
+
+      <h3 (click)="NextPage('ProfilePage',data)" style="margin-top: 0px;"><span
+          [innerHtml]="data.user_firstname"></span> <span [innerHtml]="data.user_lastname"></span></h3>
+      <p (click)="NextPage('ProfilePage',data)">from {{data.country_name_en}}</p>
+
+      <i class="Following " *ngIf="data.follow>0 && data.user_id !=gd.userProfile.user_id" (click)="follow(2,i)"></i>
+      <i class="Follow " *ngIf="data.follow==0 && data.user_id != gd.userProfile.user_id" (click)="follow(1,i)"></i>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<div id="footer" style="z-index:5"></div>

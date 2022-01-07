@@ -1,0 +1,363 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start style="order: 0;">
+      <button ion-button icon-only style="" class="">
+        <img style="position: relative;width: 20px;" src="./assets/icon/logotree.svg" alt="">
+      </button>
+      <button ion-button icon-only style="" class="">
+        <div style="position: relative;color: #000;font-weight: bold;font-size: 14px;">Adventure Earth</div>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only style="" class="" (click)="goProfile(gd.userProfile)">
+        <img style="position: relative !important;;margin-right: 10px !important;;height: 30px !important;;width: 30px !important;;" id="img_profile" class="imgpro" [src]="gd.userProfile.user_path_img" />
+      </button>
+      <button ion-button icon-only style="" class="" (click)="presentPopover($event)">
+        <img style="position: relative;margin-right: 10px;" src="./assets/icon/menu-icon.svg" alt="">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="ticketMain">
+    <div class="ticketTitle">
+      <img src="./assets/imgs/treecoconut.svg" alt="" style="vertical-align: middle;">
+      <div class="textAve" style="vertical-align: middle;">ADVENTURE EARTH</div>
+      <div class="textTicket">Your Ticket</div>
+    </div>
+    <img src="./assets/imgs/cutSecsion.svg" class="imgSection" alt="">
+    <ion-grid class="ticketNext">
+      <ion-row>
+        <!-- <img src="http://www.myadventureearth.com/data/data_photos/1005/img_base64/1544258094.2018-12-08-15-34-5415122.jpg" alt=""> -->
+        <ion-slides>
+          <ion-slide *ngFor="let img of dataget.img">
+            <img [src]="img.img_resize" alt="">
+          </ion-slide>
+        </ion-slides>
+      </ion-row>
+      <ion-row style="font-size: 12px;">
+        <ion-col col-9>
+          <div>{{dataget.packet_name}} </div>
+          <div>
+            <img src="./assets/icon/ping-icon.svg" class="" alt="" style="vertical-align: middle;width: 16px;">
+            <span style="vertical-align: middle;">Choonburi</span>
+          </div>
+        </ion-col>
+        <ion-col col-3 style="display: grid;">
+          <div class="btnDatail" (click)="showDetail()">
+            Detail
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid class="ticketNext" style="font-size: 12px;background: #EBEDED;">
+      <ion-row>
+        <ion-col col-8>
+          <img style="width: 30px;height: 30px;border-radius: 50%;vertical-align: middle;"
+            [src]="dataget.user.user_path_img" alt="">
+          <div style="display: inline-block;vertical-align: middle;">
+            <div>Experience by</div>
+            <div style="color: #1B75BB;">{{dataget.user.user_firstname}} {{dataget.user.user_lastname}}</div>
+          </div>
+        </ion-col>
+        <ion-col col-4 style="display: grid;">
+          <div style="margin: auto;" *ngIf="gd.userProfile.user_id != dataget.user.user_id">
+            <img src="./assets/icon/iconMessage.svg" class="" alt="" style="vertical-align: middle;width: 20px;">
+            <span style="color: #1B75BB;vertical-align: middle;">Message</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <img src="./assets/imgs/cutSecsion.svg" class="imgSection" alt="" style="top: -35px;">
+    <ion-grid class="ticketEnd" style="top: -50px;font-size: 12px;">
+      <ion-row>
+        <ion-col col-6>
+          <div style="font-size: 16px;text-align: center;border: 1px solid #CBD0D3;width: 80%;margin: auto;">
+            <div id="qrcodeFrame" style="width: 90%;margin: auto;padding: 3px 0;"></div>
+            <div
+              style="border-top: 1px solid #CBD0D3;background: #EBEDED;padding-top: 5px;padding-bottom: 5px;font-size: 12px;">
+              {{dataget.booking_code_order}}</div>
+          </div>
+        </ion-col>
+        <ion-col col-6 style="font-size: 14px;">
+          <div class="textGray">Date</div>
+          <div style="margin-bottom: 5px">{{dataget.booking_date}}</div>
+          <div class="textGray">Time</div>
+          <div style="margin-bottom: 5px">{{dataget.timeable[0].timeable_time}} -
+            {{dataget.timeable[dataget.timeable.length - 1].timeable_time}}</div>
+          <!-- <div class="detailPeple">
+              <div class="textGray">Adult</div>
+              <div>2</div>
+            </div>
+            <div class="detailPeple">
+              <div class="textGray">Children</div>
+              <div>2</div>
+            </div> -->
+          <div class="textGray">Guest(s)</div>
+          <div style="margin-bottom: 5px">{{dataget.Booking_Guest}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="dataget.packet_condition">
+        <ion-col>
+          <div class="textGray">Condition</div>
+          <div>{{dataget.packet_condition}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="textGray">Activity Location</div>
+          <div>
+            <span class="vertical-middle">{{dataget.address}}</span>
+            <!-- <img src="./assets/imgs/shopLocation.svg" alt="" class="vertical-middle"> -->
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="textGray">Meetpoint</div>
+          <div>
+            <span class="vertical-middle">{{meeting.name_meet}}</span> <span style="color: #FA6980;">
+              {{meeting.time_meeting}}</span>
+            <!-- <img src="./assets/imgs/shopLocation.svg" alt="" class="vertical-middle"> -->
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="textGray" *ngIf="dataget.user.store_telephone"> Call us {{dataget.user.store_telephone}} </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button block (click)="imageTo()">
+            <img src="./assets/imgs/save-icon.svg" alt="" class="vertical-middle" style="margin-right: 10px;"> Save
+            Image
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+
+  <ion-grid class="" style="font-size: 14px;top: -45px;position: relative;" *ngIf="secment == true">
+    <ion-row>
+      <ion-col>
+        <div>{{dataget.packet_name}} </div>
+        <div>
+          <img src="./assets/icon/ping-icon.svg" class="" alt="" style="vertical-align: middle;width: 16px;">
+          <span style="vertical-align: middle;">{{dataget.province.province_name_en}}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="vertical-middle" style="display: inline-block;">
+          <i class="iconStar-star" [ngClass]="dataget.package_rate.Average >= '1' ? 'starActive' : ''"></i>
+          <i class="iconStar-star" [ngClass]="dataget.package_rate.Average >= '2' ? 'starActive' : ''"></i>
+          <i class="iconStar-star" [ngClass]="dataget.package_rate.Average >= '3' ? 'starActive' : ''"></i>
+          <i class="iconStar-star" [ngClass]="dataget.package_rate.Average >= '4' ? 'starActive' : ''"></i>
+          <i class="iconStar-star" [ngClass]="dataget.package_rate.Average >= '5' ? 'starActive' : ''"></i>
+        </div>
+        <!-- <span class="textReview" style="margin-left: 15px;">
+          (168) reviews >
+        </span> -->
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row style="font-size: 14px;background: #EBEDED;margin-bottom: 15px;margin-top: 10px;">
+      <ion-col col-8>
+        <img style="width: 30px;height: 30px;border-radius: 50%;vertical-align: middle;"
+          [src]="dataget.user.user_path_img" alt="">
+        <div style="display: inline-block;vertical-align: middle;">
+          <div>Experience by</div>
+          <div style="color: #1B75BB;">{{dataget.user.user_firstname}} {{dataget.user.user_lastname}}</div>
+        </div>
+      </ion-col>
+      <ion-col col-4 style="display: grid;" (click)="chat(dataget.user)">
+        <div style="margin: auto;" *ngIf="gd.userProfile.user_id != dataget.user.user_id">
+          <img src="./assets/icon/iconMessage.svg" class="" alt="" style="vertical-align: middle;width: 20px;">
+          <span style="color: #1B75BB;vertical-align: middle;">Message</span>
+        </div>
+      </ion-col>
+    </ion-row> -->
+    <ion-row class="textGray" style="font-size: 14px;">
+      <ion-col col-5>
+        Date
+      </ion-col>
+      <ion-col col-7 style="text-align: right;">
+        {{dataget.booking_date}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="textGray" style="font-size: 14px;">
+      <ion-col col-5>
+        Time
+      </ion-col>
+      <ion-col col-7 style="text-align: right;">
+        {{dataget.timeable[0].timeable_time}} - {{dataget.timeable[dataget.timeable.length - 1].timeable_time}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="textGray" style="font-size: 14px;">
+      <ion-col col-5>
+        Guest(s)
+      </ion-col>
+      <ion-col col-7 style="text-align: right;">
+        {{dataget.Booking_Guest}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <hr>
+      </ion-col>
+    </ion-row>
+    <ion-row class="textGray" style="font-size: 14px;" *ngFor="let guestD of guests">
+      <ion-col col-5>
+        {{guestD.text}}
+      </ion-col>
+      <ion-col col-7 style="text-align: right;">
+        {{guestD.price}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="textGray" style="font-size: 14px;"
+      *ngIf="dataget.Booking_Qly < dataget.tour_less && dataget.tour_private == '1'">
+      <ion-col col-5>
+        Extra Price
+      </ion-col>
+      <ion-col col-7 style="text-align: right;">
+        THB {{dataget.tour_extra_price}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="textGray" style="font-size: 14px;" *ngIf="dataget.Accident_Status == '0'">
+      <ion-col col-5>
+        <!-- Accident Insurance -->
+        {{dataget.accident.accident_name}}
+      </ion-col>
+      <ion-col col-7 style="text-align: right;">
+        <span *ngIf="dataget.accident.accident_price != 0">THB {{dataget.accident.accident_price}}</span>
+        <span *ngIf="dataget.accident.accident_price == 0">(FREE)</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="textGray" style="font-size: 14px;" *ngIf="meeting.meet_tyep == '3'">
+      <ion-col col-5>
+        {{meeting.name_meet}}
+      </ion-col>
+      <ion-col col-7 style="text-align: right;">
+        THB {{meeting.meet_price}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="textGray" style="font-size: 14px;">
+      <ion-col col-5>
+        Tax
+      </ion-col>
+      <ion-col col-7 style="text-align: right;">
+        THB {{dataget.Booking_Tax}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <hr>
+      </ion-col>
+    </ion-row>
+    <ion-row class="textGray" style="font-size: 14px;">
+      <ion-col col-5>
+        Total
+      </ion-col>
+      <ion-col col-7 style="text-align: right;">
+        THB {{dataget.Booking_Price}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <hr>
+      </ion-col>
+    </ion-row>
+
+
+
+
+
+    <ion-row style="text-align: center;">
+      <ion-col col-4>
+        <img src="./assets/icon/icon-clock.svg" class="" alt="" style="vertical-align: middle;width: 20px;">
+        <div>Starting time</div>
+        <div>{{dataget.timeable[0].timeable_time}}</div>
+      </ion-col>
+      <ion-col col-4>
+        <img src="./assets/icon/icon-peple.svg" class="" alt="" style="vertical-align: middle;width: 20px;">
+        <div>Private</div>
+        <div>2</div>
+      </ion-col>
+      <ion-col col-4>
+        <img src="./assets/icon/icon-sand.svg" class="" alt="" style="vertical-align: middle;width: 20px;">
+        <div>Duration</div>
+        <div>{{dataget.package_time}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <hr>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="textBold">
+        Details
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="textGray">
+        {{dataget.packet_detail}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="textBold">
+        Scheddute
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div *ngFor="let data of dataget.timeable">
+          <div>{{data.timeable_time}}</div>
+          <div class="textGray">{{data.timeable_activity}}</div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <hr>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div style="padding: 2px;">
+          <img src="./assets/icon/ping-icon.svg" class="" alt="" style="vertical-align: middle;width: 16px;">
+          <span style="vertical-align: middle;" class="textBold">Experience Location</span>
+          <br>
+          <div #map id="map"></div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ion-content>

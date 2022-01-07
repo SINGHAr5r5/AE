@@ -1,0 +1,6 @@
+<ion-tabs (click)="click()">
+    <ion-tab [root]="tab1Root" tabIcon="menu1" [rootParams]="user" tabTitle="Home" (select)="scrollHome()"></ion-tab>
+    <ion-tab [root]="tab3Root" tabIcon="menu3" [rootParams]="user" id="tab3" tabTitle="Share Your Freedom" (ionSelect)="openMenu()"></ion-tab>
+    <!-- <ion-tab [root]="tab2Root" tabIcon="menu2" [rootParams]="user" tabTitle="What to do"></ion-tab> -->
+    <ion-tab [root]="tab4Root" tabIcon="menu4" [rootParams]="user" tabTitle="Connect With Traveler"></ion-tab>
+</ion-tabs>

@@ -1,0 +1,194 @@
+page-myticket {
+    .toolbar-background{
+        background-image: unset !important;
+    }
+    .ion-ios-arrow-back:before{
+        color: #212121;
+    }
+    .ion-md-arrow-back:before{
+        content: "\f3cf" !important;
+        position: relative !important;
+        background-repeat: unset !important;
+        background-position: unset !important;
+        background-image: unset !important;
+        background-size: unset !important;
+        width: unset !important;
+        height: unset !important;
+        margin-top: unset !important;
+        left: unset;
+    }
+    .back-button{
+        margin: 0;
+        width: 30px;
+        min-width: 20px;
+    }
+    .starActive:before {
+        color: #FFDD00 !important;
+    }
+    .imgTicket{
+        width: 100% !important;
+        padding-top: 100% !important;
+        background-position: center !important;
+        background-size: cover !important;
+    }
+    .bar-button-default-ios{
+        color: #ffffff !important;
+    }
+    .ion-md-arrow-back:before{
+        margin-top: -25px !important;
+    }
+    .icon_search:before{
+        right: 0px !important;
+    }
+    // .back-button{
+    //     display: none !important;
+    // }
+    .toolbar-background-ios{
+        border-width: unset !important;
+        border-style: unset !important;
+    }
+    .banner{
+        margin-top: 10px !important;
+        height: 130px;
+    }
+    .slideBanner{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .contentTitle{
+        font-size: 16px;
+        color: #8855d6;
+        text-align: left;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        width: 100%;
+        padding-right: 5px;
+    }
+    .contntDistant{
+        font-size: 10px;
+        text-align: left;
+        margin-bottom: 5px;
+        color: #9c9c9c;
+        
+    }
+    .contentDetail{
+        font-size: 12px;
+        text-align: left;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: break-word !important;
+    }
+    .cardMain{
+        padding: 0px !important;
+    }
+    .cardContent{
+        padding: 0px !important;
+    }
+    .nopadding{
+        padding: 0px;
+    }
+    .imgfullsize{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 85%;
+    }
+    .titlePage{
+        color: #8855d6;
+        padding-left:10px !important;
+        padding-top:10px !important;
+        font-size: 20px;
+    }
+    .leftcard{
+        background: linear-gradient(90deg, rgba(207,32,102,1) 0%, rgba(176,68,171,1) 100%);
+        color: #fff !important;
+    }
+    .leftcard p{
+        color: #fff !important;
+        font-size: 20px !important;
+    }
+    .relative{
+        position: relative;
+    }
+    .seeAll{
+        font-size: 18px;
+        float: right;
+        color: #8855d6;
+        margin-right: 15px;
+    }
+    .ion-ios-arrow-forward:before{
+        width: unset !important;
+        height: unset !important;
+        display: unset !important;
+        font-size: 20px;
+    }
+    .inlineBlog{
+        display: inline-block;
+    }
+    .nameStore{
+        color: #5d5d5d;
+        font-size: 14px;
+    }
+    .times{
+        color: #888;
+        font-size: 16px;    
+    }
+    .contentDetail{
+        font-size: 16px;
+        text-align: left;
+        margin: 0px !important;
+    }
+    .tagText{
+        color: #888;    
+        font-size: 10px;
+        vertical-align: middle;
+    }
+    .container {
+        margin-right: 5px !important;
+        display: inline-block;
+        text-align: center;
+        margin-top: 30px;
+      }
+      .button_border {
+        color: #8855d6;
+        background: linear-gradient(to right, #c9407a , #7f47c6);
+        border-radius: 8px;
+        display: inline-block;
+        font-size: 8px;
+        padding: 1px;
+        text-decoration: none;
+        vertical-align: middle;
+      }
+      .button_border span {
+        background: #fff;
+        display: block;
+        padding: 0px 10px;
+        border-radius: 6px;
+        
+      }
+      .borderimgage{
+        width: 27px;
+        height: 27px;
+        position: relative;
+        border-radius: 50%;
+        background-image: linear-gradient(to right, #7f47c6 , #c9407a);
+    }
+    .imgpro{
+        border-radius: 50% !important;
+        width: 25px !important;
+        height: 25px !important;
+        position: absolute !important;
+        right: 0;
+        left: 0;
+        top: 0 !important;
+        bottom: 0 !important;
+        margin: auto !important;
+        object-fit: cover !important;
+        border: unset;
+    }
+}

@@ -1,0 +1,56 @@
+<!--
+  Generated template for the SettingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title class="Museo">
+
+            <table style=" width: 100%; ">
+                <tr>
+                    <td>Settings</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 10px;opacity: .7;" class="Montserrat"><i>Share your freedom</i></td>
+                </tr>
+            </table>
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="Montserrat">
+    <ion-list>
+        <button ion-item (click)='EditProfile()'>
+        Edit Profile
+      </button>
+        <button ion-item style="line-height: 13px;padding-top: 5px;padding-top: 1px;margin: 0px 0px 0px 0;" (click)='EditPick()' class="settext">
+        Edit Settings <br>
+        <span style="font-size: 10px;color: #AEAEAE"> (Picture,Place,Interesting) </span>
+      </button>
+        <button ion-item class="no-item-inner" (click)='ResetPassword()' *ngIf="type != 'fb'">
+        <span style="color: #AEAEAE">Reset Password</span>
+      </button>
+        <button ion-item class="no-item-inner" (click)='logout()'>
+          <i class="off icon25"></i>  <span style="margin-left:30px;" class="colorRed"> LOG OUT </span>
+      </button>
+        <div ion-item style="    background-color: transparent;">
+            <span style="position: absolute;
+          top: 0;
+          right: 20px;
+          font-size: 12px;">ver.  {{gd.version}}</span>
+        </div>
+    </ion-list>
+    <!-- <div  style="     padding-left: 20px;
+                font-size: 12px;
+                margin-top: -55px;
+                z-index: 5000;">
+
+         -->
+    <!-- </div> -->
+</ion-content>
+<div id="footer"></div>

@@ -1,0 +1,72 @@
+<!--
+  Generated template for the LocationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      <table style=" width: 100%; ">
+        <tr>
+          <td>Location</td>
+        </tr>
+        <tr>
+          <td style="font-size: 10px;opacity: .7;" class="Montserrat">
+            <i>Share your freedom</i>
+          </td>
+        </tr>
+      </table>
+    </ion-title>
+    <ion-buttons end>
+      <!-- Button to Add Location Marker -->
+      <button ion-button (click)="dismiss()">
+        <i class="icon_close_whtie "></i>
+      </button>
+
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <!-- <input id="pac-input" class="controls"  type="text" placeholder="Search Box"> -->
+  <!-- <ion-searchbar [(ngModel)]="autocomplete.query" 
+                        (ionInput)="updateSearch()"
+                         ></ion-searchbar> -->
+  <!-- <ion-list>
+            <ion-item *ngFor="let item of autocompleteItems" tappable (click)="chooseItem(item)">
+              {{ item }}
+            </ion-item>
+          </ion-list> -->
+
+  <input id="pac-input" class="search" placeholder="Search Location" (keyup)="onKey()">
+  <!-- <ion-searchbar placeholder="Search Location" (ionInput)="filterItems($event)"></ion-searchbar> -->
+  <input type="hidden" id="latlong">
+  <ion-grid style="   ">
+    <ion-row style="">
+      <ion-col (click)="select(MyLocation)">
+        <i class="icon_map_search" ></i>
+        <span style="padding-left: 25px;">Current Location</span>
+      </ion-col>
+    </ion-row>
+    <div  *ngFor="let data of aroundmap;let i = index;">
+        <ion-row *ngIf='search==""'>
+            <ion-col (click)="select(data,i)">
+              {{data.place_name}} 
+            </ion-col>
+          </ion-row>
+    </div>
+  </ion-grid>
+  <div id="mapmodel" style="display: none;"></div>
+  <!-- <ion-item>
+            <i class="icon_location"> </i>
+            <ion-icon name="plane" item-start color="danger"></ion-icon>
+            <ion-label>My Location</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Airplane Mode</ion-label>
+          </ion-item> -->
+</ion-content>

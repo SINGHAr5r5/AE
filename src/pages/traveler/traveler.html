@@ -1,0 +1,135 @@
+<ion-header>
+    <ion-navbar style="padding-left: 0;padding-right: 0;padding-bottom: 0px;" hideBackButton>
+        <ion-buttons start style="order: 0;" style="width: 100%;margin: 0px;">
+            <div style="width: 100%;position: relative;">
+                <div class="header2" style="margin: auto;width: 100%;position: absolute;z-index: 0;top: 0px;bottom: 0px;height: 32px;">
+                    <button ion-button icon-only style="" class="" (click)="scrollTopFN()">
+                        <img style="position: relative;width: 20px;margin-left: 10px;" src="./assets/icon/logotree.svg" alt="">
+                    </button>
+                    <button ion-button icon-only style="" class="" (click)="scrollTopFN()">
+                        <div style="position: relative;color: #000;font-weight: bold;font-size: 14px;">Traveler
+                        </div>
+                    </button>
+                    <button ion-button icon-only style="float:right;" class="" (click)="presentPopover($event)">
+                        <img style="position: relative;margin-right: 10px;" src="./assets/icon/menu-icon.svg" alt="">
+                    </button>
+                    <button ion-button icon-only style="float:right;" class="" (click)="NextPage('ProfilePage',gd.userProfile)">
+                        <img style="position: relative;margin-right: 10px;height: 30px;width: 30px;" id="img_profile" class="imgpro" [src]="gd.userProfile.user_path_img"
+                        />
+                    </button>
+                    <button ion-button icon-only style="position: relative;float:right;" class="" (click)="gonoti()">
+                        <img style="position: relative;margin-right: 10px;width: 20px;" src="./assets/icon/Inoti.svg" alt="">
+                        <div class="numberNoti" *ngIf="gd.sumNoti > 0">
+                            <div style="margin: auto;">{{gd.sumNoti}}</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-segment [(ngModel)]="type_page">
+        <ion-segment-button value="0" (click)="change(0)" id="segmentTraveler">
+            <div style="margin: auto;font-size: 18px;">Traveler</div>
+        </ion-segment-button>
+        <ion-segment-button value="1" (click)="change(1)">
+            <div style="margin: auto;font-size: 18px;">Chat</div>
+        </ion-segment-button>
+    </ion-segment>
+    <div [hidden]="type_page != 0" style="background: rgb(226, 226, 226);color: rgb(82, 82, 82);padding: 1px 15px 3px;font-size: 16px;"
+        id="taskFilter">
+        <button ion-button icon-end outline class="km">
+            {{distant}} km
+        </button>
+        <button ion-button icon-end outline class="filter" (click)="presentfilter()">
+            Filter
+            <ion-icon name="ios-options"></ion-icon>
+        </button>
+    </div>
+</ion-header>
+<ion-content>
+    <ion-refresher id="refresher" (ionRefresh)="doRefresh($event)" *ngIf="type_page != 1">
+        <ion-refresher-content>
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-grid [hidden]="type_page != 0" *ngIf="itemMain.length != 0">
+        <ion-row *ngFor="let item of itemMain" id="contentRow">
+            <ion-col col-4 *ngFor="let user of item" class="mainCard" (click)="openModal(user)">
+                <div [ngStyle]="{'background': 'url('+user.user_path_img+')', 'background-size': 'cover', 'background-position': 'center'}"
+                    class="imgMain">
+                    <img class="country_img" style="width: 20px;height: 20px;box-shadow: 0.5px 0.5px 1px 0.5px rgba(136, 136, 136, 0.21);position: absolute;bottom: 0;right: 0;"
+                        [src]="user.country_img" alt="">
+                </div>
+                <div class="nameUser">
+                    <div [innerHtml]="user.user_firstname" style="vertical-align: middle;display: inline-block;overflow: hidden;text-overflow: clip;white-space: nowrap;max-width: 85%;">
+                    </div>
+                    <div class="online_status" style="display: inline-block;vertical-align: middle;margin-top: 5px;" *ngIf="user.statusOnline"></div>
+                </div>
+                <div class="fromUser">
+                    <span [innerHtml]="user.country_name_en"></span>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="gd.roomchat.length != 0 && type_page != 0">
+        <ion-row *ngFor="let item of gd.roomchat" style="border-bottom:1px #dadada solid;" (click)="chat(item)">
+            <ion-col col-3>
+                <div [ngStyle]="{'background': 'url('+item.user_path_img+')', 'background-size': 'cover', 'background-position': 'center'}"
+                    class="imgMain_chat"></div>
+            </ion-col>
+            <ion-col style="display: inline-flex;" col-9>
+                <div style="margin: auto;width: 100%;">
+                    <div class="nameUser_chat">
+                        <span [innerHtml]="item.user_firstname"></span>
+                        <span [innerHtml]="item.user_lastname"></span>
+                        <div *ngIf="item.message.length > 0" class="time_chat">
+                            {{item.message[item.message.length-1].sendDate}}</div>
+                    </div>
+                    <div class="message_chat" style="position: relative;" style="min-height: 26px;">
+                        <div *ngIf="item.message.length > 0" ng-class="item.statusOnline == 1 ? 'online' : 'offline'" class="textChat">{{item.message[item.message.length-1].message}}</div>
+                        <div *ngIf="item.statusOnline == 1" class="online_status" style="position: absolute;bottom: 0;top: 10px;margin: auto;right: 5px;"></div>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <div style="height: 50px;"></div>
+    <div class="filterFeed Montserrat" id="filterL">
+        <div class="tilie">
+            <span> Your Preference</span>
+        </div>
+        <table style="">
+            <tr>
+                <td class="btnfilter" style="padding-right: unset !important;padding-left: unset !important;">
+                    <div class="fillterNoclick fillterList">View All</div>
+                    <i class="check_New"></i>
+                </td>
+            </tr>
+            <tr>
+                <td class="btnfilter" style="padding-right: unset !important;padding-left: unset !important;">
+                    <div class="fillterNoclick">Following</div>
+                    <i class=""></i>
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td style="vertical-align: top;" class="nopadding">
+                    <div style="margin-top: 15px;padding-left: 3%;" id="Country">
+                        From Country
+                        <i class="icon-arrow-down"></i>
+                    </div>
+                    <div id="CountryFilter" style="display:none;">
+                        <div style="margin: 0px 16px 0 16px;">
+                            <input ion-item type="text" placeholder="search..." class="boxInput" [(ngModel)]="searchTerm" id="searchTerm" (ngModelChange)='onSearchInput(searchTerm)'>
+                        </div>
+                        <div style="    width: 120%; height: 250px;">
+                            <ion-list inset class="inLineList listinset">
+                                <button ion-item *ngFor="let item of items" value="item.country_id" id="btncountry" style="border: 0;padding-left: 15%;background-color: transparent;color: white;min-height:5px;">
+                                    {{ item.country_name_en }}
+                                </button>
+                            </ion-list>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</ion-content>

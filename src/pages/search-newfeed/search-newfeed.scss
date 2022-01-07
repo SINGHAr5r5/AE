@@ -1,0 +1,44 @@
+page-search-newfeed {
+    .boxSearch {
+        max-width: 47%;
+        margin: 0px 5px;
+        display: inline-block;
+        border: 1px solid #dddddd;
+        padding: 5px;
+        border-radius: 5px;
+        text-align: center;
+        overflow: hidden;
+        width: 95%;
+        text-overflow: clip;
+        white-space: nowrap;
+        padding-right: 8px;
+        line-height: 20px;
+        margin-bottom: 5px;
+        background: #dddddd;
+    }
+
+    .toolbar-background {
+        background: unset !important;
+    }
+
+    ion-header {
+        box-shadow: unset !important;
+    }
+
+    #segments.segment-button {
+        border: none;
+        background: transparent;
+        color: #b5b5b5;
+        border-bottom: 1px solid;
+        border-radius: 0;
+    }
+
+    #segments.segment-button.segment-activated {
+        color: #000 !important;
+    }
+
+    .action {
+        color: #FA6980;
+        border: #FA6980 1px solid;
+    }
+}

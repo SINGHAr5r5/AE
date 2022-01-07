@@ -1,0 +1,232 @@
+<!--
+  Generated template for the BookingNewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start style="order: 0;" (click)="scrollTopFN()">
+      <!-- <button ion-button icon-only style="" class="">
+        <img style="position: relative;width: 20px;" src="./assets/icon/logotree.svg" alt="">
+      </button> -->
+      <button ion-button icon-only style="" class="">
+        <div style="position: relative;color: #000;font-weight: bold;font-size: 14px;margin-left: 10px;">What to do</div>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only style="" class="" (click)="goProfile(gd.userProfile)">
+        <img style="position: relative;margin-right: 10px;height: 30px;width: 30px;" id="img_profile" class="imgpro" [src]="gd.userProfile.user_path_img"
+        />
+      </button>
+      <button ion-button icon-only style="" class="" (click)="presentPopover($event)">
+        <img style="position: relative;margin-right: 10px;" src="./assets/icon/menu-icon.svg" alt="">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)" pullMax="70">
+    <ion-refresher-content pullingIcon="none">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div>
+    <img src="./assets/imgs/testimage.png" alt="">
+  </div>
+  <!-- <video 
+    controls="controls" 
+    preload="metadata" 
+    width="100%" 
+    height="240" 
+    x-webkit-airplay="allow"
+    webkit-playsinline="webkit-playsinline" 
+    class="videoPlayer">
+    <source src="https://youtu.be/jGggxvICnH0" />
+  </video> -->
+  <ion-grid>
+    <ion-row class="filterMain" (click)="openFilter(1)">
+      <ion-col col-2 class="displayGrid">
+        <img class="pingIcon marginAuto" style="margin-left: 0" src="./assets/icon/ping-icon.svg" alt="">
+      </ion-col>
+      <ion-col col-8 class="displayGrid">
+        <span class="marginAuto" style="margin-left: 0">{{wheretogoText.name}}</span>
+      </ion-col>
+      <ion-col col-2 class="displayGrid" style="text-align: right;">
+        <ion-icon class="marginAuto" style="margin-right: 0" name="ios-arrow-down"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="filterMainFilter" *ngIf="filterOpen == '1'" [@myAnimation]>
+      <ion-col>
+        <div class="listFilter" *ngFor="let list of province" (click)="selectFilter('1',list)">
+          {{list.province_name_en}}
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="filterMain" (click)="openFilter(2)">
+      <ion-col col-2 class="displayGrid">
+        <img class="pingIcon marginAuto" style="margin-left: 0" src="./assets/icon/popularIcon.svg" alt="">
+      </ion-col>
+      <ion-col col-8 class="displayGrid">
+        <span class="marginAuto" style="margin-left: 0">{{popularText.name}}</span>
+      </ion-col>
+      <ion-col col-2 class="displayGrid" style="text-align: right;">
+        <ion-icon class="marginAuto" style="margin-right: 0" name="ios-arrow-down"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="filterMainFilter" *ngIf="filterOpen == '2'" [@myAnimation]>
+      <ion-col>
+        <div class="listFilter" *ngFor="let list of category" (click)="selectFilter('2',list)">
+          {{list.cat_name}}
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="filterMain" (click)="filter(2)">
+      <ion-col class="displayGrid">
+        <span class="marginAuto">Explore</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="gridContent" *ngIf="popularData.length != 0">
+    <ion-row>
+      <ion-col class="detailLocation">
+        Popular Activity
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="subTitleText" style="font-weight: bold;">
+        Recommended by us
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>
+          <div class="slidePrev" (click)="slidePrev()">
+            <ion-icon name="ios-arrow-back" style="margin: auto;"></ion-icon>
+          </div>
+          <div class="slideNext" (click)="slideNext()">
+            <ion-icon name="ios-arrow-forward" style="margin: auto;"></ion-icon>
+          </div>
+          <ion-slides slidesPerView='1' #slideP (click)="nextPage()" *ngIf="popularData.length != 0">
+            <ion-slide *ngFor="let images of popularData.img">
+              <div class="Imgs" style="padding-top: 60% !important;" [ngStyle]="{'background': 'url('+images.img_resize+')'}"></div>
+            </ion-slide>
+          </ion-slides>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 10px;" (click)="nextPage()">
+      <ion-col col-12 class="detailLocation">
+        {{popularData.packet_name}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row (click)="nextPage()">
+      <ion-col class="subTitleText">
+        {{popularData.packet_detail}}
+      </ion-col>
+    </ion-row>
+    <ion-row (click)="nextPage()">
+      <ion-col>
+        <div>
+          <img class="pingIcon" style="margin-left: 0;vertical-align: middle;" src="./assets/icon/ping-icon.svg" alt="">
+          <span style="color: #1B75BB;vertical-align: middle;" *ngIf="popularData.length != 0">{{popularData.province.province_name_en}}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row (click)="nextPage()">
+      <ion-col>
+        <span *ngIf="popularData.length != 0">
+          <div *ngFor="let price of popularData.packet_price">THB {{price.price}} per {{price.price_name}}</div>
+        </span>
+        <div style="color: #8F8F8F;">
+          {{popularData.countTime}}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <span *ngFor="let main of package">
+    <ion-grid class="gridContent" *ngIf="main.Section_Sub.length > 0">
+      <ion-row>
+        <ion-col class="titleText" style="padding-left: 15px;">
+          {{main.Section_Title}}
+        </ion-col>
+      </ion-row>
+      <ion-row class="filterMain" style="background: unset;color: #000 !important;width: 70%;position: relative;">
+        <ion-col col-2 class="displayGrid" (click)="showProvince(main)">
+          <img class="pingIcon marginAuto" style="margin-left: 0" src="./assets/icon/ping-icon.svg" alt="">
+        </ion-col>
+        <ion-col col-8 class="displayGrid" (click)="showProvince(main)">
+          <span class="marginAuto" style="margin-left: 0">Where to go?</span>
+        </ion-col>
+        <ion-col col-2 class="displayGrid" style="text-align: right;" (click)="showProvince(main)">
+          <ion-icon class="marginAuto" style="margin-right: 0" name="ios-arrow-down"></ion-icon>
+        </ion-col>
+        <div class="fameProvince" *ngIf="main.Section_ST == '1'" [@myAnimation]>
+          <div class="childProvince" *ngFor="let list of province" (click)="chooserProvince(main,list)">
+            {{list.province_name_en}}s
+          </div>
+        </div>
+      </ion-row>
+      <span *ngFor="let sub of main.Section_Sub;let i = index;" class="borderBottom">
+        <ion-row style="margin-top: 10px;margin-bottom: 10px;" *ngIf="sub.Sub_Package.length != 0">
+          <ion-col col-10 class="subTitleText" style="padding-left: 15px;">
+            {{sub.Sub_Title}}
+          </ion-col>
+          <ion-col col-2 class="seeAll" (click)="seeAll(sub.Sub_Package)">
+            See all
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="sub.Sub_Package.length != 0">
+          <ion-col>
+            <ion-slides slidesPerView='1.5'>
+              <span *ngFor="let pack of sub.Sub_Package;">
+                <ion-slide class="slideImg" (click)="nextDetail(pack)" *ngIf="pack.st_show == '1'">
+                  <div class="frameHeart">
+                    <img src="./assets/icon/Icon-heart_t.svg">
+                  </div>
+                  <div class="Imgs" [ngStyle]="{'background': 'url('+pack.img[0].img_resize+')','background-size': 'cover','background-position': 'center'}">
+                  </div>
+                  <div class="detailFame">
+                    <div>
+                      <img class="pingIcon" style="margin-left: 0;vertical-align: middle;" src="./assets/icon/ping-icon.svg" alt="">
+                      <span style="color: #1B75BB;vertical-align: middle;">{{pack.province.province_name_en}}</span>
+                    </div>
+                    <div class="detailLocation">
+                      {{pack.packet_name}}
+                    </div>
+                    <div style="margin-top: 5px;">
+                      <span style="color: #1B75BB;">THB {{pack.package_price[0].price}}</span> per person
+                    </div>
+                    <div style="color: #8F8F8F;">
+                      {{pack.package_time}}
+                    </div>
+                    <div style="">
+                      <span style="">
+                        <i class="iconStar-star" [ngClass]="1 <= pack.package_rate.Average ? 'starActive' : ''"></i>
+                        <i class="iconStar-star" [ngClass]="2 <= pack.package_rate.Average ? 'starActive' : ''"></i>
+                        <i class="iconStar-star" [ngClass]="3 <= pack.package_rate.Average ? 'starActive' : ''"></i>
+                        <i class="iconStar-star" [ngClass]="4 <= pack.package_rate.Average ? 'starActive' : ''"></i>
+                        <i class="iconStar-star" [ngClass]="5 <= pack.package_rate.Average ? 'starActive' : ''"></i>
+                        <div style="color: #000;min-width: 25px;max-width: 25px;display: inline-block;margin-left: 5px;">( {{pack.package_rate.Count}} )</div>
+                      </span>
+                    </div>
+                  </div>
+                </ion-slide>
+              </span>
+            </ion-slides>
+          </ion-col>
+          <hr style=" margin: 0; margin-top: 10px; margin-left: 10px; margin-right: 10px;height: 1px;width: 100%;" *ngIf="sub.Sub_Package.length != 0 && (main.Section_Sub.length - 1) != i">
+        </ion-row>
+      </span>
+    </ion-grid>
+  </span>
+  <div style="height: 150px;"></div>
+
+</ion-content>

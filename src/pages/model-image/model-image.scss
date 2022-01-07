@@ -1,0 +1,80 @@
+page-model-image {
+    ion-header {
+        box-shadow: unset !important;
+    }
+    .ion-ios-close:before {
+        width: unset !important;
+        height: unset !important;
+        font-size: 40px;
+    }
+    .ion-md-close:before {
+        width: unset !important;
+        height: unset !important;
+        font-size: 30px;
+    }
+    .toolbar-background {
+        background: #fff !important;
+    }
+    .imgChooser {
+        width: 100%;
+        // padding-top: 100%;
+        height: 30vw;
+        background-position: center !important;
+        background-size: cover !important;
+        position: relative;
+    }
+    .active {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #fff;
+        font-size: 12px;
+        font-weight: bold;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: 2px solid #d634a8;
+    }
+    .video-play {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: black;
+    }
+    .inactive {
+        background: #d634a8;
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        display: grid;
+        margin-left: -2px;
+        margin-top: -2px;
+    }
+    .textactive {
+        margin: auto;
+        line-height: 12px;
+    }
+    .action-sheet-wrapper {
+        top: unset !important;
+        height: 65%;
+    }
+    .modal {
+        position: relative !important;
+    }
+    .btnChoose {
+        background: unset;
+        position: relative;
+    }
+    .textCenter {
+        color: #fff;
+        text-align: center;
+    }
+    .action-sheet-container {
+        height: unset !important;
+        margin-top: unset !important;
+    }
+} //model-image page
+.loading-video .loading-wrapper {
+    background: #f8f8f8 !important;
+}

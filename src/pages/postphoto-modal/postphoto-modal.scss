@@ -1,0 +1,97 @@
+page-postphoto-modal {
+    //--------พิ่มใหม่
+    ion-grid.bgGray.ss1.grid {
+        margin-bottom: 5px;
+        
+    }
+    ion-icon.iconn1.icon.icon-ios.ion-ios-add-circle {
+        font-size: 53px;
+        margin-left: 8px;
+    }
+    ion-icon {
+        display: inline-block;
+        font-size: 3.2em;
+        margin-left: 10px;
+    }
+    ion-loading.loading-ios {
+        display: none;
+    }
+    img.img11 {
+        margin-left: 20px;
+    }
+    //-------
+    .scroll-content{
+        background: rgba(56, 56, 56, 0.41);
+        margin-top: unset !important;
+    }
+    .typeplace{
+        display: inline-block;
+        text-align: center;
+
+    }
+    .floatLeft{
+        float: left;
+    }
+    .floatRight{
+        float: right;
+    }
+    .typeLocat{
+        letter-spacing: 0 !important;
+        font-size: 12px;
+    }
+    .icon_true{
+        width: 10px;
+    }
+    .feeling.active{
+        color: #ec0453;
+    }
+    .typeplace.active{
+        border: 1px solid #ec0453;
+        border-radius: 25px;
+        color: #ec0453;
+        font-weight: bold;
+      }
+      .titleType{
+        color: #4e4e4e;
+        font-weight: bold;
+      }
+      .bgGray{
+        background: #f2f2f2;
+      }
+      .textFeeling{
+          color: #a1a1a1;
+      }
+      .textCenter{
+          text-align: center;
+      }
+      .doneBtn{
+        background: linear-gradient(90deg, rgb(234, 57, 118) 0%, rgb(191, 77, 148) 100%);
+        border-radius: 25px;
+        padding: 8px 25px;
+        font-size: 16px;
+        height: unset;
+        float: right;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+      ion-footer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 10px !important;
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+    .footer-md::before {
+        background-image: none;
+    }
+    .content{
+        background: transparent;
+    }
+    .footer{
+        border-radius: 25px 25px 0px 0px;
+        background: #fff;
+        box-shadow: 0px 0px 10px 0.1px #bdbdbd;
+    }
+}

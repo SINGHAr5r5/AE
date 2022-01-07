@@ -1,0 +1,186 @@
+<ion-header>
+    <ion-navbar id="default_Bar">
+        <ion-grid style="padding: 0;">
+            <ion-row>
+                <ion-col col-6 style="padding: 0;" class="col60">
+                    <ion-buttons start>
+                        <ion-buttons start>
+                            <!-- <button ion-button icon-only navPop class="icon_back" style="vertical-align: middle;" *ngIf="viewMode == 1">
+                <ion-icon name="arrow-back"></ion-icon>
+              </button> -->
+                            <button ion-button icon-only class="icon_back" style="vertical-align: middle;" (click)="back()">
+                <ion-icon name="arrow-back"></ion-icon>
+              </button>
+                            <!-- <div style="overflow: hidden;width: 78%;padding-right: 5px;text-overflow: clip;white-space: nowrap;padding-right: 8px;display: inline-block;vertical-align: middle;"
+                  class="textHeader">
+                  <span class="" [innerHtml]="img.user_firstname"></span>
+                  <span class="" [innerHtml]="img.user_lastname"></span>
+                </div> -->
+                        </ion-buttons>
+                    </ion-buttons>
+                </ion-col>
+                <ion-col col-6 style="padding: 0;" class="col40">
+                    <ion-buttons end>
+                        <button ion-button icon-only style="" class="" (click)="saerchPage()">
+              <img style="position: relative;margin-right: 10px;width: 20px;" src="./assets/icon/search-icon.svg" alt="">
+            </button>
+                        <button ion-button icon-only style="position: relative;" class="" (click)="gonoti()">
+              <img style="position: relative;margin-right: 10px;width: 20px;" src="./assets/icon/Inoti.svg" alt="">
+              <div class="numberNoti" *ngIf="gd.sumNoti > 0">
+                <div style="margin: auto;">{{gd.sumNoti}}</div>
+              </div>
+            </button>
+                        <button ion-button icon-only style="" class="" (click)="goprofile()">
+              <img style="position: relative;margin-right: 10px;height: 30px;width: 30px;" id="img_profile" class="imgpros"
+                [src]="gd.userProfile.user_path_img" />
+            </button>
+                        <button ion-button icon-only style="" class="" (click)="presentPopover($event)">
+              <img style="position: relative;margin-right: 10px;" src="./assets/icon/menu-icon.svg" alt="">
+            </button>
+                    </ion-buttons>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding forceOverscroll="false">
+    <!-- [ngStyle]="{'height': heightPhoto+'px'}" -->
+
+
+    <div style="position: relative;">
+        <ion-slides pager="true" class="slideBanner" style="height: unset;">
+            <ion-slide *ngFor="let banners of imageChoos;let i = index" [attr.data-index]='i'>
+                <div [ngStyle]="{
+                'height' : heightPhoto +'px',
+                'background': 'url('+ banners.path +')'}" class="imgslide" style="min-height: 250px;width: 100%;" *ngIf="banners.type != 3 && banners.type != 5">
+                    <ion-icon name="md-close" style="position: absolute;top: 10px;right: 10px;color: #fff;" (click)="removeImage(i)"></ion-icon>
+                </div>
+                <div *ngIf="banners.type == 3 || banners.type == 5">
+                    <video controls preload="metadata" playsinline [poster]="banners.thumbnail" style="width: 100%;">
+                        <source [src]="banners.videoPath | cdvphotolibrary"  type="video/mp4" />
+                    </video>
+                    <ion-icon name="md-close" style="position: absolute;top: 10px;right: 10px;color: #fff;" (click)="removeImage(i)"></ion-icon>
+                </div>
+                <!-- <img [src]="banners" alt="" style="width: 100%;height: 100vw; object-fit: cover;"> -->
+            </ion-slide>
+
+            <ion-slide *ngIf="imageChoos.length == 0">
+                <div style="width: 100%;padding-top: 50%;background: #c7c7c7;">
+
+                </div>
+            </ion-slide>
+        </ion-slides>
+
+        <div style="position: absolute;bottom: 0;z-index: 1;width: 100%;text-align: right;padding-bottom: 15px;padding-right: 10px;">
+            <div style="vertical-align: bottom;display: inline-block">
+                <ion-icon name="images" style="vertical-align: middle;"></ion-icon>
+                <div style="display: inline-block;font-size: 12px;color: #fff;font-weight: bold;">{{imageChoos.length}}</div>
+            </div>
+            <div class="addPhoto" (click)="addMore()">
+                <ion-icon name="add" style="margin: auto"></ion-icon>
+            </div>
+        </div>
+    </div>
+    <div class="center">
+        <ion-grid>
+            <ion-row>
+                <ion-col col-2>
+                    <!-- <img [src]="gd.userProfile.user_path_img" alt="" style="border-radius: 50%;vertical-align: middle;"> -->
+                    <div style="width: 100%;background: aqua;padding-top: 100%;border-radius: 50%;" class="profileImage" [ngStyle]="{
+            'background': 'url('+ gd.userProfile.user_path_img +')'}">
+                    </div>
+                </ion-col>
+                <ion-col col-4 style="display: inline-flex;">
+                    <div style="margin: auto;width: 100%;">
+                        <div style="width: 90%;display:inline-block; overflow: hidden;text-overflow: clip;white-space: nowrap;">
+                            <span [innerHtml]="gd.userProfile.user_firstname"></span>
+                            <span [innerHtml]="gd.userProfile.user_lastname"></span>
+                        </div>
+                        <div style="font-size: 10px;color: #488afe;">From {{gd.userProfile.country_name_en}}</div>
+                    </div>
+                </ion-col>
+                <ion-col col-6 style="display: grid;">
+                    <button (click)="post()" ion-button style="width: 100%;border-radius: 25px;background: linear-gradient(90deg, rgba(207,32,102,1) 0%, rgba(176,68,171,1) 100%);box-shadow: unset;height: 30px;margin: auto;">Post</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+      
+         <!-- +++++++ goog deal AND travel story +++++++ --> 
+            <img *ngIf="gd.hlighligh_Status == 2" class="bannerr" [src]="banner1" alt="" /> 
+            <img *ngIf="gd.hlighligh_Status == 3" class="bannerr" [src]="banner" alt="" /> 
+                 <ion-grid style="padding: 0px;">
+            <ion-row>                    
+            <ion-col class="Postbanner">
+
+                    <div style="background: #eaedef;border-radius: 8px;">
+                        <div style="background: #fff;border: 1px solid #c1c1c1;border-radius: 8px;padding: 5px 10px;">
+
+                            <!-- <textarea style="width:100%;resize: none;min-height: 75px;border: none;margin: 0px !important;" placeholder="Tell your story..."
+                [(ngModel)]="data.caption" (keyup)="onKey($event)" autocomplete="on" autocorrect="on" id="textCaption"></textarea> -->
+                            <div contenteditable="true" id="contentTag" [innerHTML]="data.caption" style="-webkit-user-select: auto;width:100%;resize: none;min-height: 75px;border: none;margin: 0px !important;" aria-placeholder="singha"></div>
+                                
+                        </div>
+                        <div>
+                            <ion-grid>
+                                <ion-row style="font-size: 10px;">
+                                    <ion-col col-2 style="text-align: center;font-size: 8px;border-right: 1px solid #c7c7c7;">
+                                        <span *ngIf="gd.feelingNew.length != 0">
+                      <img [src]="gd.feelingNew[this.data['feeling_tx_sort']-1].icon_true" alt="" style="width: 60%;min-width: 25px;min-height: 25px;"> {{gd.feelingNew[this.data['feeling_tx_sort']-1].feeling_tx_name}}
+                    </span>
+                                    </ion-col>
+                                    <ion-col col-1 style="display: grid;">
+                                        <img src="./assets/icon/ping-icon.svg" alt="" style="margin: auto;width: 16px;">
+                                    </ion-col>
+                                    <ion-col col-7 style="display: grid;">
+                                        <div style="margin: auto;margin-left: 0;">
+                                            <div style="font-size: 12px;">{{data['photo_location']}}</div>
+                                            <div style="font-size: 12px;">{{gd.TypeLocation[data['TypeLocation_srot']-1].TypeLocation_name}}</div>
+                                            <div style="color: #48ad49;">Current Location</div>
+                                        </div>
+                                    </ion-col>
+                                    <ion-col col-2 style="display: grid;">
+                                        <div style="margin: auto;color: #219dc5;" (click)="post_modal()">Change</div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid class="gridBG" style="padding: 10px;margin-top: 10px;" *ngIf="gd.userProfile['user_type_account']==2">
+            <ion-row>
+                <ion-col>
+                    <span class="">Facebook Sharing </span>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td>
+                                <img src="./assets/icon/fb_icon.png" alt="" style="width: 12px;border-radius: 2px;vertical-align: middle;">
+                                <span style="vertical-align: middle;">{{gd.userProfile['user_username']}}</span>
+                            </td>
+                            <td>
+                                <ion-toggle [(ngModel)]="data.photo_share"></ion-toggle>
+                            </td>
+                        </tr>
+                    </table>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <button ion-button outline item-end id='fackBTN' style='margin: 0; padding: 0; border: 0; height: 0;'>
+      &nbsp;
+    </button>
+    </div>
+    <div style="height: 250px;"></div>
+    <br>
+    <br>
+    <canvas id="canvass" width=64 height=64 style="display: none;"></canvas>
+    <div id="parent" style="display: none;width: 100%;">
+        <video [src]="uriVideo" id="videoDuration"></video>
+    </div>
+</ion-content>

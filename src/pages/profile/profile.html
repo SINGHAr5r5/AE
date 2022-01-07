@@ -1,0 +1,1353 @@
+<ion-header style="box-shadow: none;">
+    <div id="toolbarProfile" class="toolbar-background" *ngIf='gd.platformtype=="ios"' style="height: 30px; width: 100%; z-index: 999999; position: relative;"></div>
+</ion-header>
+<ion-content #myContent padding>
+    <div style="background: #fff;">
+        <div style="position: relative; min-height: 150px;">
+            <button ion-button icon-only class="icon_back" (click)="navPop()">
+        <!-- <ion-icon  class="ios-arrow-back icon20 icon-arrow-back "></ion-icon> -->
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+            <div style="background: url('./assets/imgs/header-profile.jpg');background-size: cover;background-position: center;padding-top: 40%; " *ngIf="coverImage == ''"></div>
+            <div [ngStyle]="{'background': 'url('+coverImage+')','background-size': 'cover','background-position': 'center','padding-top': '50%'}" class="coverBackground" *ngIf="coverImage != ''"></div>
+            <div style="fill: #585858; width: 20px;position: absolute;bottom: 30px; right: 20px; z-index: 1; " (click)="presentActionSheet(2)" *ngIf="typeprofile">
+                <!-- <img src="./assets/icon/editCover.svg" alt=""> -->
+                <svg style="padding: 3px 3px 5px 5px;background: #f1f1f1;border-radius: 5px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path id="time-3-icon"d="M404.3 86l-202 202c-1.5 1.5-2.3 3.5-2.3 5.6v26.5c0 4.4 3.6 7.9 7.9 7.9h26.3c2.1 0 4.2-.8 5.7-2.3l202.1-202c3.1-3.1 3.1-8.1 0-11.2L415.5 86c-3.1-3.1-8.1-3.1-11.2 0zM475.6 67l-14.4-14.4-.2-.2c-3.1-2.7-7.2-4.4-11.5-4.4-4.4 0-8.5 1.7-11.6 4.5l-11.3 11.4c-1.5 1.6-1.5 4.1 0 5.6L437 79.9l21.7 21.7c1.6 1.6 4.1 1.6 5.7 0l11.3-11.3c2.8-3.1 4.4-7.1 4.4-11.6-.1-4.4-1.7-8.6-4.5-11.7z" />
+          <g>
+            <path
+              d="M250 342c-3 3-7.1 4.7-11.3 4.7H197.3c-8.8 0-16-7.2-16-16V289.2c0-4.2 1.7-8.3 4.7-11.3l.8-.8 147.6-147.6c2.5-2.5.7-6.8-2.8-6.8H90.7C58.3 122.7 32 149 32 181.4v224c0 32.4 26.3 58.7 58.7 58.7h256c32.4 0 58.7-26.3 58.7-58.7v-209c0-3.6-4.3-5.3-6.8-2.8L250.8 341.2l-.8.8z" />
+          </g>
+        </svg>
+            </div>
+        </div>
+        <div style="position: relative;top: -20px;background: #fff;border-radius: 15px 15px 0px 0px;">
+            <ion-grid style="position: relative; top: -30px;">
+                <ion-row>
+                    <ion-col col-4 style="text-align: center;">
+                        <!-- <img class="imgProfile" [src]="Profile.user_path_img" alt="" style="max-width: 150px;"> -->
+                        <div (click)="viewImage(Profile.user_path_img)" class="imgProfile" style="position: relative;" [ngStyle]="{'background': 'url('+Profile.user_path_img+')','background-size': 'cover','background-position': 'center','padding-top': '100%'}">
+                            <img *ngIf="Profile.country_img != undefined && Profile.country_img_path == undefined" style="width: 25px;height: 25px;box-shadow: 0.5px 0.5px 1px 0.5px rgba(136, 136, 136, 0.21);position: absolute;bottom: 0px;right: 0px;" src="{{Profile.country_img.replace('img_resize','img_base64')}}"
+                                alt="" />
+                            <img *ngIf="Profile.country_img_path != undefined" style=" width: 25px;height: 25px;box-shadow: 0.5px 0.5px 1px 0.5px rgba(136, 136, 136, 0.21);position: absolute;bottom: 0px;right: 0px;" src="{{Profile.country_img_path.replace('img_resize','img_base64')}}"
+                                alt="" />
+                        </div>
+                    </ion-col>
+                    <ion-col col-8 style="display: grid; margin-top: 30px;">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="font-size: 15px;font-weight: bold;padding-left: 15px;" colspan="2">
+                                    <!-- {{Profile.user_firstname}} {{Profile.user_lastname}} -->
+                                    <span [innerHTML]="Profile.user_firstname"> </span>
+                                    <span [innerHTML]="Profile.user_lastname"> </span>
+                                </td>
+                                <td rowspan="2" style="width: 20%;">
+                                    <div class="fram_follow" *ngIf="!typeprofile&&status_Follow==true" (click)="follow(1)">
+                                        <img class="img_follow" src="./assets/icon/follow_icon+.png" alt="" />
+                                        <div>Follow</div>
+                                    </div>
+                                    <div class="fram_follow" *ngIf="!typeprofile&&status_Follow==false">
+                                        <img class="img_follow" src="./assets/icon/follow_icon-.png" alt="" (click)="follow(2)" />
+                                        <div style="color: #888;">Following</div>
+                                    </div>
+                                    <div class="fram_follow" *ngIf="typeprofile" (click)="settingFN()" style="padding-right: 3px; text-align: right;">
+                                        <svg style="width: 25px; fill: #6b6b6b;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                      <path
+                        d="M413.967 276.8c1.06-6.235 1.06-13.518 1.06-20.8s-1.06-13.518-1.06-20.8l44.667-34.318c4.26-3.118 5.319-8.317 2.13-13.518L418.215 115.6c-2.129-4.164-8.507-6.235-12.767-4.164l-53.186 20.801c-10.638-8.318-23.394-15.601-36.16-20.801l-7.448-55.117c-1.06-4.154-5.319-8.318-10.638-8.318h-85.098c-5.318 0-9.577 4.164-10.637 8.318l-8.508 55.117c-12.767 5.2-24.464 12.482-36.171 20.801l-53.186-20.801c-5.319-2.071-10.638 0-12.767 4.164L49.1 187.365c-2.119 4.153-1.061 10.399 2.129 13.518L96.97 235.2c0 7.282-1.06 13.518-1.06 20.8s1.06 13.518 1.06 20.8l-44.668 34.318c-4.26 3.118-5.318 8.317-2.13 13.518L92.721 396.4c2.13 4.164 8.508 6.235 12.767 4.164l53.187-20.801c10.637 8.318 23.394 15.601 36.16 20.801l8.508 55.117c1.069 5.2 5.318 8.318 10.637 8.318h85.098c5.319 0 9.578-4.164 10.638-8.318l8.518-55.117c12.757-5.2 24.464-12.482 36.16-20.801l53.187 20.801c5.318 2.071 10.637 0 12.767-4.164l42.549-71.765c2.129-4.153 1.06-10.399-2.13-13.518l-46.8-34.317zm-158.499 52c-41.489 0-74.46-32.235-74.46-72.8s32.971-72.8 74.46-72.8 74.461 32.235 74.461 72.8-32.972 72.8-74.461 72.8z" />
+                    </svg>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="color: #0045a0; font-weight: 500; padding-left: 15px;">
+                                    from {{Profile.country_name_en}}
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 33.33%; border-right: solid 1px;">
+                                    <div style="text-align: center;">
+                                        <div style="font-weight: bold; font-size: 18px;">
+                                            {{Profile.followers}}
+                                        </div>
+                                        <div style="letter-spacing: 0;" (click)="userfollows(1,'FOLLOWERS',Profile.followers)">
+                                            Followers
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="width: 33.33%; border-right: solid 1px;">
+                                    <div style="text-align: center;">
+                                        <div style="font-weight: bold; font-size: 18px;">
+                                            {{Profile.following}}
+                                        </div>
+                                        <div style="letter-spacing: 0;" (click)="userfollows(2,'FOLLOWING',Profile.following)">
+                                            Following
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="width: 33.33%;">
+                                    <div style="text-align: center;">
+                                        <div style="font-weight: bold; font-size: 18px;">
+                                            {{totalPost}}
+                                        </div>
+                                        <div style="letter-spacing: 0;">Post</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div style="border-bottom: 1px #888 solid;margin: 0 10px;position: relative;top: -40px;height: 30px;">
+            <div id="postTabs" class="tabsAction tabsDefault" (click)="changeTabs(1)">
+                <span>Post</span>
+                <span class="icon-post"></span>
+            </div>
+            <div id="albumTabs" class="tabsDefault" (click)="changeTabs(2)">
+                <div>
+                    <span>Album</span>
+                    <ion-icon name="photos" class="albumicon"></ion-icon>
+                </div>
+            </div>
+            <div id="footprintTabs" class="tabsDefault" (click)="changeTabs(3)">
+                <span>Favorite</span>
+                <span class="iconHeart-heart"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="lds-ring" style="position: absolute;top: 25%;left: 0;right: 0;margin: auto;z-index: 100;" *ngIf="loading">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <ion-refresher *ngIf="section != 'four'" id="refresher" (ionRefresh)="doRefresh($event)" [enabled]="refresherEnabled" pullMax="1000">
+        <ion-refresher-content enabled="true"> </ion-refresher-content>
+    </ion-refresher>
+    <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--////////////////////////////////////////////////////////////////// tab1 //////////////////////////////////////////////////////////////////-->
+    <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!-- <div *ngIf="tabs == 1" style="margin-top: -30px;background: #d8d8d8;">
+  -->
+    <div style="margin-top: -30px;">
+        <div style="padding: 5px; margin: 0 10px;">
+            <b *ngIf="tabs == 2" style="font-size: 16px;">Journey</b>
+            <!-- <b *ngIf="tabs == 2" style="font-size: 16px;">Photos and Album</b> -->
+            <span class="iconP-onePicture albumDefault" style="padding-right: 0px;" [ngClass]="(mode != 2 && albumType == 1 && tabs == 2) || (mode == 2 && viewType == 1 && tabs == 2) || (feedType == 1 && tabs == 1) || (favType == 1 && tabs == 3)? 'albumAction' : ''"
+                (click)="changeAlbum(1)"></span>
+            <span class="iconP-twoPicture albumDefault" [ngClass]="(mode != 2 && albumType == 0 && tabs == 2) || (mode == 2 && viewType == 0 && tabs == 2) || (feedType == 0 && tabs == 1) || (favType == 0 && tabs == 3)? 'albumAction' : ''" (click)="changeAlbum(0)"></span>
+        </div>
+    </div>
+
+    <!-- <div *ngIf="tabs == 2" style="margin-top: -30px;">
+    <div style="padding: 5px;margin: 0 10px;">   
+      <b *ngIf="tabs == 2" style="font-size: 16px;">Photos and Album</b>
+      <span class="iconP-onePicture albumDefault" style="padding-right: 0px;" [ngClass]="(albumType == 1 && tabs == 2) ? 'albumAction' : ''" (click)="changeAlbum(1)"></span>
+      <span class="iconP-twoPicture albumDefault" [ngClass]="(albumType == 0 && tabs == 2) ? 'albumAction' : ''" (click)="changeAlbum(0)"></span>
+    </div>
+    </div> -->
+
+    <ion-grid *ngIf="tabs == 1" style="margin-top: -30px;">
+        <ion-row *ngIf="feedType == 0">
+            <ion-col *ngFor="let datafeed of postList;let i = index;" style="padding: 0px; padding-bottom: 5px; padding-right: 5px;" col-6>
+                <div *ngIf="datafeed.checkshow == 0 && datafeed.status_show" style="border: solid 1px #e4e4e4; background: #fff;">
+                    <div class="disshowimg" *ngIf="!datafeed.status_show"></div>
+                    <div *ngIf="datafeed.status_show">
+                        <ion-grid style="padding: 0; height: 45px;" (click)="NextPage('ProfilePage',datafeed)" id="gridDetail" *ngIf="datafeed.user_id != 'TAT'">
+                            <ion-row *ngIf="feedType == 0">
+                                <ion-col col-3 id="gridCol3">
+                                    <img class="imgpro1" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" />
+                                </ion-col>
+                                <ion-col col-9 style="margin: auto; color: white; padding: 0px;" id="gridCol">
+                                    <div class="fullname">
+                                        <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"></span>
+                                        <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                                    </div>
+                                    <div class="location fromName" style="width: 100%;" style="color: #9e9e9e;">
+                                        <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}}</span>
+                                        <span>&bull;</span>
+                                        <span style="letter-spacing: 0.1px !important;font-size: 12px !important;">{{datafeed.time}}</span>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid style="padding: 0; height: 45px;" id="gridDetail" *ngIf="datafeed.user_id == 'TAT'">
+                            <ion-row>
+                                <ion-col col-3 id="gridCol3">
+                                    <img class="imgpro1" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" />
+                                </ion-col>
+                                <ion-col col-9 style="margin: auto; color: white;" id="gridCol">
+                                    <div class="fullname" style="width: 100%;" style="color: #565656; font-size: 11px;">
+                                        <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"></span>
+                                        <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                                    </div>
+                                    <div class="location fromName" style="width: 100%;">
+                                        <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}}</span>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-12 style="padding: 0; height: 100%; font-size: 14px;">
+                                    <div class="Museo color4D caption" [innerHtml]="datafeed.hashtag"></div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                    <div style="position: relative;" *ngIf="datafeed.status_show">
+                        <div class="frameHeart">
+                            <img src="./assets/icon/icon-hearts6t.png" alt="" (click)="bookmark(datafeed,1,i,2)" *ngIf="datafeed.status_bookmark && datafeed.user_id != 'TAT'" style="width: 22px;" />
+                            <img src="./assets/icon/icon-hearts6.png" alt="" (click)="bookmark(datafeed,2,i,2)" *ngIf="!datafeed.status_bookmark && datafeed.user_id != 'TAT'" style="width: 22px;" />
+                        </div>
+                        <div class="frameFeel" *ngIf="datafeed.user_id != 'TAT' && datafeed.status_show">
+                            <span class="frameFeeling">{{datafeed.feeling_name}}</span>
+                        </div>
+                        <div *ngIf="datafeed.user_id != 'TAT'" style="background: #e6e6e6; height: 193px !important;" id="image">
+                            <!-- <div *ngIf="datafeed.checkCard == 0" [ngStyle]="{
+                                                'background': 'url('+datafeed.pictureResize[0].path_full+')'}" class="bgList" style="padding-top: 100%;"
+                      (click)="NextPage('DetailfeedPage',datafeed)"></div> -->
+
+                            <div [ngStyle]="{ 'height': '100%'}">
+                                <img [ngStyle]="{ 'height': '100%'}" *ngIf="datafeed.checkCard == 0 && datafeed.pictureResize[0].type == 1" class="abc" (click)="NextPage('DetailfeedPage',datafeed)" [src]="datafeed.pictureResize[0].path_resize" alt="" style="width: 100%;" />
+                                <video id="video" (click)="NextPage('DetailfeedPage',datafeed)" controls preload="metadata" playsinline *ngIf="datafeed.pictureResize[0].type == 2" alt="" style="width: 100%;height: 100%;object-fit: cover;">
+                                    <source [src]="datafeed.pictureResize[0].path_resize "  type="video/mp4" />
+                                </video>
+                            </div>
+                            <div class="photoAll" *ngIf="datafeed.pictureResize.length > 1">
+                                <div class="textPhotoGroup">
+                                    <img style="border-radius: unset;width: 19px;vertical-align: middle;" src="./assets/icon/photoAll.svg" alt="" />
+                                    <span class="span-all-photo">All Photo({{datafeed.pictureResize.length}})</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="datafeed.user_id == 'TAT'" style="background: #e6e6e6; height: 193px !important;" id="image">
+                            <div *ngIf="datafeed.checkCard == 0 && datafeed.pictureResize[0].type == 1" [ngStyle]="{ 'background': 'url('+datafeed.pictureResize[0].path_full+')'}" class="bgList" style="padding-top: 100%;" (click)="NextPage('DetailfeedPage',datafeed)"></div>
+                            <video id="video" (click)="NextPage('DetailfeedPage',datafeed)" controls preload="metadata" playsinline *ngIf="datafeed.pictureResize[0].type == 2" alt="" style="width: 100%;height: 100%;object-fit: cover;">
+                                <source [src]="datafeed.pictureResize[0].path_resize "  type="video/mp4" />
+                            </video>
+                        </div>
+                        <div id="tabProfile" class="ChildNewfeed" style="position: absolute; bottom: 0px; width: 100%;" *ngIf="datafeed.status_show"></div>
+                    </div>
+                    <div *ngIf="datafeed.status_show" id="detailcard">
+                        <ion-grid style="padding-top: 5px;padding-bottom: 5px;max-height: 45px;min-height: 45px;border-bottom: 1px solid #f5f5f5;padding: 0px;background: #f7f7f7;position: relative;font-size: 14px;">
+                            <i class="icon_map icon15"></i>
+                            <ion-row (click)="NextPage('TouristPage',datafeed)" style="padding-top: 8px;">
+                                <ion-col col-8 style="padding: 0;">
+                                    <span class="color87 locations" style="margin-left: 20px;" [innerHTML]="datafeed.photo_location"></span>
+                                </ion-col>
+                                <ion-col col-4 style="padding: 0;padding: 0;text-align: right;font-weight: bolder;">
+                                    <span class="location distant" style="position: absolute;right: 5px;bottom: 0;color: #72c2ff;width: 100% !important;">{{datafeed.distant}} km.</span>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row (click)="NextPage('TouristPage',datafeed)">
+                                <ion-col col-12 style="padding: 0;">
+                                    <span class="location" style="margin-left: 20px; padding-bottom: 5px;">{{datafeed.photo_province}}</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid style="padding-top: 12px;padding-bottom: 12px;padding-left: 12px;" class="threeIcon">
+                            <ion-row class="FSitalic font12">
+                                <ion-col col-6 style="position: relative; padding: 0;" class="col_fix1">
+                                    <img src="./img/icon_coconut_gray.svg" style="width: 15px; vertical-align: middle;" alt="" (click)="like(datafeed,2,i,2)" *ngIf="!datafeed.status_like && datafeed.user_id != 'TAT'" />
+                                    <div id="like{{datafeed.photo_id}}" *ngIf="datafeed.status_like && datafeed.user_id != 'TAT'" style="display: inline-block;" (click)="like(datafeed,1,i,2)">
+                                        <img src="./img/icon_coconut.png" style="width: 15px; vertical-align: middle;" alt="" />
+                                        <span class="like-iconTNew"> <div class="heart-animation-1"></div> <div class="heart-animation-2"></div> </span>
+                                    </div>
+                                    <div style="display: inline-block;position: relative;height: 16px;vertical-align: middle;margin-left: -10px;" *ngIf="datafeed.imageLike.length != 0 && datafeed.user_id != 'TAT'">
+                                        <div class="userLike" style="display: grid;min-width: 16px;height: 16px;font-size: 10px;">
+                                            <span class="sumLike" style="font-size: 10px;">{{datafeed.sum_like}}</span>
+                                        </div>
+                                    </div>
+                                    <span style=" font-style: normal;font-size: 10px;font-weight: bold;vertical-align: middle;" (click)="like(datafeed,2,i,2)" *ngIf="!datafeed.status_like && datafeed.user_id != 'TAT'" class="fontnormal">Coconut</span>
+                                    <span style="font-style: normal;font-size: 10px;font-weight: bold;vertical-align: middle;" *ngIf="datafeed.status_like && datafeed.user_id != 'TAT'" (click)="like(datafeed,1,i,2)" class="fontnormal">Coconut</span>
+                                </ion-col>
+                                <ion-col col-6 style="position: relative; padding: 0;" (click)="NextPage('viewComment',datafeed)">
+                                    <img src="./assets/icon/icon-comment-new-f.svg" alt="" style="width: 15px; vertical-align: middle;" *ngIf="!datafeed.status_comment" />
+                                    <img src="./assets/icon/icon-comment-new-t.svg" alt="" style="width: 15px; vertical-align: middle;" *ngIf="datafeed.status_comment" />
+                                    <div style="display: inline-block;position: relative; height: 16px;min-width: 8px;vertical-align: middle;margin-left: -10px;" x>
+                                        <div *ngIf="datafeed.countComment != 0" class="userLike" style="display: grid; min-width: 16px; height: 16px;font-size: 10px;">
+                                            <span class="sumLike" style="font-size: 10px;">{{datafeed.countComment}}</span>
+                                        </div>
+                                    </div>
+                                    <span style="font-style: normal;vertical-align: middle;font-size: 10px;font-weight: bold;" class="fontnormal">Comment</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+
+                        <hr style="margin: 0 5px; background: #e4e4e4; height: 1px;" />
+                        <ion-grid (click)="NextPage('viewComment',datafeed)" class="" no-padding>
+                            <ion-row class="font_10" *ngIf="datafeed.userIdComment != ''">
+                                <ion-col col-3 style="display: inline-flex;">
+                                    <div class="borderimgage inlineBlog" style="display: inline-block; margin: auto;">
+                                        <img class="imgpro1" id="img_profile" [src]="datafeed.comment_user_img" />
+                                    </div>
+                                </ion-col>
+                                <ion-col class="padding_5" col-9 style="display: inline-flex;">
+                                    <div class="commentBg" style="display: inline-block; max-width: 95%;vertical-align: middle;margin: auto;padding: 5px 10px;margin-left: 0px;">
+                                        <p class="location namecomment" style="width: 100%;margin: 0px;font-size: 12px !important;" [innerHtml]="datafeed.fulnameComment"></p>
+                                        <p class="location" style="width: 100%;margin: 0px;font-size: 12px !important;" [innerHtml]="datafeed.comment"></p>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row class="font_10" *ngIf="datafeed.countComment == 0">
+                                <ion-col col-3 style="display: inline-flex;">
+                                    <div class="borderimgage inlineBlog" style="display: inline-block; margin: auto;">
+                                        <img class="imgpro1" id="img_profile" [src]="gd.userProfile.user_path_img" />
+                                    </div>
+                                </ion-col>
+                                <ion-col class="padding_5" col-9 style="display: inline-flex;">
+                                    <div class="borderinput commentbord" style="display: inline-block; width: 100%;vertical-align: middle; margin: auto;">
+                                        <input type="text" disabled class="inputComment" value="Write a comment" style="border: unset !important;" />
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="feedType == 1">
+            <ion-col *ngFor="let datafeed of postList;let i = index;" style="padding: 0px; padding-bottom: 5px; padding-right: 5px;" col-12>
+                <div *ngIf="datafeed.checkshow == 0 && datafeed.status_show" style="border: solid 1px #e4e4e4; background: #fff;">
+                    <div class="disshowimg" *ngIf="!datafeed.status_show"></div>
+                    <div *ngIf="datafeed.status_show">
+                        <ion-grid style="padding: 0; height: 45px;" (click)="NextPage('ProfilePage',datafeed)" id="gridDetail" *ngIf="datafeed.user_id != 'TAT'">
+                            <ion-row *ngIf="feedType == 1">
+                                <ion-col col-2 id="gridCol3" style="display: grid;">
+                                    <img class="imgpro2" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" style="margin: auto;" />
+                                </ion-col>
+                                <ion-col col-10 style="margin: auto; color: white; padding: 0px;" id="gridCol">
+                                    <div class="fullname">
+                                        <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"></span>
+                                        <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                                    </div>
+                                    <div class="location fromName" style="width: 100%;" style="color: #9e9e9e;">
+                                        <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}}</span>
+                                        <span>&bull;</span>
+                                        <span style="letter-spacing: 0.1px !important;font-size: 12px !important; ">{{datafeed.time}}</span>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid style="padding: 0; height: 45px;" id="gridDetail" *ngIf="datafeed.user_id == 'TAT'">
+                            <ion-row>
+                                <ion-col col-2 id="gridCol3">
+                                    <img class="imgpro2" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" />
+                                </ion-col>
+                                <ion-col col-10 style="margin: auto; color: white;" id="gridCol">
+                                    <div class="fullname" style="width: 100%;" style="color: #565656; font-size: 11px;">
+                                        <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"></span>
+                                        <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                                    </div>
+                                    <div class="location fromName" style="width: 100%;">
+                                        <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}} </span>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-12 style="padding: 0; height: 100%; font-size: 14px;">
+                                    <div class="Museo color4D caption" [innerHtml]="datafeed.hashtag"></div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                    <div style="position: relative;" *ngIf="datafeed.status_show">
+                        <div class="frameHeart">
+                            <img src="./assets/icon/icon-hearts6t.png" alt="" (click)="bookmark(datafeed,1,i,2)" *ngIf="datafeed.status_bookmark && datafeed.user_id != 'TAT'" style="width: 22px;" />
+                            <img src="./assets/icon/icon-hearts6.png" alt="" (click)="bookmark(datafeed,2,i,2)" *ngIf="!datafeed.status_bookmark && datafeed.user_id != 'TAT'" style="width: 22px;" />
+                        </div>
+                        <div class="frameFeel" *ngIf="datafeed.user_id != 'TAT' && datafeed.status_show">
+                            <span class="frameFeeling">{{datafeed.feeling_name}}</span>
+                        </div>
+                        <div *ngIf="datafeed.user_id != 'TAT'" style="background: #e6e6e6;" id="image">
+                            <!-- <div *ngIf="datafeed.checkCard == 0" [ngStyle]="{
+                                                  'background': 'url('+datafeed.pictureResize[0].path_full+')'}" class="bgList" style="padding-top: 100%;"
+                        (click)="NextPage('DetailfeedPage',datafeed)"></div> -->
+
+                            <div [ngStyle]="{ 'height': '300px', 'object-fit':'cover'}">
+                                <img [ngStyle]="{ 'height': '300px','object-fit':'cover'}" *ngIf="datafeed.checkCard == 0 && datafeed.pictureResize[0].type == 1" class="" (click)="NextPage('DetailfeedPage',datafeed)" [src]="datafeed.pictureResize[0].path_resize" alt="" style="width: 100%;"
+                                />
+                                <video id="video" (click)="NextPage('DetailfeedPage',datafeed)" controls preload="metadata" playsinline *ngIf="datafeed.pictureResize[0].type == 2" alt="" style="width: 100%;height: 100%;object-fit: cover;">
+                                    <source [src]="datafeed.pictureResize[0].path_resize "  type="video/mp4" />
+                                </video>
+                            </div>
+                            <div class="photoAll" *ngIf="datafeed.pictureResize.length > 1">
+                                <div class="textPhotoGroup">
+                                    <img style=" border-radius: unset;width: 19px;vertical-align: middle;" src="./assets/icon/photoAll.svg" alt="" />
+                                    <span class="div-all-photo">All Photo({{datafeed.pictureResize.length}})</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="datafeed.user_id == 'TAT'" style="background: #e6e6e6;" id="image">
+                            <div *ngIf="datafeed.checkCard == 0 && datafeed.pictureResize[0].type == 1" [ngStyle]="{ 'background': 'url('+datafeed.pictureResize[0].path_full+')'}" class="bgList" style="padding-top: 100%;" (click)="NextPage('DetailfeedPage',datafeed)"></div>
+                            <video id="video" (click)="NextPage('DetailfeedPage',datafeed)" controls preload="metadata" playsinline *ngIf="datafeed.pictureResize[0].type == 2" alt="" style="width: 100%;height: 100%;object-fit: cover;">
+                                <source [src]="datafeed.pictureResize[0].path_resize "  type="video/mp4" />
+                            </video>
+                        </div>
+                        <div id="tabProfile" class="ChildNewfeed" style="position: absolute; bottom: 0px; width: 100%;" *ngIf="datafeed.status_show"></div>
+                    </div>
+                    <div *ngIf="datafeed.status_show" id="detailcard">
+                        <ion-grid style="padding-top: 5px;padding-bottom: 5px;max-height: 45px;min-height: 45px;border-bottom: 1px solid #f5f5f5;padding: 0px;background: #f7f7f7;position: relative;font-size: 14px; ">
+                            <i class="icon_map icon15"></i>
+                            <ion-row (click)="NextPage('TouristPage',datafeed)" style="padding-top: 8px;">
+                                <ion-col col-8 style="padding: 0;">
+                                    <span class="color87 locations" style="margin-left: 20px;" [innerHTML]="datafeed.photo_location"></span>
+                                </ion-col>
+                                <ion-col col-4 style="padding: 0; padding: 0;text-align: right;font-weight: bolder; ">
+                                    <span class="location distant" style="position: absolute;right: 5px;bottom: 0;color: #72c2ff;width: 100% !important; ">{{datafeed.distant}} km.</span>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row (click)="NextPage('TouristPage',datafeed)">
+                                <ion-col col-12 style="padding: 0;">
+                                    <span class="location" style="margin-left: 20px; padding-bottom: 5px;">{{datafeed.photo_province}}</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid style="padding-top: 12px;padding-bottom: 12px; padding-left: 12px;" class="threeIcon">
+                            <ion-row class="FSitalic font12">
+                                <ion-col col-6 style="position: relative; padding: 0;" class="col_fix1">
+                                    <img src="./img/icon_coconut_gray.svg" style="width: 20px; vertical-align: middle;" alt="" (click)="like(datafeed,2,i,2)" *ngIf="!datafeed.status_like && datafeed.user_id != 'TAT'" />
+                                    <div id="like{{datafeed.photo_id}}" *ngIf="datafeed.status_like && datafeed.user_id != 'TAT'" style="display: inline-block;" (click)="like(datafeed,1,i,2)">
+                                        <img src="./img/icon_coconut.png" style="width: 20px; vertical-align: middle;" alt="" />
+                                        <span class="like-iconTNew">
+                                            <div class="heart-animation-1"></div>
+                                            <div class="heart-animation-2"></div>
+                                        </span>
+                                    </div>
+                                    <div style="display: inline-block;position: relative;height: 20px; vertical-align: middle; margin-left: -10px;" *ngIf="datafeed.imageLike.length != 0 && datafeed.user_id != 'TAT'">
+                                        <div class="userLike" style="display: grid;min-width: 20px;height: 20px;font-size: 16px; ">
+                                            <span class="sumLike" style="font-size: 12px;">{{datafeed.sum_like}}</span>
+                                        </div>
+                                    </div>
+                                    <span style="font-style: normal;font-size: 13px;font-weight: bold; vertical-align: middle;" (click)="like(datafeed,2,i,2)" *ngIf="!datafeed.status_like && datafeed.user_id != 'TAT'" class="fontnormal">Coconut</span>
+                                    <span style="font-style: normal;font-size: 13px;font-weight: bold;vertical-align: middle;" *ngIf="datafeed.status_like && datafeed.user_id != 'TAT'" (click)="like(datafeed,1,i,2)" class="fontnormal">Coconut</span>
+                                </ion-col>
+                                <ion-col col-6 style="position: relative; padding: 0;" (click)="NextPage('viewComment',datafeed)">
+                                    <span style="margin-left: 5px;">
+                    <img src="./assets/icon/icon-comment-new-f.svg" alt="" style="width: 20px; vertical-align: middle;"
+                      *ngIf="!datafeed.status_comment" />
+                    <img src="./assets/icon/icon-comment-new-t.svg" alt="" style="width: 20px; vertical-align: middle;"
+                      *ngIf="datafeed.status_comment" />
+                    <div style=" display: inline-block;position: relative;height: 20px;vertical-align: middle;margin-left: -10px;" *ngIf="datafeed.countComment != 0">
+                      <div class="userLike" style="display: grid;min-width: 20px;height: 20px;font-size: 16px;">
+                        <span class="sumLike" style="font-size: 12px;">{{datafeed.countComment}}</span>
+                    </div>
+                </div>
+                <span style="font-style: normal;vertical-align: middle;font-size: 13px;font-weight: bold;" class="fontnormal">Comment</span>
+                </span>
+                </ion-col>
+                </ion-row>
+                </ion-grid>
+
+                <hr style="margin: 0 5px; background: #e4e4e4; height: 1px;" />
+                <ion-grid (click)="NextPage('viewComment',datafeed)" class="" no-padding>
+                    <ion-row class="font_10" *ngIf="datafeed.userIdComment != ''">
+                        <ion-col col-2 style="display: inline-flex;">
+                            <div class="borderimgage inlineBlog" style="display: inline-block; margin: auto;">
+                                <img class="imgpro2" id="img_profile" [src]="datafeed.comment_user_img" style="vertical-align: middle;height: 40px; width: 40px; border: none;" />
+                            </div>
+                        </ion-col>
+                        <ion-col class="padding_5" col-10 style="display: inline-flex;">
+                            <div class="commentBg" style="display: inline-block; max-width: 95%;vertical-align: middle;margin: auto;padding: 5px 10px;margin-left: 0px;">
+                                <p class="location namecomment" style="width: 100%;margin: 0px;font-size: 12px !important;" [innerHtml]="datafeed.fulnameComment"></p>
+                                <p class="location" style=" width: 100%;margin: 0px;font-size: 12px !important;" [innerHtml]="datafeed.comment"></p>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="font_10" *ngIf="feedType == 1 || datafeed.countComment == 0">
+                        <ion-col col-2 style="display: inline-flex;">
+                            <div class="borderimgage inlineBlog" style="display: inline-block; margin: auto;">
+                                <img class="imgpro2" id="img_profile" [src]="gd.userProfile.user_path_img" />
+                            </div>
+                        </ion-col>
+                        <ion-col class="padding_5" col-10 style="display: inline-flex;">
+                            <div class="borderinput commentbord" style="display: inline-block;width: 100%; vertical-align: middle; margin: auto; ">
+                                <input type="text" disabled class="inputComment" value="Write a comment" style="border: unset !important;" />
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--////////////////////////////////////////////////////////////////// tab2 //////////////////////////////////////////////////////////////////-->
+    <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+    <div *ngIf="tabs == 2" style="margin-top: 10px;">
+        <!-- <div style="padding: 5px;margin: 0 10px;">
+      <b style="font-size: 16px;">Photos and Album</b>
+      <span class="iconP-onePicture albumDefault" style="padding-right: 0px;" [ngClass]="albumType == 1 ? 'albumAction' : ''" (click)="changeAlbum(1)"></span>
+      <span class="iconP-twoPicture albumDefault" [ngClass]="albumType == 0 ? 'albumAction' : ''" (click)="changeAlbum(0)"></span>
+    </div> -->
+        <div *ngIf="mode == 1" style="padding: 10px; text-align: center; position: relative;">
+            <ion-grid>
+
+                <ion-row *ngIf="albumType == 0" align-items-start>
+                    <ion-col *ngFor="let img of album; let i = index" (click)="viewAllAlbum(img)" col-6>
+
+                        <div *ngIf="album != undefined" style="height: 193px; width: 100%; position: relative;">
+                            <img *ngIf="img.type == 1" [src]="img.path_resize" alt="" class="albumMode1" />
+                            <video id="video" class="video-profile" controls preload="metadata" playsinline *ngIf="img.type == 2" alt="" style="width: 100%;height: 100%;object-fit: cover;">
+                                <source [src]="img.path_resize "  type="video/mp4" />
+                            </video>
+                            <div class="photoAllAlbum" *ngIf="img.photo_count > 1">
+                                <div class="textPhotoGroup" *ngIf="albumType == 0">
+                                    <img style="border-radius: unset;width: 19px;vertical-align: middle;" src="./assets/icon/photoAll.svg" alt="" />
+                                    <span class="div-all-photo">All Photo({{img.photo_count}})</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="album != undefined && img.path_resize != undefined" style="color: dodgerblue; padding: 5px;">
+                            {{img.province}}<span *ngIf="img.province != undefined && img.province != ''">,
+              </span>{{img.location.split(',').reverse()[0]}}
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngIf="albumType == 1">
+                    <ion-col *ngFor="let img of album; let i = index" (click)="viewAllAlbum(img)" col-12>
+                        <div *ngIf="album != undefined" style="height: auto; width: 100%; position: relative;">
+                            <img [src]="img.path_resize" alt="" class="albumMode2" />
+                            <div class="photoAllalbum" *ngIf="img.photo_count > 1">
+                                <div class="textPhotoGroup" *ngIf="albumType == 1">
+                                    <img style="border-radius: unset;width: 19px;vertical-align: middle;" src="./assets/icon/photoAll.svg" alt="" />
+                                    <span class="div-all-photo">All Photo({{img.photo_count}})</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="img != undefined" style="color: dodgerblue; padding-bottom: 20px; padding-top: 5px;">
+                            {{img.province}}<span *ngIf="img.province != undefined && img.province != ''">,
+              </span>{{img.location.split(',').reverse()[0]}}
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+
+        <div *ngIf="mode == 2" style="padding: 0 10px 10px 10px; text-align: center;">
+            <ion-label *ngIf=" allPhoto != undefined && allPhoto.length > 0" style="color: dodgerblue; margin-left: 5px; text-align: left;">{{allPhoto[0].album_name}}</ion-label>
+            <ion-grid *ngIf="allPhoto != undefined && allPhoto.length > 0">
+                <ion-row *ngIf="viewType == 0" align-items-start>
+                    <ion-col *ngFor="let img of allPhoto; let i = index" col-6>
+                        <div style="height: 193px; width: 100%; position: relative;">
+                            <img *ngIf="img.type == 1" [src]="img.path_resize" alt="" class="albumMode1" (click)="goDetail(img)" />
+                            <video id="video" class="video-profile" (click)="goDetail(img)" controls preload="metadata" playsinline *ngIf="img.type == 2" alt="" style="width: 100%;height: 100%;object-fit: cover;">
+                                <source [src]="img.path_resize "  type="video/mp4" />
+                            </video>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="viewType == 1">
+                    <ion-col *ngFor="let img of allPhoto; let i = index" col-12>
+                        <div style="height: auto; width: 100%; position: relative;">
+                            <img [src]="img.path_resize" alt="" class="albumMode2" (click)="goDetail(img)" />
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
+
+    <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+    <!--////////////////////////////////////////////////////////////////// tab3 //////////////////////////////////////////////////////////////////-->
+    <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+    <!-- <div *ngIf="tabs == 3" style="margin-top: -30px;background: #d8d8d8;">
+    <div *ngFor="let datafeed of footprintList;let i = index;" style="margin-bottom: 10px;background: #fff;">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3 style="display: grid;">
+            <div class="imgProfile"
+              [ngStyle]="{'background': 'url('+datafeed.user_img+')','background-size': 'cover','background-position': 'center','padding-top': '80%'}"
+              style="width: 80%;margin: auto;"></div>
+          </ion-col>
+          <ion-col col-9 style="display: grid;">
+            <table style="width: 100%;margin: auto;">
+              <tr>
+                <td style="font-size: 15px;font-weight: bold;">
+                  <div (click)="NextPage('ProfilePage',datafeed)" class="text1line" style="max-width: 180px;">
+                    <span [innerHtml]="datafeed.user_firstname"> </span>
+                    <span [innerHtml]="datafeed.user_lastname"></span>
+                  </div>
+                  <div style="font-size: 12px;">
+                    <span style="color: #0045a0;font-weight: 500;">from {{datafeed.country_name_en}} </span>
+                    <span>&bull; {{datafeed.time}}</span>
+
+                  </div>
+                </td>
+                <td style="text-align: right;">
+
+
+                  <div class="fram_follow" style="display: inline-block;font-size: 8px;"
+                    *ngIf="datafeed.user_id != Profile.user_id && datafeed.followST != true"
+                    (click)="followFC(1,datafeed.user_id)">
+                    <img class="img_follow" style="width: 20px;" src="./assets/icon/follow_icon+.png" alt="">
+                    <div>Follow</div>
+                  </div>
+
+                  <div class="fram_follow" style="display: inline-block;font-size: 8px;"
+                    *ngIf="datafeed.user_id != Profile.user_id && datafeed.followST == true"
+                    (click)="followFC(2,datafeed.user_id)">
+                    <img class="img_follow" style="width: 20px;" src="./assets/icon/follow_icon-.png" alt="">
+                    <div style="color: #888;">Following</div>
+                  </div>
+
+                  <div class="fram_follow" style="display: inline-block;font-size: 8px;"
+                    (click)="gd.presentPopover($event,datafeed)">
+                    <img style="width: 20px;" src="./assets/icon/share_icon.png" alt="">
+                    <div class="text_icon">Share</div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div [innerHtml]="datafeed.hashtag"></div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="padding: 0px;">
+            <img [src]="datafeed.pictureResize[0]" alt="" style="border-radius: 6px 6px 0 0;width: 100%;"
+              (click)="NextPage('DetailfeedPage',datafeed)">
+            <div>
+              <ion-grid style="padding: 5px;background: #ececec;margin-top: -5px;">
+                <ion-row>
+                  <ion-col col-1 style="padding: 0;display: grid;">
+                    <img src="./assets/icon/ping-icon.png" alt="" class="inline"
+                      style="border-radius: 0px;height: 17px;width: 16px;margin: auto;">
+                  </ion-col>
+                  <ion-col col-9 style="padding: 0;">
+                    <div class="inline font_12" style="width: 100%;">
+                      <div class="Montserrat text_1line" style="width: 96%" [innerHTML]="datafeed.photo_location"></div>
+                      <div class="Montserrat text_1line"
+                        style="max-width:60%;font-style: normal;font-weight: bold;display: inline-flex;">
+                        {{datafeed.photo_province}}</div>
+                    </div>
+                  </ion-col>
+                  <ion-col style="padding: 0;" col-2>
+                    <div class="inline font_12" style="width: 100%;">
+                      <div class="color7B Montserrat text_1line"
+                        style="color: #00b4ff;font-size: 12px;font-weight: bold;margin-right: 5px;float: right;display: inline-block;">
+                        {{datafeed.distant}} km</div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row style="border-bottom: 1px solid #e4e4e4;padding:0px;">
+          <ion-col col-4 style="text-align: center;display: grid;padding-top: 9px;padding-bottom: 8px;">
+            <div style="margin: auto">
+              <a class='like-button ' (click)="like(datafeed,1,i)" id="like{{datafeed.photo_id}}"
+                *ngIf="datafeed.status_like && datafeed.user_id != 'TAT'">
+                <span class='like-iconTNew'>
+                  <div class='heart-animation-1'></div>
+                  <div class='heart-animation-2'></div>
+                </span>
+              </a>
+              <img src="./img/icon_coconut_gray.png" class="img_icon" (click)="like(datafeed,2,i)"
+                *ngIf="!datafeed.status_like && datafeed.user_id != 'TAT'">
+              <div class="inline font_10" style="text-align: left;vertical-align: bottom;">
+                <div>{{datafeed.sum_like}}</div>
+                <div class="inline">coconut</div>
+              </div>
+            </div>
+
+          </ion-col>
+          <ion-col col-4 style="text-align: center;display: grid;padding-top: 9px;padding-bottom: 8px;">
+            <div style="margin: auto" (click)="NextPage('viewComment',datafeed)">
+              <img src="./img/icon_comment_count.png" class="img_icon">
+              <div class="inline font_10" style="text-align: left;">
+                <div>{{datafeed.countComment}}</div>
+                <div class="inline">comment</div>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col col-4 style="text-align: center;display: grid;padding-top: 9px;padding-bottom: 8px;">
+            <div style="margin: auto">
+              <span (click)="bookmark(datafeed,1,i,1)" *ngIf="datafeed.status_bookmark">
+                <img src="./img/icon_footprint.png" style="height: 22px;width: unset;vertical-align: middle;">
+
+                <div class="inline font_10" style="text-align: left;">
+                  <br>
+                  <div class="inline">footprint</div>
+                </div>
+              </span>
+              <span (click)="bookmark(datafeed,2,i,1)" *ngIf="!datafeed.status_bookmark">
+                <img src="./img/icon_footprint_f.png" style="height: 22px;width: unset;vertical-align: middle;">
+                <div class="inline font_10" style="text-align: left;">
+                  <br>
+                  <div class="inline">footprint</div>
+                </div>
+              </span>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="font_10" *ngIf="datafeed.userIdComment != ''" (click)="NextPage('viewComment',datafeed)">
+          <ion-col class="padding_0">
+            <div class="borderimgage inlineBlog" style="display: inline-block;">
+              <img class="imgpro" id="img_profile" [src]="datafeed.comment_user_img"
+                style="vertical-align: middle;height: 40px;width: 40px;" />
+            </div>
+            <div class="commentBg" style="display: inline-block;width: 85%;vertical-align: middle;">
+              <p class="location namecomment" style="width: 100%;margin: 0px;" [innerHtml]="datafeed.fulnameComment">
+              </p>
+              <p class="location" style="width: 100%;margin: 0px;" [innerHtml]="datafeed.comment"></p>
+            </div>
+            <p style="margin: unset;margin-left: 45px;" class="timeComment">{{datafeed.timeComment}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngIf="datafeed.countComment == 0" (click)="NextPage('viewComment',datafeed)">
+          <ion-col class="font_10" style="padding-left: 0;padding-right: 0;padding: 0px;">
+            <div class="borderimgage inlineBlog" *ngIf="gd.userProfile.length != 0" style="display: inline-block;">
+              <img class="imgpro" id="img_profile" [src]="gd.userProfile.user_path_img"
+                style="vertical-align: middle;height: 40px;width: 40px;" />
+            </div>
+            <div class="borderinput commentbord" style="display: inline-block;width: 85%;vertical-align: middle;">
+              <input type="text" disabled class="inputComment" [(ngModel)]="datafeed.textComment"
+                placeholder="Write a comment" style="width: 75%;border:unset !important;"
+                (keyup.enter)="sendComment(datafeed , '1')">
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div> -->
+    <ion-list style="margin:0" *ngIf="tabs == 3">
+        <ion-grid>
+            <!-- data grid style -->
+            <ion-row *ngIf="favType == 0">
+                <ion-col *ngFor="let datafeed of footprintList;let i = index;" no-padding col-6>
+                    <div style="padding: 0px; padding-bottom: 5px; padding-right: 5px;">
+                        <div *ngIf="datafeed.checkshow == 0 && datafeed.status_show" style="border: solid 1px #e4e4e4; background: #fff;">
+                            <div class="disshowimg" *ngIf="!datafeed.status_show"></div>
+                            <div *ngIf="datafeed.status_show">
+                                <!--  data profile normal user  -->
+                                <ion-grid style="padding: 0; height: 45px;" (click)="NextPage('ProfilePage',datafeed)" id="gridDetail" *ngIf="datafeed.user_id != 'TAT'">
+                                    <ion-row>
+                                        <ion-col col-3 id="gridCol3">
+                                            <img class="imgpro1" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" />
+                                        </ion-col>
+                                        <ion-col col-9 style="margin: auto; color: white; padding: 0px;" id="gridCol">
+                                            <div class="fullname">
+                                                <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"></span>
+                                                <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                                            </div>
+                                            <div class="location fromName" style="width: 100%;" style="color: #9e9e9e;">
+                                                <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}} </span>
+                                                <span>&bull;</span>
+                                                <span style="letter-spacing: 0.1px !important;font-size: 12px !important;">{{datafeed.time}}</span>
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                    <!-- <ion-row *ngIf="">
+                  <ion-col col-2 id="gridCol3" style="display: grid;">
+                    <img class="imgpro" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" style="margin: auto;"
+                    />
+                  </ion-col>
+                  <ion-col col-10 style="margin: auto;color:white;padding: 0px;" id="gridCol">
+                    <div class="fullname">
+                      <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"> </span>
+                      <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                    </div>
+                    <div class="location fromName" style="width: 100%" style="color: #9e9e9e;">
+                      <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}}
+                      </span>
+                      <span>&bull;</span>
+                      <span style="letter-spacing: 0.1px !important;font-size: 12px !important;">{{datafeed.time}}</span>
+                    </div>
+                  </ion-col>
+                </ion-row> -->
+                                </ion-grid>
+                                <!-- data profile normal user -->
+
+                                <!-- data profile TAT user -->
+                                <ion-grid style="padding: 0; height: 45px;" id="gridDetail" *ngIf="datafeed.user_id == 'TAT'">
+                                    <ion-row>
+                                        <ion-col col-3 id="gridCol3">
+                                            <img class="imgpro1" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" />
+                                        </ion-col>
+                                        <ion-col col-9 style="margin: auto; color: white;" id="gridCol">
+                                            <div class="fullname" style="width: 100%;" style="color: #565656; font-size: 11px;">
+                                                <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"></span>
+                                                <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                                            </div>
+                                            <div class="location fromName" style="width: 100%;">
+                                                <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}}</span>
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                <!-- data profile TAT user -->
+
+                                <!-- caption -->
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col col-12 style="padding: 0; height: 100%; font-size: 14px;">
+                                            <div class="Museo color4D caption" [innerHtml]="datafeed.hashtag"></div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                <!-- caption -->
+                            </div>
+
+                            <!-- photo -->
+                            <div style="position: relative;" *ngIf="datafeed.status_show">
+                                <div class="frameHeart">
+                                    <img src="./assets/icon/icon-hearts6t.png" alt="" (click)="bookmark(datafeed,1,i,2)" *ngIf="datafeed.status_bookmark" style="width: 22px;" />
+                                    <img src="./assets/icon/icon-hearts6.png" alt="" (click)="bookmark(datafeed,2,i,2)" *ngIf="!datafeed.status_bookmark" style="width: 22px;" />
+                                </div>
+                                <div class="frameFeel" *ngIf="datafeed.user_id != 'TAT' && datafeed.status_show">
+                                    <span class="frameFeeling">{{datafeed.feeling_name}}</span>
+                                </div>
+                                <div style="background: #e6e6e6;" id="image">
+                                    <div class="img-post-two">
+                                        <img class="img-post-two" *ngIf="datafeed.checkCard == 0 && datafeed.pictureResize[0].type == 1" (click)="NextPage('DetailfeedPage',datafeed)" [src]="datafeed.pictureResize[0].path_resize" />
+                                        <video id="video" (click)="NextPage('DetailfeedPage',datafeed)" controls preload="metadata" playsinline *ngIf="datafeed.pictureResize[0].type == 2" alt="" style="width: 100%;height: 100%;object-fit: cover;">
+                                            <source [src]="datafeed.pictureResize[0].path_resize "  type="video/mp4" />
+                                        </video>
+                                    </div>
+                                    <div class="photoAll" *ngIf="datafeed.pictureResize.length > 1">
+                                        <div class="textPhotoGroup">
+                                            <img style="border-radius: unset;width: 19px;vertical-align: middle;" src="./assets/icon/photoAll.svg" alt="" />
+                                            <span class="div-all-photo">All Photo({{datafeed.pictureResize.length}})</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div *ngIf="datafeed.user_id == 'TAT'" style="background: #e6e6e6;" id="image">
+                <div *ngIf="datafeed.checkCard == 0" [ngStyle]="{ 'background': 'url('+datafeed.pictureResize[0].path_full+')'}" class="bgList"
+                  style="padding-top: 100%;" (click)="NextPage('DetailfeedPage',datafeed)"></div>
+                <div class="photoAll" *ngIf="datafeed.pictureResize.length > 1">
+                  <div class="textPhotoGroup">
+                    <img style="border-radius: unset;width: 19px;vertical-align: middle;" src="./assets/icon/photoAll.svg" alt="">
+                    <span class="div-all-photo">All Photo({{datafeed.pictureResize.length}})</span>
+                  </div>
+                </div>
+              </div> -->
+                                <div id="tabProfile" class="ChildNewfeed" style="position: absolute; bottom: 0px; width: 100%;" *ngIf="datafeed.status_show"></div>
+                            </div>
+                            <!-- photo -->
+
+                            <!-- location, coconuts, comments -->
+                            <div *ngIf="datafeed.status_show" id="detailcard">
+                                <ion-grid style="padding-top: 5px;padding-bottom: 5px; max-height: 45px;min-height: 45px;border-bottom: 1px solid #f5f5f5;padding: 0px;background: #f7f7f7;position: relative; font-size: 14px;">
+                                    <i class="icon_map icon15"></i>
+                                    <ion-row (click)="NextPage('TouristPage',datafeed)" style="padding-top: 8px;">
+                                        <ion-col col-8 style="padding: 0;">
+                                            <span class="color87 locations" style="margin-left: 20px;" [innerHTML]="datafeed.photo_location"></span>
+                                        </ion-col>
+                                        <ion-col col-4 style="padding: 0;padding: 0;text-align: right;font-weight: bolder;">
+                                            <span class="location distant" style="position: absolute;right: 5px;bottom: 0;color: #72c2ff;width: 100% !important;">{{datafeed.distant}} km.</span>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row (click)="NextPage('TouristPage',datafeed)">
+                                        <ion-col col-12 style="padding: 0;">
+                                            <span class="location" style="margin-left: 20px; padding-bottom: 5px;">{{datafeed.photo_province}}</span>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                <ion-grid style="padding-top: 12px; padding-bottom: 12px; padding-left: 12px;" class="threeIcon">
+                                    <ion-row class="FSitalic font12">
+                                        <ion-col col-6 style="position: relative; padding: 0;" class="col_fix1">
+                                            <img src="./img/icon_coconut_gray.svg" style="width: 15px; vertical-align: middle;" alt="" (click)="like(datafeed,2,i,2)" *ngIf="!datafeed.status_like" />
+                                            <div id="like{{datafeed.photo_id}}" *ngIf="datafeed.status_like" style="display: inline-block;" (click)="like(datafeed,1,i,2)">
+                                                <img src="./img/icon_coconut.png" style="width: 15px; vertical-align: middle;" alt="" />
+                                                <span class="like-iconTNew">
+                                                    <div class="heart-animation-1"></div>
+                                                    <div class="heart-animation-2"></div>
+                                                </span>
+                                            </div>
+                                            <div style="display: inline-block;position: relative;height: 16px;vertical-align: middle;margin-left: -10px;" *ngIf="datafeed.imageLike.length != 0 && datafeed.user_id != 'TAT'">
+                                                <div class="userLike" style="display: grid;min-width: 16px;height: 16px;font-size: 10px;">
+                                                    <span class="sumLike" style="font-size: 10px;">{{datafeed.sum_like}}</span>
+                                                </div>
+                                            </div>
+                                            <span style="font-style: normal;font-size: 10px;font-weight: bold;vertical-align: middle;" (click)="like(datafeed,2,i,2)" *ngIf="!datafeed.status_like" class="fontnormal">Coconut</span>
+                                            <span style="font-style: normal;font-size: 10px;font-weight: bold;vertical-align: middle;" *ngIf="datafeed.status_like" (click)="like(datafeed,1,i,2)" class="fontnormal">Coconut</span>
+                                        </ion-col>
+                                        <ion-col col-6 style="position: relative; padding: 0;" (click)="NextPage('viewComment',datafeed)">
+                                            <img src="./assets/icon/icon-comment-new-f.svg" alt="" style="width: 15px; vertical-align: middle;" *ngIf="!datafeed.status_comment" />
+                                            <img src="./assets/icon/icon-comment-new-t.svg" alt="" style="width: 15px; vertical-align: middle;" *ngIf="datafeed.status_comment" />
+                                            <div style=" display: inline-block;position: relative;height: 16px;min-width: 8px;vertical-align: middle;margin-left: -10px;">
+                                                <div *ngIf="datafeed.countComment != 0" class="userLike" style="display: grid;min-width: 16px;height: 16px;font-size: 10px;">
+                                                    <span class="sumLike" style="font-size: 10px;">{{datafeed.countComment}}</span>
+                                                </div>
+                                            </div>
+                                            <span style=" font-style: normal; font-size: 10px; font-weight: bold; vertical-align: middle;" class="fontnormal">Comment</span>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+
+                                <hr style="margin: 0 5px; background: #e4e4e4; height: 1px;" />
+                                <ion-grid (click)="NextPage('viewComment',datafeed)" class="" no-padding>
+                                    <ion-row class="font_10" *ngIf="datafeed.userIdComment != ''">
+                                        <ion-col col-3 style="display: inline-flex;">
+                                            <div class="borderimgage inlineBlog" style="display: inline-block; margin: auto;">
+                                                <img class="imgpro1" id="img_profile" [src]="datafeed.comment_user_img" style="vertical-align: middle; border: none;" />
+                                            </div>
+                                        </ion-col>
+                                        <ion-col class="padding_5" col-9 style="display: inline-flex;">
+                                            <div class="commentBg" style="display: inline-block;max-width: 95%; vertical-align: middle;margin: auto;padding: 5px 10px;margin-left: 0px;">
+                                                <p class="location namecomment" style="width: 100%; margin: 0px;font-size: 12px !important;" [innerHtml]="datafeed.fulnameComment"></p>
+                                                <p class="location" style="width: 100%; margin: 0px;font-size: 12px !important;" [innerHtml]="datafeed.comment"></p>
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row *ngIf="datafeed.userIdComment == '' || datafeed.userIdComment == undefined" class="font_10">
+                                        <ion-col col-3 style="display: inline-flex;">
+                                            <div class="borderimgage inlineBlog" style="display: inline-block; margin: auto;">
+                                                <img class="imgpro1" id="img_profile" [src]="gd.userProfile.user_path_img" style=" vertical-align: middle;border: none; " />
+                                            </div>
+                                        </ion-col>
+                                        <ion-col class="padding_5" col-9 style="display: inline-flex;">
+                                            <div class="borderinput commentbord" style="display: inline-block;width: 100%;vertical-align: middle;margin: auto;">
+                                                <input type="text" disabled class="inputComment" value="Write a comment" style="border: unset !important;" />
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </div>
+                            <!-- location, coconuts, comments -->
+
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <!-- data single style -->
+            <ion-row *ngIf="favType == 1">
+                <ion-col *ngFor="let datafeed of footprintList;let i = index;" no-padding col-12>
+                    <div style="padding: 0px; padding-bottom: 5px; padding-right: 5px;">
+                        <div *ngIf="datafeed.checkshow == 0 && datafeed.status_show" style="border: solid 1px #e4e4e4; background: #fff;">
+                            <div class="disshowimg" *ngIf="!datafeed.status_show"></div>
+                            <div *ngIf="datafeed.status_show">
+                                <!--  data profile normal user  -->
+                                <ion-grid style="padding: 0; height: 45px;" (click)="NextPage('ProfilePage',datafeed)" id="gridDetail" *ngIf="datafeed.user_id != 'TAT'">
+                                    <ion-row>
+                                        <ion-col col-2 id="gridCol3" style="text-align: center;">
+                                            <img class="imgpro2" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" />
+                                        </ion-col>
+                                        <ion-col col-10 style="margin: auto; color: white; padding: 0px;" id="gridCol">
+                                            <div class="fullname">
+                                                <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"></span>
+                                                <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                                            </div>
+                                            <div class="location fromName" style="width: 100%;" style="color: #9e9e9e;">
+                                                <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}}</span>
+                                                <span>&bull;</span>
+                                                <span style=" letter-spacing: 0.1px !important;font-size: 12px !important;">{{datafeed.time}}</span>
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                    <!-- <ion-row *ngIf="">
+                  <ion-col col-2 id="gridCol3" style="display: grid;">
+                    <img class="imgpro" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" style="margin: auto;"
+                    />
+                  </ion-col>
+                  <ion-col col-10 style="margin: auto;color:white;padding: 0px;" id="gridCol">
+                    <div class="fullname">
+                      <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"> </span>
+                      <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                    </div>
+                    <div class="location fromName" style="width: 100%" style="color: #9e9e9e;">
+                      <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}}
+                      </span>
+                      <span>&bull;</span>
+                      <span style="letter-spacing: 0.1px !important;font-size: 12px !important;">{{datafeed.time}}</span>
+                    </div>
+                  </ion-col>
+                </ion-row> -->
+                                </ion-grid>
+                                <!-- data profile normal user -->
+
+                                <!-- data profile TAT user -->
+                                <ion-grid style="padding: 0; height: 45px;" id="gridDetail" *ngIf="datafeed.user_id == 'TAT'">
+                                    <ion-row>
+                                        <ion-col col-3 id="gridCol3">
+                                            <img class="imgpro2" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" />
+                                        </ion-col>
+                                        <ion-col col-9 style="margin: auto; color: white;" id="gridCol">
+                                            <div class="fullname" style="width: 100%;" style="color: #565656; font-size: 11px;">
+                                                <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname">
+                        </span>
+                                                <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                                            </div>
+                                            <div class="location fromName" style="width: 100%;">
+                                                <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}}
+                        </span>
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                <!-- data profile TAT user -->
+
+                                <!-- caption -->
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col col-12 style="padding: 0; height: 100%; font-size: 14px;">
+                                            <div class="Museo color4D caption" [innerHtml]="datafeed.hashtag"></div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                <!-- caption -->
+                            </div>
+
+                            <!-- photo -->
+                            <div style="position: relative;" *ngIf="datafeed.status_show">
+                                <div class="frameHeart">
+                                    <img src="./assets/icon/icon-hearts6t.png" alt="" (click)="bookmark(datafeed,1,i,2)" *ngIf="datafeed.status_bookmark" style="width: 22px;" />
+                                    <img src="./assets/icon/icon-hearts6.png" alt="" (click)="bookmark(datafeed,2,i,2)" *ngIf="!datafeed.status_bookmark" style="width: 22px;" />
+                                </div>
+                                <div class="frameFeel" *ngIf="datafeed.user_id != 'TAT' && datafeed.status_show">
+                                    <span class="frameFeeling">{{datafeed.feeling_name}}</span>
+                                </div>
+                                <div style="background: #e6e6e6;" id="image">
+                                    <div [ngStyle]="{ 'height': '300px', 'object-fit': 'cover'}">
+                                        <img [ngStyle]="{ 'height': '300px', 'object-fit': 'cover'}" *ngIf="datafeed.checkCard == 0 && datafeed.pictureResize[0].type == 1" class="" (click)="NextPage('DetailfeedPage',datafeed)" [src]="datafeed.pictureResize[0].path_resize" alt="" style="width: 100%;"
+                                        />
+                                        <video id="video" (click)="NextPage('DetailfeedPage',datafeed)" controls preload="metadata" playsinline *ngIf="datafeed.pictureResize[0].type == 2" alt="" style="width: 100%;height: 100%;object-fit: cover;">
+                                            <source [src]="datafeed.pictureResize[0].path_resize "  type="video/mp4" />
+                                        </video>
+                                    </div>
+                                    <div class="photoAll" *ngIf="datafeed.pictureResize.length > 1">
+                                        <div class="textPhotoGroup">
+                                            <img style="border-radius: unset;width: 19px;vertical-align: middle; " src="./assets/icon/photoAll.svg" alt="" />
+                                            <span style="vertical-align: bottom;font-size: 14px;font-weight: normal;">All Photo({{datafeed.pictureResize.length}})</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div *ngIf="datafeed.user_id == 'TAT'" style="background: #e6e6e6;" id="image">
+                <div *ngIf="datafeed.checkCard == 0" [ngStyle]="{ 'background': 'url('+datafeed.pictureResize[0].path_full+')'}" class="bgList"
+                  style="padding-top: 100%;" (click)="NextPage('DetailfeedPage',datafeed)"></div>
+                <div class="photoAll" *ngIf="datafeed.pictureResize.length > 1">
+                  <div class="textPhotoGroup">
+                    <img style="border-radius: unset;width: 19px;vertical-align: middle;" src="./assets/icon/photoAll.svg" alt="">
+                    <span class="span-all-photo">All Photo({{datafeed.pictureResize.length}})</span>
+                  </div>
+                </div>
+              </div> -->
+                                <div id="tabProfile" class="ChildNewfeed" style="position: absolute; bottom: 0px; width: 100%;" *ngIf="datafeed.status_show"></div>
+                            </div>
+                            <!-- photo -->
+
+                            <!-- location, coconuts, comments -->
+                            <div *ngIf="datafeed.status_show" id="detailcard">
+                                <ion-grid style="padding-top: 5px; padding-bottom: 5px;max-height: 45px;min-height: 45px;border-bottom: 1px solid #f5f5f5;padding: 0px; background: #f7f7f7;position: relative;font-size: 14px; ">
+                                    <i class="icon_map icon15"></i>
+                                    <ion-row (click)="NextPage('TouristPage',datafeed)" style="padding-top: 8px;">
+                                        <ion-col col-8 style="padding: 0;">
+                                            <span class="color87 locations" style="margin-left: 20px;" [innerHTML]="datafeed.photo_location"></span>
+                                        </ion-col>
+                                        <ion-col col-4 style=" padding: 0; padding: 0;text-align: right;font-weight: bolder;">
+                                            <span class="location distant" style="position: absolute;right: 5px;bottom: 0;color: #72c2ff;width: 100% !important;">{{datafeed.distant}} km.</span>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row (click)="NextPage('TouristPage',datafeed)">
+                                        <ion-col col-12 style="padding: 0;">
+                                            <span class="location" style="margin-left: 20px; padding-bottom: 5px;">{{datafeed.photo_province}}</span>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                                <ion-grid style="padding-top: 12px; padding-bottom: 12px; padding-left: 12px;" class="threeIcon">
+                                    <ion-row class="FSitalic font12">
+                                        <ion-col col-6 style="position: relative; padding: 0;" class="col_fix1">
+                                            <img src="./img/icon_coconut_gray.svg" style="width: 20px; vertical-align: middle;" alt="" (click)="like(datafeed,2,i,2)" *ngIf="!datafeed.status_like" />
+                                            <div id="like{{datafeed.photo_id}}" *ngIf="datafeed.status_like" style="display: inline-block;" (click)="like(datafeed,1,i,2)">
+                                                <img src="./img/icon_coconut.png" style="width: 20px; vertical-align: middle;" alt="" />
+                                                <span class="like-iconTNew"><div class="heart-animation-1"></div><div class="heart-animation-2"></div></span>
+                                            </div>
+                                            <div style="display: inline-block;position: relative;height: 20px;vertical-align: middle; margin-left: -10px;" *ngIf="datafeed.imageLike.length != 0 && datafeed.user_id != 'TAT'">
+                                                <div class="userLike" style=" display: grid; min-width: 20px;height: 20px;font-size: 16px;">
+                                                    <span class="sumLike" style="font-size: 12px;">{{datafeed.sum_like}}</span>
+                                                </div>
+                                            </div>
+                                            <span style="font-style: normal;font-size: 13px;font-weight: bold;vertical-align: middle;" (click)="like(datafeed,2,i,2)" *ngIf="!datafeed.status_like" class="fontnormal">Coconut</span>
+                                            <span style="  font-style: normal;font-size: 13px;font-weight: bold;vertical-align: middle;" *ngIf="datafeed.status_like" (click)="like(datafeed,1,i,2)" class="fontnormal">Coconut</span>
+                                        </ion-col>
+                                        <ion-col col-6 style="position: relative; padding: 0;" (click)="NextPage('viewComment',datafeed)">
+                                            <img src="./assets/icon/icon-comment-new-f.svg" alt="" style="width: 20px; vertical-align: middle;" *ngIf="!datafeed.status_comment" />
+                                            <img src="./assets/icon/icon-comment-new-t.svg" alt="" style="width: 20px; vertical-align: middle;" *ngIf="datafeed.status_comment" />
+
+                                            <div style=" display: inline-block; position: relative;height: 20px; min-width: 8px;vertical-align: middle;margin-left: -10px;">
+                                                <div *ngIf="datafeed.countComment != 0" class="userLike" style="display: grid;min-width: 20px;height: 20px;font-size: 16px;">
+                                                    <span class="sumLike" style="font-size: 12px;">{{datafeed.countComment}}</span>
+                                                </div>
+                                            </div>
+                                            <span style="font-style: normal;vertical-align: middle;font-size: 13px;font-weight: bold;" class="fontnormal">Comment</span>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+
+                                <hr style="margin: 0 5px; background: #e4e4e4; height: 1px;" />
+                                <ion-grid (click)="NextPage('viewComment',datafeed)" class="" no-padding>
+                                    <ion-row class="font_10" *ngIf="datafeed.userIdComment != ''">
+                                        <ion-col col-2 style="display: inline-flex;" no-padding>
+                                            <div class="borderimgage inlineBlog" style="display: inline-block; margin: auto;">
+                                                <img class="imgpro2" id="img_profile" [src]="datafeed.comment_user_img" style="vertical-align: middle; border: none;" />
+                                            </div>
+                                        </ion-col>
+                                        <ion-col class="5" col-10 style="display: inline-flex;">
+                                            <div class="commentBg" style="display: inline-block;max-width: 95%;vertical-align: middle;margin: auto; padding: 5px 10px; margin-left: 0px;">
+                                                <p class="location namecomment" style="width: 100%; margin: 0px;font-size: 12px !important;" [innerHtml]="datafeed.fulnameComment"></p>
+                                                <p class="location" style="width: 100%;margin: 0px; font-size: 12px !important;" [innerHtml]="datafeed.comment"></p>
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row class="font_10">
+                                        <ion-col col-2 style="display: inline-flex;" no-pdding>
+                                            <div class="borderimgage inlineBlog" style="display: inline-block; margin: auto;">
+                                                <img class="imgpro2" id="img_profile" [src]="gd.userProfile.user_path_img" style=" vertical-align: middle;border: none;" />
+                                            </div>
+                                        </ion-col>
+                                        <ion-col class="padding_5" col-10 style="display: inline-flex;">
+                                            <div class="borderinput commentbord" style="display: inline-block;width: 100%;vertical-align: middle;margin: auto;">
+                                                <input type="text" disabled class="inputComment" value="Write a comment" style="border: unset !important;" />
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </div>
+                            <!-- location, coconuts, comments -->
+
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+
+        <!-- <div *ngFor="let datafeed of footprintList;let i = index;" style="padding: 0px;padding-bottom: 5px;padding-right: 5px;" [ngClass]="feedType == 0 ? 'widthTest' : ''">
+      <div *ngIf="datafeed.checkshow == 0" style="border: solid 1px #e4e4e4;background: #fff;">
+        <div class="disshowimg" *ngIf="!datafeed.status_show"></div>
+        <div *ngIf="datafeed.status_show">
+          <ion-grid style=" padding:  0;height: 45px;" (click)="NextPage('ProfilePage',datafeed)" id="gridDetail" *ngIf="datafeed.user_id != 'TAT'">
+            <ion-row *ngIf="feedType == 0">
+              <ion-col col-3 id="gridCol3">
+                <img class="imgpro" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" />
+              </ion-col>
+              <ion-col col-9 style="margin: auto;color:white;padding: 0px;" id="gridCol">
+                <div class="fullname">
+                  <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"> </span>
+                  <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                </div>
+                <div class="location fromName" style="width: 100%" style="color: #9e9e9e;">
+                  <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}}
+                  </span>
+                  <span>&bull;</span>
+                  <span style="letter-spacing: 0.1px !important;font-size: 12px !important;">{{datafeed.time}}</span>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="feedType == 1">
+              <ion-col col-2 id="gridCol3" style="display: grid;">
+                <img class="imgpro" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" style="margin: auto;"
+                />
+              </ion-col>
+              <ion-col col-10 style="margin: auto;color:white;padding: 0px;" id="gridCol">
+                <div class="fullname">
+                  <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"> </span>
+                  <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                </div>
+                <div class="location fromName" style="width: 100%" style="color: #9e9e9e;">
+                  <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}}
+                  </span>
+                  <span>&bull;</span>
+                  <span style="letter-spacing: 0.1px !important;font-size: 12px !important;">{{datafeed.time}}</span>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid style=" padding:  0;height: 45px;" id="gridDetail" *ngIf="datafeed.user_id == 'TAT'">
+            <ion-row>
+              <ion-col col-3 id="gridCol3">
+                <img class="imgpro" [src]="datafeed.user_img" id="dImg" onError="src = './assets/imgs/onError.png'" />
+              </ion-col>
+              <ion-col col-9 style="margin: auto;color:white;" id="gridCol">
+                <div class="fullname" style="width: 100%" style="color: #565656;font-size: 11px;">
+                  <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_firstname"> </span>
+                  <span style="letter-spacing: 0.1px !important;" [innerHtml]="datafeed.user_lastname"></span>
+                </div>
+                <div class="location fromName" style="width: 100%">
+                  <span style="letter-spacing: 0.1px !important;" class="colorCountry">{{datafeed.country_name_en}}
+                  </span>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid style="padding-top: 0;">
+            <ion-row>
+              <ion-col col-12 style="padding: 0;height: 100%;font-size: 14px;">
+                <div class="Museo color4D caption" [innerHtml]="datafeed.hashtag"></div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        <div style="position: relative;" *ngIf="datafeed.status_show">
+          <div class="frameHeart">
+            <img src="./assets/icon/Icon-heart_t.svg" alt="" (click)="bookmark(datafeed,1,i,2)" *ngIf="datafeed.status_bookmark && datafeed.user_id != 'TAT'"
+              style="width: 28px;">
+            <img src="./assets/icon/Icon-heart_f.svg" alt="" (click)="bookmark(datafeed,2,i,2)" *ngIf="!datafeed.status_bookmark && datafeed.user_id != 'TAT'"
+              style="width: 28px;">
+          </div>
+          <div class="frameFeel" *ngIf="datafeed.user_id != 'TAT' && datafeed.status_show">
+            <span class="frameFeeling">{{datafeed.feeling_name}}</span>
+          </div>
+          <div *ngIf="datafeed.user_id != 'TAT'" style="background: #e6e6e6;border-radius: 5px;" id="image">
+            <div *ngIf="datafeed.checkCard == 0" [ngStyle]="{
+                                          'background': 'url('+datafeed.pictureResize[0].path_full+')'}" class="bgList" style="padding-top: 100%;"
+              (click)="NextPage('DetailfeedPage',datafeed)"></div>
+          </div>
+          <div *ngIf="datafeed.user_id == 'TAT'" style="background: #e6e6e6;border-radius: 5px;" id="image">
+            <div *ngIf="datafeed.checkCard == 0" [ngStyle]="{
+                                              'background': 'url('+datafeed.pictureResize[0].path_full+')'}" class="bgList" style="padding-top: 100%;"
+              (click)="NextPage('DetailfeedPage',datafeed)"></div>
+          </div>
+          <div id="tabProfile" class="ChildNewfeed" style="position: absolute;bottom: 0px; width: 100%;" *ngIf="datafeed.status_show">
+          </div>
+        </div>
+        <div *ngIf="datafeed.status_show" id="detailcard">
+          <ion-grid style="padding-top: 5px;padding-bottom: 5px;max-height: 45px;min-height: 45px;border-bottom: 1px solid #f5f5f5;padding: 0px;background: #f7f7f7;position: relative;font-size: 14px;;">
+            <i class="icon_map icon15"></i>
+            <ion-row (click)="NextPage('TouristPage',datafeed)" style="padding-top: 8px;">
+              <ion-col col-8 style="padding: 0;">
+                <span class="color87 locations" style="margin-left: 20px;" [innerHTML]="datafeed.photo_location"></span>
+              </ion-col>
+              <ion-col col-4 style="padding: 0;padding: 0;text-align: right;font-weight: bolder;">
+                <span class="location distant" style="position: absolute;right: 5px;bottom: 0;color: #72c2ff;width: 100% !important;">{{datafeed.distant}} km.
+                </span>
+              </ion-col>
+            </ion-row>
+            <ion-row (click)="NextPage('TouristPage',datafeed)">
+              <ion-col col-12 style="padding: 0;">
+                <span class="location" style="margin-left: 20px;padding-bottom: 5px;">
+                  {{datafeed.photo_province}}</span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-grid style="padding-top: 8px;padding-bottom: 8px;" *ngIf="datafeed.user_id != 'TAT'" class="threeIcon">
+            <ion-row class="FSitalic font12">
+              <ion-col col-12 style="position: relative;padding: 0;" class="col_fix1">
+                <img src="./img/icon_coconut_gray.svg" style="width: 15px;vertical-align: middle;" alt="" (click)="like(datafeed,2,i,2)"
+                  *ngIf="!datafeed.status_like && datafeed.user_id != 'TAT'">
+                <div id="like{{datafeed.photo_id}}" *ngIf="datafeed.status_like && datafeed.user_id != 'TAT'" style="display: inline-block ;"
+                  (click)="like(datafeed,1,i,2)">
+                  <img src="./img/icon_coconut.png" style="width: 15px;vertical-align: middle;" alt="">
+                  <span class='like-iconTNew'>
+                    <div class='heart-animation-1'></div>
+                    <div class='heart-animation-2'></div>
+                  </span>
+                </div>
+                <div style="display: inline-block;position: relative;width: 25px;height: 15px;vertical-align: middle;left: -5px;" *ngIf="datafeed.imageLike.length != 0 && datafeed.user_id != 'TAT'"
+                  [ngClass]="[(datafeed.imageLike.length == 1) ? 'Like1Users' : '',  (datafeed.imageLike.length == 2) ? 'Like2Users': '', (datafeed.imageLike.length > 2) ? 'Like3Users' : '']">
+                  <div class="userLike" *ngIf="datafeed.imageLike[0]" [ngStyle]="{'background': 'url('+datafeed.imageLike[0]+')'}"></div>
+                  <div class="userLike" style="left: 5px;" *ngIf="datafeed.imageLike[1]" [ngStyle]="{'background': 'url('+datafeed.imageLike[1]+')'}"></div>
+                  <div class="userLike" style="left: 10px;display: grid;" *ngIf="datafeed.imageLike[2]">
+                    <div style="margin: auto;font-size: 8px;font-style: normal;">+</div>
+                  </div>
+                </div>
+                <span style="font-style: normal;font-size: 10px;font-weight: bold;" (click)="like(datafeed,2,i,2)" *ngIf="!datafeed.status_like && datafeed.user_id != 'TAT'"
+                  class="fontnormal" [ngClass]="datafeed.imageLike.length == 0 ? '' : datafeed.imageLike.length == 1 ? 'margin1' : datafeed.imageLike.length == 2 ? 'margin2' : datafeed.imageLike.length == 3 ? 'margin3' : '' ">Coconut</span>
+                <span style="font-style: normal;font-size: 10px;font-weight: bold;" *ngIf="datafeed.status_like && datafeed.user_id != 'TAT'"
+                  (click)="like(datafeed,1,i,2)" class="fontnormal" [ngClass]="datafeed.imageLike.length == 0 ? '' : datafeed.imageLike.length == 1 ? 'margin1' : datafeed.imageLike.length == 2 ? 'margin2' : datafeed.imageLike.length == 3 ? 'margin3' : '' ">Coconut</span>
+                <span style="margin-left: 10px;">
+                  <img src="./assets/icon/icon-comment-new-f.svg" alt="" style="width: 13px;vertical-align: middle;" *ngIf="datafeed.countComment == 0">
+                  <img src="./assets/icon/icon-comment-new-t.svg" alt="" style="width: 13px;vertical-align: middle;" *ngIf="datafeed.countComment != 0">
+                  <span style="font-style: normal;vertical-align: middle;font-size: 10px;font-weight: bold;" class="fontnormal">Comment</span>
+                </span>
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+
+          <hr style="margin: 0 5px;background: #e4e4e4;height: 1px;">
+          <ion-grid *ngIf="datafeed.user_id != 'TAT'" (click)="NextPage('viewComment',datafeed)" class="maxHeigth">
+            <ion-row class="font_10" *ngIf="datafeed.userIdComment != '' && feedType == 0">
+              <ion-col col-3 style="display: grid;">
+                <div class="borderimgage inlineBlog" style="display: inline-block;margin: auto;">
+                  <img class="imgpro" id="img_profile" [src]="datafeed.comment_user_img" style="vertical-align: middle;height: 28px;width: 28px;border: none;"
+                  />
+                </div>
+              </ion-col>
+              <ion-col class="padding_0" col-9 style="display: grid;">
+                <div class="commentBg" style="display: inline-block;width: 100%; vertical-align: middle;margin: auto;padding: 5px;">
+                  <p class="location namecomment" style="width: 100%;margin: 0px;font-size: 12px !important;" [innerHtml]="datafeed.fulnameComment"></p>
+                  <p class="location" style="width: 100%;margin: 0px;font-size: 12px !important;" [innerHtml]="datafeed.comment">
+                  </p>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="font_10" *ngIf="datafeed.userIdComment != '' && feedType == 1">
+              <ion-col col-2 style="display: grid;">
+                <div class="borderimgage inlineBlog" style="display: inline-block;margin: auto;">
+                  <img class="imgpro" id="img_profile" [src]="datafeed.comment_user_img" style="vertical-align: middle;height: 28px;width: 28px;border: none;"
+                  />
+                </div>
+              </ion-col>
+              <ion-col class="padding_0" col-10 style="display: grid;">
+                <div class="commentBg" style="display: inline-block;width: 100%; vertical-align: middle;margin: auto;padding:5px;">
+                  <p class="location namecomment" style="width: 100%;margin: 0px;font-size: 12px !important;" [innerHtml]="datafeed.fulnameComment"></p>
+                  <p class="location" style="width: 100%;margin: 0px;font-size: 12px !important;" [innerHtml]="datafeed.comment">
+                  </p>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="font_10" *ngIf="datafeed.countComment == 0 && feedType == 0">
+              <ion-col col-3 style="display: grid;">
+                <div class="borderimgage inlineBlog" style="display: inline-block;margin: auto;">
+                  <img class="imgpro" id="img_profile" [src]="gd.userProfile.user_path_img" style="vertical-align: middle;height: 28px;width: 28px;border: none;"
+                  />
+                </div>
+              </ion-col>
+              <ion-col class="padding_0" col-9 style="display: grid;">
+                <div class="borderinput commentbord" style="display: inline-block;width: 100%;vertical-align: middle;margin: auto;">
+                  <input type="text" disabled class="inputComment" value="Write a comment" style="border:unset !important;">
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row class="font_10" *ngIf="datafeed.countComment == 0 && feedType == 1">
+              <ion-col col-2 style="display: grid;">
+                <div class="borderimgage inlineBlog" style="display: inline-block;margin: auto;">
+                  <img class="imgpro" id="img_profile" [src]="gd.userProfile.user_path_img" style="vertical-align: middle;height: 28px;width: 28px;border: none;"
+                  />
+                </div>
+              </ion-col>
+              <ion-col class="padding_0" col-10 style="display: grid;">
+                <div class="borderinput commentbord" style="display: inline-block;width: 100%;vertical-align: middle;margin: auto;">
+                  <input type="text" disabled class="inputComment" value="Write a comment" style="border:unset !important;">
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+    </div> -->
+    </ion-list>
+
+
+
+    <ion-infinite-scroll style="margin-top: 0px; margin-bottom: 20px;" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content>
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>
+
+<div id="footer" style="z-index: 5;"></div>

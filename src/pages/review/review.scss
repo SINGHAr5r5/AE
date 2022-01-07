@@ -1,0 +1,73 @@
+page-review {
+    .imageshow{
+        width: 40%;
+        padding-top: 40%;
+        border: 1px solid;
+        display: inline-block;
+        background-size: cover !important;
+        background-position: center !important;
+        margin: 5px;
+    }
+    .fame{
+      background: #fff;
+        margin-top: 150px;
+        border: 1px solid #c7c7c7;
+        border-radius: 5px;
+    }
+    .btnAdd{
+        background: #E82064 !important;
+        color: #fff !important;
+        text-transform: none !important;
+        font-weight: normal !important;
+        height: 2.5rem !important;
+        box-shadow: none !important;
+    }
+    .btnSubmit{
+        background: #09BF32 !important;
+        color: #fff !important;
+        text-transform: none !important;
+        font-weight: normal !important;
+        height: 2.5rem !important;
+        box-shadow: none !important;
+    }
+    ion-icon::before{
+        width: unset !important;
+        height: unset !important;
+    }
+    .textRate{
+        color: #136726;
+        font-size: 12px;
+    }
+    .starActive:before {
+        color: #FFDD00 !important;
+    }
+    .action-sheet-wrapper{
+        top: unset !important;
+        height: 65%;
+      }
+      .modal{
+            position: relative !important;
+      }
+      .btnChoose{
+        background: unset;
+        position: relative;
+      }
+      .textCenter{
+        color: #fff;
+        text-align: center;
+      }
+      .action-sheet-container{
+        height: unset !important;
+        margin-top: unset !important;
+      }
+
+}
+ion-app.ios page-review [padding] .scroll-content {
+    padding: 10px !important;
+}
+.md page-review {
+    #actionCamera{
+      margin-top: 30% !important;
+    }
+  }
+  

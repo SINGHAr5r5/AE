@@ -1,0 +1,249 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start style="order: 0;" (click)="scrollTopFN()">
+      <!-- <button ion-button icon-only style="" class="">
+        <img style="position: relative;width: 20px;" src="./assets/icon/logotree.svg" alt="">
+      </button> -->
+      <button ion-button icon-only style="" class="">
+        <div style="position: relative;color: #000;font-weight: bold;font-size: 14px;">Booking</div>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only style="" class="" (click)="goProfile(gd.userProfile)">
+        <img
+          style="position: relative !important;;margin-right: 10px !important;;height: 30px !important;;width: 30px !important;;"
+          id="img_profile" class="imgpro" [src]="gd.userProfile.user_path_img" />
+      </button>
+      <button ion-button icon-only style="" class="" (click)="presentPopover($event)">
+        <img style="position: relative;margin-right: 10px;" src="./assets/icon/menu-icon.svg" alt="">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="Museo">
+  <ion-refresher (ionRefresh)="doRefresh($event)" pullMax="1000">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- <span *ngIf="lastestEvent.length > 0">
+
+    <div class="titlePage" (click)="seeMore(1)" *ngIf="linit_last == 1">
+      <span style="color: #000;">Lastest Payment</span>
+      <span class="seeAll" (click)="seeMore(1)" >
+        <ion-icon name="arrow-down"></ion-icon>
+      </span>
+    </div>
+
+    <div class="titlePage" (click)="seeless(1)" *ngIf="linit_last != 1">
+      <span style="color: #000;">Lastest Payment</span>
+      <span class="seeAll" (click)="seeless(1)" >
+        <ion-icon name="arrow-up"></ion-icon>
+      </span>
+    </div>
+    
+    <ion-card class="cardMain" *ngFor="let data of lastestEvent | slice:0:linit_last;" (click)="nextPaged(data)">
+      <ion-card-content class="Museo cardContent">
+        <ion-grid class="nopadding">
+          <ion-row>
+            <ion-col col-3 class="nopadding leftcard">
+              <p>{{data.month}}</p>
+              <p>{{data.day}}</p>
+              <p>{{data.year}}</p>
+            </ion-col>
+            <ion-col col-9>
+              <p class="contentTitle">{{data.booking_name}}</p>
+              <p class="contntDistant">{{data.booking_category}}</p>
+              <div style="text-align: left;">
+                  <div class="borderimgage inlineBlog" style="vertical-align: middle;">
+                      <img class="imgpro" id="img_profile" [src]="data.booking_shop.user_path_img" />
+                    </div>
+    
+                  <div class="inlineBlog">
+                      <div class="nameStore" style="vertical-align: middle;">
+                        <span [innerHTML]="data.booking_shop.user_firstname"></span>
+                        <span> </span>
+                        <span [innerHTML]="data.booking_shop.user_lastname"></span>
+                      </div>
+                    </div>
+              </div>
+   
+              <div style="text-align: left;">
+                <span class="tagText">Tag : </span>
+                <div style="text-align: left;display: inline-block;">
+                  <div class="container" *ngFor="let tag of data.booking_tag">
+                    <a class="button_border">
+                      <span>{{tag.tag_name}}</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </span>
+
+  <span *ngIf="incommentEvent.length > 0">
+      <div class="titlePage" (click)="seeMore(2)" *ngIf="limit_incoming == 1">
+          <span style="color: #000;">Event incoming</span>
+          <span class="seeAll">
+            <ion-icon name="arrow-down"></ion-icon>
+          </span>
+        </div>
+    
+        <div class="titlePage" (click)="seeless(2)" *ngIf="limit_incoming != 1">
+          <span style="color: #000;">Event incoming</span>
+          <span class="seeAll">
+            <ion-icon name="arrow-up"></ion-icon>
+          </span>
+        </div>
+        
+        <ion-card class="cardMain" *ngFor="let data of incommentEvent | slice:0:limit_incoming;" (click)="nextPaged(data)">
+          <ion-card-content class="Museo cardContent">
+            <ion-grid class="nopadding">
+              <ion-row>
+                <ion-col col-3 class="nopadding leftcard">
+                  <p>{{data.month}}</p>
+                  <p>{{data.day}}</p>
+                  <p>{{data.year}}</p>
+                </ion-col>
+                <ion-col col-9>
+                  <p class="contentTitle">{{data.booking_name}}</p>
+                  <p class="contntDistant">{{data.booking_category}}</p>
+                  <div style="text-align: left;">
+                      <div class="borderimgage inlineBlog" style="vertical-align: middle;">
+                          <img class="imgpro" id="img_profile" [src]="data.booking_shop.user_path_img" />
+                        </div>
+        
+                      <div class="inlineBlog">
+                          <div class="nameStore" style="vertical-align: middle;">
+                            <span [innerHTML]="data.booking_shop.user_firstname"></span>
+                            <span> </span>
+                            <span [innerHTML]="data.booking_shop.user_lastname"></span>
+                          </div>
+                        </div>
+                  </div>
+       
+                  <div style="text-align: left;">
+                    <span class="tagText">Tag : </span>
+                    <div style="text-align: left;display: inline-block;">
+                      <div class="container" *ngFor="let tag of data.booking_tag">
+                        <a class="button_border">
+                          <span>{{tag.tag_name}}</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+    
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+  </span>
+
+  <span *ngIf="postEvent.length > 0">
+      <div class="titlePage" (click)="seeMore(3)" *ngIf="limit_post == 1">
+          <span style="color: #000;">Post Event</span>
+          <span class="seeAll">
+            <ion-icon name="arrow-down"></ion-icon>
+          </span>
+        </div>
+    
+        <div class="titlePage" (click)="seeless(3)" *ngIf="limit_post != 1">
+          <span style="color: #000;">Post Event</span>
+          <span class="seeAll">
+            <ion-icon name="arrow-up"></ion-icon>
+          </span>
+        </div>
+        
+        <ion-card class="cardMain" *ngFor="let data of postEvent | slice:0:limit_post;" (click)="nextPaged(data)">
+          <ion-card-content class="Museo cardContent">
+            <ion-grid class="nopadding">
+              <ion-row>
+                <ion-col col-3 class="nopadding leftcard">
+                  <p>{{data.month}}</p>
+                  <p>{{data.day}}</p>
+                  <p>{{data.year}}</p>
+                </ion-col>
+                <ion-col col-9>
+                  <p class="contentTitle">{{data.booking_name}}</p>
+                  <p class="contntDistant">{{data.booking_category}}</p>
+                  <div style="text-align: left;">
+                      <div class="borderimgage inlineBlog" style="vertical-align: middle;">
+                          <img class="imgpro" id="img_profile" [src]="data.booking_shop.user_path_img" />
+                        </div>
+        
+                      <div class="inlineBlog">
+                          <div class="nameStore" style="vertical-align: middle;">
+                            <span [innerHTML]="data.booking_shop.user_firstname"></span>
+                            <span> </span>
+                            <span [innerHTML]="data.booking_shop.user_lastname"></span>
+                          </div>
+                        </div>
+                  </div>
+                  <div style="text-align: left;">
+                    <span class="tagText">Tag : </span>
+                    <div style="text-align: left;display: inline-block;">
+                      <div class="container" *ngFor="let tag of data.booking_tag">
+                        <a class="button_border">
+                          <span>{{tag.tag_name}}</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+  </span> -->
+
+  <ion-card style="margin: 0px;width: 100%;margin-bottom: 10px;" *ngFor="let data of dataRes">
+    <ion-card-content style="padding: 0;font-size: 13px;">
+      <ion-grid style="padding: 0;">
+        <ion-row>
+          <ion-col col-4 (click)="nextPage(data)">
+            <!-- <div style="background: url('http://www.myadventureearth.com/data/data_photos/1000/img_base64/1544235820.2018-12-08-09-23-4031840.jpg');width: 100%;padding-top: 100%;background-position: center;background-size: cover">
+            </div> -->
+            <div [ngStyle]="{'background': 'url('+data.img[0].img_resize+')'}" class="imgTicket"></div>
+          </ion-col>
+          <ion-col col-8 style="text-align: left;">
+            <div (click)="nextPage(data)">
+              {{data.packet_name}}
+            </div>
+            <div>
+              <span>Status</span>
+              <span *ngIf="data.booking_status == 0" style="color: #007cff">Waiting for payment</span>
+              <span *ngIf="data.booking_status == 1" style="color: #019830">Payment success</span>
+              <span *ngIf="data.booking_status == 2" style="color: #ff0000">Payment fail</span>
+              <span *ngIf="data.booking_status == 3" style="color: #007cff">Pending payment verification</span>
+            </div>
+            <div *ngIf="data.package_rate.Average != 0">
+              <span>
+                <i class="iconStar-star" [ngClass]="1 <= data.package_rate.Average ? 'starActive' : ''"></i>
+                <i class="iconStar-star" [ngClass]="2 <= data.package_rate.Average ? 'starActive' : ''"></i>
+                <i class="iconStar-star" [ngClass]="3 <= data.package_rate.Average ? 'starActive' : ''"></i>
+                <i class="iconStar-star" [ngClass]="4 <= data.package_rate.Average ? 'starActive' : ''"></i>
+                <i class="iconStar-star" [ngClass]="5 <= data.package_rate.Average ? 'starActive' : ''"></i>
+                <span> Reviewed</span>
+              </span>
+            </div>
+            <div *ngIf="data.package_rate.Average == 0" style="color: #007cff" (click)="review(data)">Reviewing</div>
+            <div>{{data.booking_date}}</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+
+</ion-content>
+<div id="footer" style="z-index: 100;"></div>

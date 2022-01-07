@@ -1,0 +1,42 @@
+<div style="height: 50px;"></div>
+<ion-list style="margin: 0;">
+  <button ion-item (click)="close(1)" detail-none class="profile">
+    <ion-grid style="padding: 0">
+      <ion-row>
+        <ion-col col-3 style="display: inline-grid;">
+          <img style="position: relative;height: 40px;width: 40px;margin: auto;border: 0px;
+          box-shadow: 0px 1px 5px 0.2px rgba(86, 86, 86, 0.5);" id="img_profile" class="imgpro"
+            [src]="gd.userProfile.user_path_img" />
+        </ion-col>
+        <ion-col col-9 style="display: inline-grid;">
+          <div style="margin: auto;margin-left: 0px;width: 100%;">
+            <div class="textProfile">Profile</div>
+            <div class="textName">{{gd.userProfile['user_firstname']}} {{gd.userProfile['user_lastname']}}</div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </button>
+  <button ion-item (click)="close(2)" detail-none>
+    <img src="./assets/icon/icon_traveler.svg" alt="" class="Middle">
+    <span class="Middle">Traveler</span>
+    <ion-icon name="ios-arrow-forward" item-right style="display: grid;"></ion-icon>
+
+  </button>
+  <!-- <button ion-item (click)="close(3)" detail-none>
+    <img src="./assets/icon/icon_booking.svg" alt="" class="Middle">
+    <span class="Middle">Booking</span>
+    <ion-icon name="ios-arrow-forward" item-right style="display: grid;"></ion-icon>
+
+  </button> -->
+  <button ion-item (click)="close(4)" detail-none>
+    <img src="./assets/icon/icon_setting.svg" alt="" class="Middle">
+    <span class="Middle">Setting</span>
+    <ion-icon name="ios-arrow-forward" item-right style="display: grid;"></ion-icon>
+
+  </button>
+  <button ion-item (click)="close(5)" detail-none>
+    <img src="./assets/icon/icon_logout.svg" alt="" class="Middle">
+    <span class="Middle">Log out</span>
+  </button>
+</ion-list>

@@ -1,0 +1,164 @@
+page-ticket {
+    .toolbar-background{
+        background-image: unset !important;
+    }
+    .ion-md-arrow-back:before{
+        content: "\f3cf" !important;
+        position: relative !important;
+        background-repeat: unset !important;
+        background-position: unset !important;
+        background-image: unset !important;
+        background-size: unset !important;
+        width: unset !important;
+        height: unset !important;
+        margin-top: unset !important;
+        left: unset;
+    }
+    .back-button{
+        margin: 0;
+        width: 30px;
+        min-width: 20px;
+    }
+    .btnDatail{
+        margin: auto;
+        text-align: center;
+        color: #1B75BB;
+        font-size: 14px;
+    }
+    #map {
+        width: 100%;
+        height: 250px;
+        margin-top: 15px;
+      }
+    .ticketMain{
+        margin: 20px 5px 5px 5px;
+    }
+    .ticketTitle{
+        background: #fcfcfc;
+        height: 25px;
+        border-radius: 5px;
+        border: 1px solid #eaeaea;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-bottom: none;
+        position: relative;
+        z-index: 1;
+        font-size: 13px;
+        margin-top: 5px;
+        padding: 2px 5px;
+    }
+    .ticketNext{
+        background: #fcfcfc;
+        border: 1px solid #eaeaea;
+        border-top: none;
+        border-bottom: none;
+        position: relative;
+        z-index: 1;
+        top: -30px;
+    }
+    .ticketEnd{
+        background: #fcfcfc;
+        border: 1px solid #eaeaea;
+        border-top: none;
+        position: relative;
+        z-index: 1;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .textAve{
+        margin-top: 5px;
+        display: inline-block;
+    }
+    .textTicket{
+        float: right;
+        margin-right: 15px;
+        margin-top: 5px;
+        display: inline-block;
+
+    }
+    .imgSection{
+        width: 100%;
+        position: relative;
+        top: -10px;
+        z-index: 0;
+    }
+    .textGray{
+        color: #7A7A7A;
+    }
+    .detailPeple{
+        width: 48%;
+        display: inline-block;
+    }
+    .vertical-middle{
+        vertical-align: middle;
+    }
+    .button-block{
+        background-color: #FA6980 !important;
+        margin-top: 25px;
+    }
+    .textReview{
+        vertical-align: middle;
+        font-size: 18px;
+        color: #7A7A7A;
+    }
+    .starActive:before {
+        color: #FFDD00 !important;
+    }
+    .textBold{
+        font-weight: bold;
+    }
+    .ticket_id{
+        font-size: 16px;
+        font-weight: 500;
+        color: #7e48c0;
+        font-size: 20px;
+    }
+    .borderBottom{
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: 100% 0.6px;
+        background-image: linear-gradient(to right, #c9407a 0%, #7f47c6 100%);
+    }
+    .borderimgage{
+        width: 27px;
+        height: 27px;
+        position: relative;
+        border-radius: 50%;
+        background-image: linear-gradient(to right, #7f47c6 , #c9407a);
+    }
+    
+    .imgpro{
+        border-radius: 50% !important;
+        width: 25px !important;
+        height: 25px !important;
+        position: absolute !important;
+        right: 0;
+        left: 0;
+        top: 0 !important;
+        bottom: 0 !important;
+        margin: auto !important;
+        object-fit: cover !important;
+        border: unset;
+    }
+    .inlineBlog{
+        display: inline-block !important;
+    }
+    .nameStore{
+        color: #3e3e3e;
+        font-size: 12px;
+    }
+    .dateSelect{
+        font-size: 30px;
+        color: #7e48c0;
+        font-weight: bold;
+    }
+    .nameTours{
+        font-size: 20px;
+        font-weight: 500;
+        color: #7e48c0;
+    }
+    .icon-arrow-right:before {
+        margin-top: -12px;
+        right: 20px;
+    }
+}

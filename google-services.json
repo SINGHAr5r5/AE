@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "145451048347",
+    "firebase_url": "https://adventureearth-4343d.firebaseio.com",
+    "project_id": "adventureearth-4343d",
+    "storage_bucket": "adventureearth-4343d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145451048347:android:80fa45df823f2128",
+        "android_client_info": {
+          "package_name": "com.adventure.earth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145451048347-2kh1uvh2co3rv6nisehmgo4tc2oljps5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqmDeEDCh3PVohmtUy7ZZxDXgrBI4VvEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145451048347-2kh1uvh2co3rv6nisehmgo4tc2oljps5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "145451048347-k6erc3vchvifbad88nmicptnqjtq9knm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.adventure.earth"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145451048347:android:3c8d52ed1f39c4f8",
+        "android_client_info": {
+          "package_name": "com.test.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145451048347-2kh1uvh2co3rv6nisehmgo4tc2oljps5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqmDeEDCh3PVohmtUy7ZZxDXgrBI4VvEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145451048347-2kh1uvh2co3rv6nisehmgo4tc2oljps5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "145451048347-k6erc3vchvifbad88nmicptnqjtq9knm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.adventure.earth"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

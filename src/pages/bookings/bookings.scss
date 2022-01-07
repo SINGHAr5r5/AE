@@ -1,0 +1,224 @@
+page-bookings {
+    .scroll-content {
+        background: #F8F8F8 !important;
+    }
+
+    .fameProvince {
+        width: 100%;
+        text-align: center;
+        background: #fff;
+        position: absolute;
+        top: 40px;
+        z-index: 3;
+        left: 0;
+        border: 1px solid rgba(171, 171, 171, 0.43);
+        border-radius: 8px;
+        box-shadow: 0px 0px 5px 0px #d4d4d4;
+        overflow: scroll;
+        max-height: 150px;
+    }
+
+    .childProvince {
+        padding: 5px 0px 5px 5px !important;
+        border-bottom: 1px solid rgba(220, 220, 220, 0.62);
+        color: #4c4c4c;
+        margin: 0 10px;
+        text-align: left;
+    }
+
+    .childProvince:last-child {
+        border-bottom: 0px;
+    }
+
+    .starActive:before {
+        color: #FFDD00 !important;
+    }
+
+    .borderBottom:first-child {
+        border-bottom: 2px solid #dadada;
+    }
+
+    .borderBottom:last-child {
+        border-bottom: none;
+    }
+
+    .slideImg .Imgs {
+        border-radius: 20px;
+    }
+
+    .slideImg {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .listFilter {
+        color: #636363;
+        padding: 5px !important;
+        border-bottom: 1px solid;
+        border-color: rgba(199, 199, 199, 0.5);
+    }
+
+    .listFilter:last-child {
+        border-bottom: none;
+    }
+
+    .toolbar-background {
+        background-image: unset !important;
+    }
+
+    ion-icon::before {
+        width: unset !important;
+        height: unset !important;
+        display: inline-block !important;
+    }
+
+    .filterMainFilter {
+        border: 1px solid rgba(171, 171, 171, 0.43);
+        border-radius: 8px;
+        padding: 0px 15px 0 15px;
+        margin: 0px 15px;
+        box-shadow: 0px 0px 5px 0px #d4d4d4;
+        margin-top: 15px;
+    }
+
+    .filterMain {
+        border: 1px solid rgba(171, 171, 171, 0.43);
+        border-radius: 8px;
+        padding: 0px 15px 0 15px;
+        margin: 0px 15px;
+        box-shadow: 0px 0px 5px 0px #d4d4d4;
+        height: 35px;
+        margin-top: 15px;
+    }
+
+    .filterMain:first-child {
+        margin-top: 10px !important;
+    }
+
+    .filterMain:last-child {
+        background: #16B53A;
+        color: #fff;
+    }
+
+    .displayGrid {
+        display: inline-flex;
+    }
+
+    .pingIcon {
+        width: 15px;
+        margin: auto;
+        margin-left: 0;
+    }
+
+    .marginAuto {
+        margin: auto;
+    }
+
+    .iconDown {
+        text-align: right;
+        margin: auto;
+        margin-right: 0;
+        font-size: 20px;
+        color: #8e8e8e;
+    }
+
+    .Imgs {
+        background-position: center !important;
+        background-size: cover !important;
+        width: 100% !important;
+        padding-top: 100% !important;
+    }
+
+    .Imgs2 {
+        // background-position: center !important;
+        // background-size: cover !important;
+        // width: 100% !important;
+        // padding-top: 100% !important;
+    }
+
+    .titleText {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .subTitleText {
+        color: #7A7A7A;
+        font-size: 15px;
+    }
+
+    .seeAll {
+        color: #1B75BB;
+    }
+
+    .frameHeart {
+        position: absolute;
+        margin-left: 5px !important;
+        margin-top: 5px !important;
+        display: grid;
+        width: 30px;
+        right: 15px;
+    }
+
+    .gridContent {
+        background: #fff;
+        border-top: 1px solid #d2d2d269;
+        border-bottom: 1px solid #d2d2d269;
+        margin-top: 10px;
+    }
+
+    .detailFame {
+        margin-top: 5px;
+        text-align: left;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .detailLocation {
+        font-weight: bold;
+        overflow: hidden;
+        width: 100%;
+        text-overflow: initial;
+        max-height: 36px;
+        padding-right: 8px;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        line-height: 15.5px;    
+        margin-top: 5px;
+    }
+
+    .slidePrev {
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        font-size: 25px;
+        z-index: 2;
+        color: #696969;
+        border-radius: 50%;
+        background: #ffffffb3;
+        width: 35px;
+        height: 35px;
+        display: inline-flex;
+    }
+
+    .slideNext {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        font-size: 25px;
+        z-index: 2;
+        color: #696969;
+        border-radius: 50%;
+        background: #ffffffb3;
+        width: 35px;
+        height: 35px;
+        display: inline-flex;
+    }
+}
+
+ion-app.md page-bookings [padding] .scroll-content {
+    background: #F8F8F8;
+    padding-top: 0px !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}

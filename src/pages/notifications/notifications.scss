@@ -1,0 +1,77 @@
+page-notifications {
+    .ion-md-arrow-back:before{
+        content: "\f3cf" !important;
+        color: #000;
+        width: unset !important;
+        height: unset !important;
+        position: relative !important;
+        margin-top: unset !important;
+        margin-left: 0px;
+    }
+    .toolbar-background {
+        background: #fff !important;
+    }
+    .ion-ios-arrow-back:before{
+        height: unset !important;
+        width: unset !important;
+        color: #000 !important;
+        margin-left: 10px;
+    }
+    .hour{
+        color: #00a1ff;
+        font-size: 10px;
+    }
+    .ion-ios-more:before{
+        width: unset !important;
+        height: unset !important;
+        display: unset !important;
+        font-size: 30px !important;
+        color: #5d5d5d;
+    }
+    .avataborder{
+        background: linear-gradient(to right, #c81a60, #834bd1);
+        border-radius: 50%;
+        padding: 3px;
+    }
+    .avatabackground{
+        background: #fff;
+        border-radius: 50%;
+    }
+    ion-avatar img{
+        width: 45px !important;
+        height: 45px !important;
+    }
+    p.detail{
+        color: #2f2f2f;
+    }
+    .texttitle{
+        color: #8855d6;
+        padding: 5px 0px 5px 10px !important;
+        font-size: 15px;
+        border-bottom: solid 0.1px;
+    }
+    .item-block:first-child{
+        border-top: unset !important;
+    }
+    .noRead{
+        background: #efefef !important;
+    }
+    .noRead ion-item{
+        background: transparent;
+    }
+    .numberNoti {
+        position: absolute;
+        font-size: 8px;
+        background: #fa6980;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        border: 1px solid #fff;
+        color: #fff;
+        display: grid;
+        top: -2px;
+    }
+}
+ion-app.md  page-notifications [padding] .scroll-content{
+    padding: 0px !important;
+}

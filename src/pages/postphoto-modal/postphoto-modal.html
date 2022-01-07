@@ -1,0 +1,78 @@
+<ion-content (click)="close()"></ion-content>
+<ion-footer padding>
+  <ion-list>
+    <div>
+      <button ion-button class="doneBtn" (click)="close()">Done</button>
+    </div>
+    <div>
+      <ion-grid class="bgGray ss1">
+        <ion-row>
+          <ion-col class="titleType">
+            Post Hlighligh
+          </ion-col>
+        </ion-row>
+          <ion-row class="hlighligh_row">  
+            <img class="img11" src="{{myimage1}}" (click)="addEvent1();">
+            <img class="img11" src="{{myimage2}}" (click)="addEvent2();">
+            <img class="img11" src="{{myimage3}}" (click)="addEvent3();">
+          </ion-row>
+      </ion-grid>
+      <ion-grid class="bgGray">
+        <ion-row>
+          <ion-col class="titleType">
+            Feeling
+          </ion-col>
+        </ion-row>
+          <ion-row *ngFor="let item of feeling">
+            <ion-col style="display: grid;"  *ngFor="let items of item" class="feeling textCenter textFeeling" (click)="feelingSel(items.feeling_tx_id,items.feeling_tx_sort)" [ngClass]="data.feeling_id == items.feeling_tx_id ? 'active' : ''">
+              <img style="margin: auto;" [src]="items.icon_false" alt="" *ngIf="data.feeling_id != items.feeling_tx_id">
+              <img style="margin: auto;" [src]="items.icon_true" alt="" *ngIf="data.feeling_id == items.feeling_tx_id">
+              <div style="margin: auto auto 2px auto;">{{items.feeling_tx_name}}</div>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+      <div style="margin-top: 10px;">
+        <div class="titleType" style="padding-left: 10px;">
+            Add Location
+        </div>
+        <div>
+          <ion-grid>
+            <ion-row style="border: solid 1px #60c662;border-radius: 10px;">
+              <ion-col col-1 style="display: grid;">
+                <img src="./assets/icon/ping-icon.svg" alt="" style="margin: auto;width: 16px;">
+              </ion-col>
+              <ion-col col-9>
+                <div>
+                    <div>{{data.photo_location}}</div>
+                    <div style="font-size: 12px;color: #006d02;">Current Location</div>
+                </div>
+              </ion-col>
+              <ion-col col-2 style="font-size: 12px;color: #0065a5;margin: auto;font-weight: bold;" (click)="more()">
+                <span>Change</span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+      <ion-grid class="bgGray" style="margin-top: 10px;">
+        <ion-row>
+          <ion-col class="titleType">
+            Type of Location
+          </ion-col>
+        </ion-row>
+          <ion-row *ngFor="let item of typeplace">
+            <ion-col *ngFor="let items of item" class="typeplace textCenter textFeeling" (click)="typeLocatSel(items.TypeLocation_id,items.TypeLocation_srot)" [ngClass]="data.TypeLocation == items.TypeLocation_id ? 'active' : ''">
+              <div class="typeLocat" id="typeLocat{{items.TypeLocation_id}}">
+                <img style="vertical-align: middle;margin-bottom: 1px;" src="./assets/icon/icon_true.svg" *ngIf="data.TypeLocation == items.TypeLocation_id" alt="" class="icon_true">
+                <span style="vertical-align: middle;">{{items.TypeLocation_name}}</span>
+              </div>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+    </div>
+
+    <div>
+
+    </div>
+  </ion-list>
+</ion-footer>

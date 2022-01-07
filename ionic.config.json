@@ -1,0 +1,14 @@
+{
+  "name": "AENew",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/endpoints",
+      "proxyUrl": "http://localhost:3000"
+    }
+  ]
+}

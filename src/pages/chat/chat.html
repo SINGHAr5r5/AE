@@ -1,0 +1,97 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>
+            <table style=" width: 100%; ">
+                <tr>
+                    <td><span [innerHTML]="data['user_firstname']"></span> <span [innerHTML]="data['user_lastname']"></span></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 10px;opacity: .7;" class="Montserrat">
+                    </td>
+                </tr>
+            </table>
+
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding id="contentChat" style="margin-bottom: 60px !important;">
+    <div *ngFor="let message of message" style="padding-top: 15px;padding-bottom: 40px;" class="Montserrat">
+        <div class="datecute" *ngIf="message.showdate" style="margin-bottom: 10px;">
+            <span class="dateshow">{{message.date}}</span>
+        </div>
+        <table style="margin-left: 10px;" *ngIf="gd.userProfile.user_id!=message.id" align="left">
+            <tr>
+                <td style="vertical-align: top;">
+                    <img style="width:30px;border-radius: 50px;" [src]="imguser" />
+                </td>
+                <td>
+                    <table style="    margin-left: 10px;">
+                        <tr>
+                            <td>
+                                <div style="display: inline-block;
+                                    padding: 10px 15px;
+                                    border-radius: 10px;
+                                    max-width: 205px;
+                                    line-height: 130%;       
+                                    background: #f0f4f7;
+                                    ">{{message.message}}</div>
+                            </td>
+                            <td style="vertical-align: bottom;    padding-bottom: 5%;">
+                                <span style="color: #989494;margin-left: 10px;font-size: 10px;">
+                                    {{message.sendDate}}
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+            </tr>
+        </table>
+        <table style="margin-right: 20px;margin-left: 20px;" *ngIf="gd.userProfile.user_id==message.id" align="right">
+            <tr>
+                <td style="vertical-align: bottom;padding-bottom: 5%;line-height: 10px">
+                    <div style="color: #989494;margin-left: 5px;font-size: 10px;" *ngIf="message.status == 1">
+                        Read
+                    </div>
+                    <span style="color: #989494;margin-left: 5px;font-size: 10px;">
+                        {{message.sendDate}}
+                    </span>
+                </td>
+                <td>
+                    <table style="    margin-left: 10px;">
+                        <tr>
+                            <td>
+                                <div style="display: inline-block;
+                                  padding: 10px 15px;
+                                  border-radius: 10px;
+                                  max-width: 205px;
+                                  line-height: 130%;
+                                  background: #0084ff;
+                                  background-repeat: round;
+                                  background-size: cover;
+                                  color: white;
+                                  ">{{message.message}}</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <div style="clear: both;"></div> 
+    </div>
+
+</ion-content>
+<ion-footer>
+    <div id="sendmessage" style="z-index: 100;">
+        <div>
+            <input type="text" id="send" placeholder="Enter a message..." value="" (keyup.enter)="send()" (click)='scrollbottom()' />
+            <label for="send" class="send-chat">
+                <i class="icon_sendmsg" (click)="send()"></i>
+            </label>
+        </div>
+    </div>
+</ion-footer>

@@ -1,0 +1,90 @@
+<!--
+  Generated template for the ImageCapturePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content padding style="background: linear-gradient(0deg, rgba(174,82,158,1) 0%, rgba(232,32,100,1) 100%);">
+    <ion-icon (click)="close()" name="md-close" style="position: absolute;right: 10px;top: 30px;color: #fff;font-size: 30px;"></ion-icon>
+    <div class="ticketMain" id="container">
+      <div class="ticketTitle">
+        <!-- <img src="" alt=""> -->
+        <img [src]="logo" alt="" style="vertical-align: middle;">
+        <div class="textAve" style="vertical-align: middle;">ADVENTURE EARTH</div>
+        <div class="textTicket">Your Ticket</div>
+      </div>
+      <img [src]="section" class="imgSection" alt="">
+      <ion-grid class="ticketNext">
+        <ion-row>
+          <img [src]="packgeImage[0]" alt="" style="width: 70%;margin: auto;">
+        </ion-row>
+        <ion-row style="font-size: 10px;">
+          <ion-col>
+            <div>{{dataGet.packet_name}}</div>
+            <div>
+              <img [src]="ping" class="" alt="" style="vertical-align: middle;width: 10px;">
+              <span style="vertical-align: middle;">{{dataGet.province.province_name_en}}</span>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid class="ticketNext" style="font-size: 10px;background: #EBEDED;">
+        <ion-row>
+          <ion-col>
+            <img style="width: 30px;height: 30px;border-radius: 50%;vertical-align: middle;" [src]="user_image" alt="">
+            <div style="display: inline-block;vertical-align: middle;">
+              <div>Experience by</div>
+              <div style="color: #1B75BB;">{{dataGet.user.user_firstname}} {{dataGet.user.user_lastname}}</div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <img [src]="section" class="imgSection" alt="" style="top: -36px;">
+      <ion-grid class="ticketEnd" style="top: -55px;font-size: 10px;">
+        <ion-row>
+          <ion-col col-6>
+            <div style="text-align: center;border: 1px solid #CBD0D3;width: 70%; margin: auto;">
+              <div id="qrcode" style="width: 65%;margin: auto;padding: 3px 0;"></div>
+              <div style="border-top: 1px solid #CBD0D3;background: #EBEDED;padding-top: 5px;padding-bottom: 5px;">{{dataGet.booking_code_order}}</div>
+            </div>
+          </ion-col>
+          <ion-col col-6 style="">
+            <div class="textGray">Date</div>
+            <div style="margin-bottom: 5px">August 15, 2019</div>
+            <div class="textGray">Time</div>
+            <div style="margin-bottom: 5px">{{dataGet.timeable[0].timeable_time}} - {{dataGet.timeable[dataGet.timeable.length -1].timeable_time}}</div>
+            <div class="detailPeple">
+              <div class="textGray">Guest(s)</div>
+              <div>{{dataGet.Booking_Guest}}</div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="conditions != ''">
+          <ion-col>
+            <div class="textGray">Price condition</div>
+            <div>{{dataGet.conditions}}
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="textGray">Meetpoint</div>
+            <div>
+              <span class="vertical-middle">{{meeting.name_meet}}</span><span style="color: #FA6980;">{{meeting.time_meeting}}</span>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="dataGet.user.store_telephone != ''">
+          <ion-col>
+            <div class="textGray"> Call us {{dataGet.user.store_telephone}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-content>
+  

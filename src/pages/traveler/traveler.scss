@@ -1,0 +1,360 @@
+.ios page-traveler {
+  .segment-button {
+    height: 40px;
+    display: grid;
+  }
+
+  .country_img {
+    bottom: 15px !important;
+    border: none !important;
+  }
+}
+
+.md,
+.ios {
+  page-traveler {
+    .toolbar-background {
+      background: #fff !important;
+    }
+    .numberNoti {
+      position: absolute;
+      font-size: 8px;
+      background: #fa6980;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      border: 1px solid #fff;
+      color: #fff;
+      display: grid;
+      top: -2px;
+    }
+
+    button.filter {
+      height: 1.8em;
+      color: #525252;
+      border-color: #525252;
+      float: right;
+    }
+
+    button.activated {
+      background: none;
+    }
+
+    button.km {
+      height: 1.8em;
+      color: #525252;
+      border: none;
+    }
+
+    ion-icon::before {
+      height: unset !important;
+      width: unset !important;
+      display: unset !important;
+    }
+
+    ion-header {
+      box-shadow: unset !important;
+    }
+
+    .segment-ios .segment-button.segment-activated {
+      background-color: unset !important;
+    }
+
+    .segment-ios .segment-button {
+      border-top: 0px !important;
+      border-left: 0px !important;
+      border-right: 0px !important;
+      border-radius: 0px !important;
+      border-color: #888 !important;
+      color: unset !important;
+    }
+
+    .textChat {
+      width: 90%;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: clip;
+      white-space: nowrap;
+    }
+
+    .offline {
+      color: #000;
+    }
+
+    .scroll-content {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+
+    .message_chat {
+      width: 100%;
+      font-size: 16px;
+    }
+
+    .time_chat {
+      display: inline-block;
+      float: right;
+      font-weight: normal;
+      color: #888;
+    }
+
+    .nameUser_chat {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .imgMain_chat {
+      width: 75%;
+      padding-top: 75%;
+      background-size: cover;
+      border-radius: 50%;
+      margin: auto !important;
+      display: inline-block;
+      margin: 5px !important;
+    }
+
+    .tab_chat_main {
+      background: linear-gradient(to left, rgba(119, 119, 119, 1) 0%, rgba(119, 119, 119, 1))left bottom#fff no-repeat;
+      background-size: 100% 1px;
+      /* if linear-gradient, we need to resize it */
+    }
+
+    .segment-button.segment-activated {
+      color: #e61e62 !important;
+      border-bottom-width: 2px !important;
+      border-image-source: linear-gradient(90deg, rgba(207, 32, 102, 1) 0%, rgba(176, 68, 171, 1) 100%) !important;
+      border-image-slice: 20 !important;
+
+    }
+
+    .segment-button {
+      color: #403f3f !important;
+    }
+
+    .tab_chat_feed {
+      text-align: center;
+      display: inline-block;
+      width: 49%;
+      margin-top: 15px !important;
+      padding-bottom: 5px !important;
+      font-size: 20px;
+      font-weight: bold;
+
+    }
+
+    .tab_text {
+      color: #c41651;
+    }
+
+    .tab_active {
+      background: linear-gradient(to left, rgba(232, 32, 100, 1) 0%, rgba(174, 82, 158, 1) 100%)left bottom#fff no-repeat;
+      background-size: 100% 3px;
+      /* if linear-gradient, we need to resize it */
+    }
+
+    .online_status {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #00af26;
+      border-radius: 50%;
+    }
+
+    .item-inner {
+      border: none !important;
+    }
+
+    .mainCard {
+      display: inline-block;
+      width: 33.33%;
+      text-align: center;
+    }
+
+    .imgMain {
+      width: 90%;
+      padding-top: 90% !important;
+      border-radius: 50%;
+      margin: auto !important;
+      position: relative;
+    }
+
+    .nameUser {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .fromUser {
+      color: #0090ff;
+      font-size: 12px;
+    }
+
+    .onlinest {
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+      background: #00b707;
+      border-radius: 50%;
+      position: absolute;
+      right: 0px;
+      bottom: 5px;
+      border: solid 3px #fff;
+    }
+
+    .FollowingDetail {
+      right: 80px !important;
+    }
+
+    .FollowDetail {
+      right: 80px !important;
+    }
+
+    #map {
+      width: 100%;
+      height: 250px;
+    }
+
+    #Feeling {
+      margin-left: -10px;
+    }
+
+    content-drawer {
+      background-color: transparent !important;
+    }
+
+    content-drawer .content {
+      padding: 10px;
+      padding-right: 15px;
+    }
+
+    .item-block .item-inner {
+      border-bottom: 0px !important;
+    }
+
+    #profile {
+      border-radius: 70px;
+      object-fit: cover;
+      width: 70px !important;
+      height: 70px !important;
+      margin-top: 5px;
+    }
+
+    .btn1 .button-inner span {
+      width: 85px;
+      color: orange;
+      font-size: 10px;
+      padding: 9px;
+      background-color: white;
+      border-radius: 50px;
+    }
+
+    .btn2 {
+      position: absolute;
+      right: 65px;
+      width: 85px;
+      padding: 15px 15px !important;
+      font-size: 12px !important;
+      background-image: none;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+      background-color: #ccc !important;
+      top: 35px;
+      font-size: 10px !important;
+    }
+
+    .btn_datailfeed {
+      padding: 0px 1px !important;
+      height: 30px !important;
+      position: absolute;
+      top: 35px;
+      right: 65px;
+    }
+
+    @media (max-width:320px) {
+      button .button-inner span {
+        width: 65px !important;
+      }
+
+    }
+
+    .icon_message1:before {
+      right: 15px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      // border-radius: 60px;
+    }
+
+    .icon_map_input {
+      width: 22px;
+      height: 22px;
+      z-index: 1000;
+      top: 30px;
+      left: 8%;
+      position: absolute;
+    }
+
+    input {
+      z-index: 500;
+      width: 90%;
+      height: 35px;
+      border-radius: 50px;
+      margin-right: auto;
+      margin-left: auto;
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      border: 1px solid;
+      padding: 20px;
+      box-shadow: 0px 0px 15px #7F47DB;
+      border-color: transparent;
+      color: #7F47DB;
+      padding-left: 10%;
+    }
+
+    .icon_close {
+      width: 20px;
+      height: 20px;
+      right: 9%;
+      z-index: 1000;
+      top: 30px;
+      position: absolute;
+
+    }
+
+    #footer {
+      z-index: 5px;
+    }
+
+
+    #btnpurple2 {
+      border-radius: 50px;
+      padding-top: 5px;
+      padding-right: 10px;
+      padding-bottom: 5px;
+      padding-left: 10px;
+    }
+
+
+
+
+
+
+  }
+}
+
+.md {
+  page-traveler {
+    .onlinest {
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+      background: #00b707;
+      border-radius: 50%;
+      position: absolute;
+      right: 10px;
+      bottom: 5px;
+      border: solid 3px #fff;
+    }
+  }
+}

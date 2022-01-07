@@ -1,0 +1,33 @@
+<ion-header style="border-bottom: 1px solid #eaeaea;">
+
+  <ion-navbar>
+    <ion-searchbar id="searchNewFeed" style="max-width: 85%;display: inline-flex;vertical-align: middle;background: #EBEDED;border-radius: 8px;padding: 0px;min-height: 30px;"
+      placeholder="Search for a place" (ionInput)="filterItems($event)" [animated]="true" #myInput [(ngModel)]="inputSearch" (search)="enterSearch()">
+    </ion-searchbar>
+    <div style="display: inline-flex;color: #8a8a8a;" (click)="cancle()">Cancel</div>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row style="text-align: center">
+      <ion-col col-6>
+        <div style="width: 120px;margin: auto;border-radius: 5px;padding: 3px 5px;" (click)="chooser('Recent')" [ngClass]="typeSearch == 'Recent' ? 'action' : ''">
+          <span>Recent</span>
+        </div>
+      </ion-col>
+      <ion-col col-6>
+        <div style="width: 120px;margin: auto;border-radius: 5px;padding: 3px 5px;" (click)="chooser('Near Location')" [ngClass]="typeSearch == 'Recent' ? '' : 'action'">
+          <span>Nearest</span>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div>
+    <div class="boxSearch" *ngFor="let data of dataSearch" (click)="selected(data)">
+      <span [innerHTML]="data.photo_location"></span>
+    </div>
+  </div>
+</ion-content>

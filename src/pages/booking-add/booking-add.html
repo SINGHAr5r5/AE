@@ -1,0 +1,230 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        <div class="headercuttom Museo">
+          <span>{{dataget.packet_name}}</span>
+          <br>
+          <p style="font-size: 10px;opacity: .7;margin-top: 0px;margin-bottom: unset !important;" class="Montserrat">Share your story and freedom</p>
+        </div>
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+<ion-content padding class="Museo">
+      <!-- <select>
+          <option>Bacon</option>
+          <option>Black Olives</option>
+        </select>
+      <div style="height: 1500px;">
+
+      </div> -->
+
+  <div class="imgBorder">
+    <ion-slides pager class="slideBanner">
+      <ion-slide *ngFor="let img of dataget.img">
+        <div class="slideImg" [ngStyle]="{'height': dataget.img[0].sizeimg_resize+'px','background': 'url('+img.img_resize+')'}"></div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div class="nameBooking">
+    <span [innerHTML]="dataget.packet_name"></span>
+  </div>
+  <div class="locationBooking">
+    <span>{{dataget.packet_category}} * {{dataget.packet_distant}}km</span>
+  </div>
+  <ion-grid class="padding15">
+          <ion-row (click)="NextPages('ProfilePage',dataget)">
+            <ion-col class="padding-left0">
+              <div class="borderimgage inlineBlog">
+                <img class="imgpro" id="img_profile" [src]="dataget.user[0].user_path_img" />
+              </div>
+              <div class="inlineBlog">
+                <div class="nameStore">
+                  <span [innerHTML]="dataget.user[0].user_firstname"></span>
+                  <span> </span>
+                  <span [innerHTML]="dataget.user[0].user_lastname"></span>
+                </div>
+                <div class="times">{{dataget.user[0].user_time}}</div>
+              </div>
+            </ion-col>
+          </ion-row>
+    <ion-row class="borderBottom">
+      <ion-col  class="Tag" style="padding-right: 0px !important;padding-left: 0px !important;">
+        <div>
+          <span class="tagText">Tag : </span>
+          <div style="text-align: left;display: inline-block;">
+            <div class="container" *ngFor="let tag of dataget.tag">
+              <a class="button_border">
+                <span>{{tag.tag_name}}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="textTitle">
+        <span>Trip Date </span>
+        <span style="color: #f00;font-size: 12px;"> {{stock}}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row (click)="showCalendar()">
+      <ion-col>
+        <div class="tripDateframe">
+          <span class="textInput">{{date_text}}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col class="calendar" id="calendar-slide" style="display: none;">
+          <div style="position: absolute;top: 35px;font-size: 10px;color: #f00;text-align: center;width: 100%;left: -15px;" *ngIf="countday == 0">This month, the tour is sold out.</div>
+        <ion-calendar #calendar (onDaySelect)="onDaySelect($event)" (onMonthSelect)="onMonthSelect($event)"></ion-calendar>
+        <button ion-button color="secondary" round small class="btnCalendar" (click)="selectDate()" style="background: linear-gradient(to right, #d92e6e , #c7429d);">select date</button>
+        <button ion-button color="danger" round small class="btnCalendar" (click)="cancleDate()" class="module-border-wrap">cancle</button>
+      </ion-col>
+    </ion-row>
+    <span *ngFor="let peple of dataget.packet_price;let i = index">
+        <ion-row *ngIf="i%2==0">
+            <ion-col class="textTitle" col-6>
+              <span>{{peple.price_name}}</span>
+            </ion-col>
+            <ion-col class="textTitle" *ngIf="dataget.packet_price[i+1]!= undefined">
+              <span>{{dataget.packet_price[i+1]["price_name"]}}</span>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="i%2==0">
+            <ion-col>
+              <div class="tripDateframe">
+                <ion-icon name="remove" class="iconCount iconRemove adult" (click)="calculator_peple('remove',i)"></ion-icon>
+                <span class="textInput" *ngIf="peple.num_of_peple == 0">-</span>
+                <span class="textInput" *ngIf="peple.num_of_peple != 0">{{peple.num_of_peple}}</span>
+                <ion-icon name="add" class="iconCount iconAdd adult" (click)="calculator_peple('add',i)"></ion-icon>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="tripDateframe" *ngIf="dataget.packet_price[i+1]!= undefined">
+                  <ion-icon name="remove" class="iconCount iconRemove children" (click)="calculator_peple('remove',i+1)"></ion-icon>
+                  <span class="textInput" *ngIf="dataget.packet_price[i+1].num_of_peple == 0">-</span>
+                <span class="textInput" *ngIf="dataget.packet_price[i+1].num_of_peple != 0">{{dataget.packet_price[i+1].num_of_peple}}</span>
+                  <ion-icon name="add" class="iconCount iconAdd children" (click)="calculator_peple('add',i+1)"></ion-icon>
+              </div>
+            </ion-col>
+          </ion-row>
+    </span>
+
+    <!-- <div *ngFor="let travels of travel;let i = index" [attr.data-index]='i' style="text-align: center;">
+        <ion-row *ngIf="i%2==0">
+            <ion-col (click)='showselected(2,travels.travel_id)'>
+                <img src="./assets/imgs/selected_img.png" id='select2{{travels.travel_id}}' class="sizeimg" style="display: none;position: absolute;"
+                    alt="">
+                <div class="card-subtitle">{{travels.travel_name}}</div>
+                <img class="sizeimg" [src]="travels.travel_img" />
+            </ion-col>
+            <ion-col>
+                <div *ngIf="travel[i+1]!= undefined" (click)='showselected(2,travel[i+1].travel_id)' style="text-align: center;">
+                    <img src="./assets/imgs/selected_img.png" id='select2{{travel[i+1].travel_id}}' class="sizeimg" style="display: none;position: absolute;"
+                        alt="">
+                    <img class="sizeimg " id='images' [src]="travel[i+1].travel_img" />
+                    <div class="card-subtitle">{{travel[i+1].travel_name}}</div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </div> -->
+
+    <ion-row>
+      <ion-col class="textTitle">
+        <span>Meeting Point</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+          <ion-list style="margin-bottom: unset !important;">
+              <ion-item class="borderItem" style="color: #888;text-align: center;" (click)="showmeeting()">
+                {{textMeeting}}
+              </ion-item>
+              <ion-card class="autosearchList cardmeet" style="display: none;">
+                  <ion-card-content class="cardmeet">
+                    <ion-list id="autoList" class="autoSearch">
+                      <ion-item *ngFor="let item of dataget.packet_meeting" (click)="chooseMeeting(item)">
+                        <span [innerHtml]="item.name_meet"></span>
+                      </ion-item>
+                    </ion-list>
+                  </ion-card-content>
+                </ion-card>
+            </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card style="padding: 5px;">
+          <ion-card-content style="padding: unset;">
+            <ion-grid class="textCard">
+              <ion-row>
+                <ion-col col-8 class="textLeft">
+                  <span>Trip cost :</span>
+                </ion-col>
+                <ion-col col-4 class="textRight">
+                  <span>{{Trip_cost}}</span>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-8 class="textLeft">
+                  <span>Tax :</span>
+                </ion-col>
+                <ion-col col-4 class="textRight">
+                  <span>{{Tax}}</span>
+                </ion-col>
+              </ion-row>
+              <!-- <ion-row>
+                <ion-col col-8 class="textLeft">
+                  <span>Accident Insurance :</span>
+                </ion-col>
+                <ion-col col-4 class="textRight">
+                  <span>FREE</span>
+                </ion-col>
+              </ion-row> -->
+              <ion-row style="border-bottom: solid #c1c1c1 1px;">
+                <ion-col col-8 class="textLeft">
+                  <span>Total price :</span>
+                </ion-col>
+                <ion-col col-4 class="textRight">
+                  <span>{{total_price}}</span>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-8 class="textLeft">
+                  <span style="color: #8247c3;">Postscript </span>
+                </ion-col>
+                <ion-col col-4 class="textRight">
+                  <span></span>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="dataget.packet_condition">
+                <ion-col col-8 class="textLeft">
+                  <span [innerHtml]="dataget.packet_condition"></span>
+                </ion-col>
+                <ion-col col-4 class="textRight">
+                  <span></span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row (click)="nextPage()">
+      <ion-col>
+          <button ion-button full id="btnpurple" class="btn center">
+              <span class="Museo" style="font-size: 18px;">Next</span>
+              <i class="icon-arrow-right icon25"></i>
+          </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <br><br>
+
+</ion-content>
+
+<div id="footer" style="z-index: 100;"></div>

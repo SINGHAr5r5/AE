@@ -1,0 +1,109 @@
+page-preview {
+
+  ion-header{
+    box-shadow: none;
+  }
+
+  .icon-close {
+    font-size: 2.2em;
+    color: white;
+  }
+
+  .div-icon-close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: -webkit-center;
+  }
+
+  .menu-button-height {
+    padding: 0 5vw !important;
+  }
+
+  .header-md .padding-notch {
+    padding-top: var(--notch-inset-top) !important;
+  }
+
+  .header-ios .padding-notch {
+    padding-top: calc(env(safe-area-inset-top)) !important;
+    padding-top: calc(const(safe-area-inset-top)) !important;
+  }
+
+  .btn-close {
+    position: absolute;
+    right: 0;
+  }
+
+  ion-header {
+    top: 0 !important;
+    padding: 0;
+    background: rgba($color: #000000, $alpha: 0.8);
+  }
+
+  .preview {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .toolbar-title {
+    font-size: 5vw;
+    font-weight: bold;
+    color: white;
+    display: block !important;
+  }
+
+  .toolbar-background {
+    background: transparent !important;
+  }
+
+  .scroll-content {
+    padding: 0 !important;
+    margin-bottom: 0 !important;
+    // margin: 18vw 0 0 0 !important;
+    background: rgba($color: #000000, $alpha: 0.8);
+  }
+
+  ion-content {
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .full {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.modal-preview .modal-wrapper {
+  height: 100%;
+  width: 100%;
+  top: unset !important;
+  left: unset !important;
+  transform-origin: center !important;
+
+  height: 100%;
+  width: 100%;
+  top: unset !important;
+  left: unset !important;
+  transform: scale(1) !important;
+  transition-timing-function: ease !important;
+  transform-origin: center !important;
+}
+
+.popover-preview .popover-content {
+  transform: scale(1) !important;
+  transform-origin: center !important;
+  border-radius: 0 !important;
+
+  // top: 50% !important;
+  // left: 50% !important;
+  // transform: translate(-50%, -50%);
+  // border: none !important;
+  // width: 100% !important;
+  // background: transparent !important;
+  // box-shadow: none !important;
+}

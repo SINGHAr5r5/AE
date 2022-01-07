@@ -1,0 +1,64 @@
+<!--
+  Generated template for the ReviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>review</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content padding style="background: rgba(121, 121, 121, 0.5);">
+  <ion-grid class="fame">
+    <ion-row>
+      <ion-col col-10>
+        <span class="textAll">Your overall rating of this property</span>
+      </ion-col>
+      <ion-col col-2 style="text-align: right;" (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <span>
+            <i class="iconStar-star" [ngClass]="1 <= commentRate ? 'starActive' : ''" (click)="sendRate(1)"></i>
+            <i class="iconStar-star" [ngClass]="2 <= commentRate ? 'starActive' : ''" (click)="sendRate(2)"></i>
+            <i class="iconStar-star" [ngClass]="3 <= commentRate ? 'starActive' : ''" (click)="sendRate(3)"></i>
+            <i class="iconStar-star" [ngClass]="4 <= commentRate ? 'starActive' : ''" (click)="sendRate(4)"></i>
+            <i class="iconStar-star" [ngClass]="5 <= commentRate ? 'starActive' : ''" (click)="sendRate(5)"></i>
+        </span>
+        <span class="textRate">Click to rate</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="textAll">Your review</div>
+        <ion-textarea style="min-height: 60px;border: none;margin: 0px !important;border: 1px solid #EBEDED;"
+          placeholder="" [(ngModel)]="tetxReview" autocomplete="on" autocorrect="on"></ion-textarea>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="textAll">Do you have photos to share? </div>
+        <div style="overflow-x: scroll;width: 100%;white-space: nowrap;" *ngIf="photoresize.length > 0">
+          <div *ngFor="let imgFor of photoresize" [ngStyle]="{'background': 'url('+ imgFor +')'}" class="imageshow"></div>
+          <!-- <div *ngFor="let img of photoresize">{{img}}</div> -->
+        </div>
+        <button ion-button class="btnAdd" (click)="addPhoto()">Add a Photo</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <hr style="margin-top: 0;">
+        <button ion-button class="btnSubmit" (click)="send_review()">Submit your review</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <input type="file" multiple (change)="changeListener($event)" accept="image/x-png,image/jpeg" style="position: absolute;top: -50px;"
+    id="filGallerys" />
+</ion-content>

@@ -1,0 +1,147 @@
+<!--
+  Generated template for the EditTagPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <!-- <ion-menu side="right" [content]="mycontent">...</ion-menu> -->
+      <ion-title class="Museo">
+        <table style=" width: 100%; ">
+          <tr>
+            <td>{{Title}}</td>
+          </tr>
+          <tr>
+            <td class="Montserrat" style="font-size: 10px;opacity: .7;">Share your freedom</td>
+          </tr>
+        </table>
+  
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content>
+    <ion-list class="center list" >
+      <div class="center Detail Montserrat*">
+        <span style="">
+          {{Detail}}
+        </span>
+      </div>
+      <div>
+        <ion-grid style="margin-top: 15px;">
+            <ion-row style="height: 20px;">
+                <ion-col col-12 >
+                  <div   (click)="Clear(showpage)" style="position: absolute; right: 10px;top: -5px;color: #878787;">  
+                    Clear All 
+                  </div>
+                </ion-col>
+              
+          </ion-row>
+          <ion-row>
+            <ion-col col-9 style=" font-size: 16px;font-weight: 800;">
+              {{selecttext}}
+            </ion-col>
+            <ion-col col-2 class="text-right " style=" position: absolute;margin-top: -10px;right: 10px;">
+              <ion-badge class="colorpurple" *ngIf="showpage==1"> {{typeNum1}} </ion-badge>
+              <ion-badge class="colorpurple" *ngIf="showpage==2"> {{typeNum2}} </ion-badge>
+              <ion-badge class="colorpurple" *ngIf="showpage==3"> {{numtag}} </ion-badge>
+              
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div *ngIf="showpage==1">
+        <ion-grid id="img">
+          <div *ngFor="let feelings of feeling;let i = index" [attr.data-index]='i'>
+            <ion-row *ngIf="i%2==0">
+              <ion-col (click)='showselected(1,feelings.feeling_id)' >
+                <div style="position: relative;">
+                <img src="./assets/imgs/selected_img.png" id='select1{{feelings.feeling_id}}' class="sizeimg" style="display: none;position: absolute;"
+                  alt="">
+                <img class="sizeimg" [src]="feelings.feeling_img" />
+              </div>
+              </ion-col>
+              <ion-col>
+                <div *ngIf="feeling[i+1]!= undefined" (click)='showselected(1,feeling[i+1].feeling_id)' style="position: relative;">
+                  <!-- <div class="selected_img"></div> -->
+                  <img src="./assets/imgs/selected_img.png" id='select1{{feeling[i+1].feeling_id}}' class="sizeimg" style="display: none;position: absolute;"
+                    alt="">
+                  <img class="sizeimg " id='images' [src]="feeling[i+1].feeling_img" />
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+  
+        </ion-grid>
+      </div>
+  
+      <div *ngIf="showpage==2">
+        <ion-grid id="img">
+          <div *ngFor="let travels of travel;let i = index" [attr.data-index]='i' >
+            <ion-row *ngIf="i%2==0">
+              <ion-col (click)='showselected(2,travels.travel_id)'>
+                <div style="position: relative;">
+                <img src="./assets/imgs/selected_img.png" id='select2{{travels.travel_id}}' class="sizeimg" style="display: none;position: absolute;"
+                  alt="">
+                <div class="card-subtitle">{{travels.travel_name}}</div>
+                <img class="sizeimg" [src]="travels.travel_img" />
+              </div>
+              </ion-col>
+              <ion-col>
+                <div *ngIf="travel[i+1]!= undefined" (click)='showselected(2,travel[i+1].travel_id)' style="position: relative;">
+                  <img src="./assets/imgs/selected_img.png" id='select2{{travel[i+1].travel_id}}' class="sizeimg" style="display: none;position: absolute;"
+                    alt="">
+                  <img class="sizeimg " id='images' [src]="travel[i+1].travel_img" />
+                  <div class="card-subtitle">{{travel[i+1].travel_name}}</div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+  
+        </ion-grid>
+      </div>
+  
+      <div  *ngIf="showpage==3">
+        <ion-grid id="Search" style="margin-top: 15px;">
+          <ion-row>
+            <ion-col col-12 style="background-color: #ccc;border-radius: 50px;font-size: 20px;">
+              <input type="text" placeholder="Search..." id="Search" class="widthText" (input)="onSearchChange($event.target.value)">
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div  *ngIf="showpage==3" id="silde_tab">
+        <ion-grid >
+          <ion-row class="text-center">
+            <div class="outer ">
+              <div class="wrapper" *ngFor="let tags of tag;let j= index">
+                <div class="internal" *ngFor="let subtag of tag[j];let i = index">
+                  <span style="display:inline-block;" [ngClass]="(data.tag[0] == subtag.tag_id || data.tag[1] == subtag.tag_id  || data.tag[2] == subtag.tag_id ||data.tag[3] == subtag.tag_id ||data.tag[4] == subtag.tag_id  ) ? 'btn1_1 bounceIn' : ''"
+                    class="tag btn1" id="tag{{j}}{{subtag.tag_id}}" (click)='tagselect(j,subtag.tag_id,subtag.tag_name)'>
+                    <span [ngClass]="(data.tag[0] == subtag.tag_id || data.tag[1] == subtag.tag_id  || data.tag[2] == subtag.tag_id ||data.tag[3] == subtag.tag_id ||data.tag[4] == subtag.tag_id) ? '' : 'btn_de'">
+                    {{subtag.tag_name}}</span>
+                    <!-- <input type="hidden" name="{{subtag.tag_name}}" id="" value="{{subtag.tag_id}}"> -->
+                  </span>
+                </div>
+                <div class="internal"> </div>
+              </div>
+            </div>
+  
+          </ion-row>
+        </ion-grid>
+  
+      </div>
+  
+  
+  
+  
+      <div class="">
+        <button ion-button full round id="btnpurple" class="center" style="padding: 20px;max-width: 310px;" (click)="send()" *ngIf="numtag == 5 || typeNum2 == 5 || typeNum1 == 5">
+          <span class="Museo font20">Save</span>
+        </button>
+        <br>
+      </div>
+    </ion-list>
+  
+  </ion-content>
+  <div id="footer"></div>

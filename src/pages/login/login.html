@@ -1,0 +1,76 @@
+<ion-content class="body">
+    <!-- <div>
+        <i class="logo positionlogo sizelogo"></i>
+    </div> -->
+    <div style="position: absolute; top: 10px;left: 20px;" (click)="goBussiness(false)" *ngIf="StBusi">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+    </div>
+
+    <ion-list scrollY="true" class="center list" no-bounce>
+        <!-- <div>
+      <i class="text_logo positiontext "></i>
+    </div> -->
+        <div class="div-shareyourfreedom">
+            <img src="./img/text_login.png" style="   width: 157px;height: 55px;margin: auto;" alt="">
+        </div>
+        <div style="color: #A53C60;margin-bottom: 10px;margin-top: -10px;text-align: center;" *ngIf="StBusi">For business owner</div>
+        <div class="inputlogin div-input" style="margin-bottom: 25px;">
+            <i class="icon-user"></i>
+            <input type="text" [(ngModel)]="data.email" autofocus="true" id="usernameID" style="background: transparent;margin-top: 2px;border: 0px;width:90% !important;" placeholder="Username">
+        </div>
+        <div class="inputlogin div-input">
+            <i class="icon-password"></i>
+            <input type="password" [(ngModel)]="data.password" (keyup.enter)="TabsPage()" style="background: transparent; width: 90%;margin-top: 2px;border: 0px;" placeholder="Password">
+        </div>
+        <div style="text-align: right; padding-top: 10px;color:#898989;">
+            <span (click)="showConfirm()"> Forget Password ? </span>
+        </div>
+        <div class="marginfrom" (click)="TabsPage()">
+            <button ion-button full id="btnpurple" style="padding: 20px;">
+        <span class="Museo">SIGN IN</span>
+      </button>
+        </div>
+        <div style="height:15px; display: block; position: relative;">
+            <i class="or sizeor"></i>
+        </div>
+        <div style="margin-top: 20px;" (click)="loginFacebook()">
+            <button ion-button full style="padding: 20px">
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <ion-icon class="icon-btn-facebook" ios="logo-facebook" md="logo-facebook"></ion-icon>
+                    <span>Login with Facebook</span>
+                </div>
+            </button>
+        </div>
+
+
+        <div *ngIf="gd.isShowFacebook" style="margin-top: 20px;" (click)="loginApple()">
+            <button ion-button full style="padding: 20px; background: #000;">
+                <div style="display: flex; justify-content: center; align-items: center;">
+                <ion-icon class="icon-btn-apple" ios="logo-apple" md="logo-apple"></ion-icon>
+                <span>Login with Apple</span>
+                </div>
+            </button>
+        </div>
+
+        <div style="margin-top:15px;" class="Montserrat">
+            <table>
+                <tr>
+                    <td>
+                    </td>
+                    <td style="text-align: left; padding-left: 10px;width: 100%;color: #303F8A;">
+                        <span style="letter-spacing: 0;"> Don’t have an account yet? </span>
+                    </td>
+                    <td>
+                        <button ion-button outline style=" font-size: 12px;height: 27px;color: #303F8A;border-color: #303F8A;" (click)="register()">SIGN UP</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- <div style="text-align: center;margin-top: 10px;" (click)="goBussiness(true)" *ngIf="!StBusi">
+      <img src="./assets/icon/shop_icon.svg" style="    vertical-align: middle;" alt="">
+      <div
+        style="    border-radius: 25px;border: 1px solid #A53C60;padding: 5px 20px;color: #A53C60;display: inline-block;vertical-align: middle;">
+        I'm a business owner</div>
+    </div> -->
+    </ion-list>
+</ion-content>

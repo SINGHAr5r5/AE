@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ionic App</title>
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: ws: https://ssl.gstatic.com; style-src  * 'self' 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * https://www.myadventureearth.com/  ionic: cdvfile: cdvphotolibrary: data: blob: 'unsafe-inline' 'self'; media-src https://www.myadventureearth.com/ ionic: * 'self';">
+    <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4e8ef7">
+
+    <!-- add to homescreen for ios -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script>
+        var heighttest = 0;
+        var select2 = function select2() {
+            $('.js-example-basic-single').select2();
+        }
+    </script>
+
+
+    <!-- cordova.js required for cordova apps -->
+    <script src="assets/js/smile-Waterfall.js"></script>
+    <script src="assets/js/getmap.js"></script>
+    <script src="assets/js/tinder.js"></script>
+    <script src="assets/js/binaryajax.js"></script>
+    <script src="assets/js/exif.js"></script>
+    <script src="assets/js/framework7.min.js"></script>
+    <!-- <script src="assets/js/places.js"></script> -->
+    <!-- <script src="assets/js/long-press-menu.js"></script> -->
+    <script src="assets/js/swipeview.js"></script>
+    <script src="assets/js/exif2.js"></script>
+    <script src="assets/js/canvasResize.js"></script>
+    <!-- <script src="assets/js/cordova-exif.js"></script> -->
+
+    <link rel="stylesheet" href="assets/js/photoswift/photoswipe.css">
+    <link rel="stylesheet" href="assets/js/photoswift/default-skin/default-skin.css">
+    <script src="assets/js/photoswift/photoswipe.min.js"></script>
+    <script src="assets/js/photoswift/photoswipe-ui-default.min.js"></script>
+
+
+
+
+    <script src="https://www.jquery-az.com/javascript/alert/dist/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="https://www.jquery-az.com/javascript/alert/dist/sweetalert.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.8/pixi.min.js'></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <!-- <script src="assets/js/jQuery.scrollSpeed.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <!-- <script src="http://maps.google.com/maps/api/js?key=AIzaSyBNmE9PnQmXWerBe9gW58NQY8notrracvI&v=3.exp&libraries=places"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtGlZbnvqqvB2-Zxzw3zDl3L6fuTiv9G8&libraries=places&language=en"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKniUvCeY53slaAsfxUDDURG9ydx5txmo&libraries=places&language=en" ></script> -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.34&key=AIzaSyDdcr1TyN7JGROR9mynxc3EpeTANUfoPwI&callback=initMap"></script> -->
+
+
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdcr1TyN7JGROR9mynxc3EpeTANUfoPwI&callback=initMap"
+    async defer></script> -->
+
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1R7zdAwk6iykxTBJedUnNtXjMIAd9Hq8&libraries=places" -->
+    <!-- async defer></script> -->
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+    <link href="build/main.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/cssprogress.css" rel="stylesheet">
+    <link href="css/tinder.css" rel="stylesheet">
+    <link href="css/select2.min.css" rel="stylesheet" />
+    <link href="css/framework7.ios.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <script src="assets/js/omise.js"></script>
+
+    <!-- <link href="css/masonry.css" rel="stylesheet"> -->
+
+
+
+    <script src="assets/js/html2canvas.js"></script>
+    <script src="assets/js/qrcode.min.js"></script>
+    <!-- <script src="assets/js/hammer.js"></script> -->
+
+
+
+
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+</head>
+
+<body style="line-height: normal !important;">
+
+    <!-- Ionic's root component and where the app will load -->
+    <ion-app></ion-app>
+
+
+    <!-- The polyfills js is generated during the build process -->
+    <script src="build/polyfills.js"></script>
+
+
+    <script src="cordova.js"></script>
+    <!-- The vendor js is generated during the build process
+       It contains all of the dependencies in node_modules -->
+    <script src="build/vendor.js"></script>
+
+    <!-- The main bundle js is generated during the build process -->
+    <script src="build/main.js"></script>
+    <script src="assets/js/jquery.fancy-scroll.js"></script>
+
+
+    <!-- filter -->
+    <div class="filterFeed Montserrat" id="filter"></div>
+    <div class="filterFeed Montserrat" id="filterlocation"></div>
+    <ion-backdrop style="display: none;" id="Dfilter"></ion-backdrop>
+    <ion-backdrop style="display: none;" id="DfilterL"></ion-backdrop>
+    <!-- End  filter -->
+
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+        <!-- Background of PhotoSwipe. 
+     It's a separate element as animating opacity is faster than rgba(). -->
+        <div class="pswp__bg"></div>
+
+        <!-- Slides wrapper with overflow:hidden. -->
+        <div class="pswp__scroll-wrap">
+
+            <!-- Container that holds slides. 
+        PhotoSwipe keeps only 3 of them in the DOM to save memory.
+        Don't modify these 3 pswp__item elements, data is added later on. -->
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+
+            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+            <div class="pswp__ui pswp__ui--hidden">
+
+                <div class="pswp__top-bar">
+
+                    <!--  Controls are self-explanatory. Order can be changed. -->
+
+                    <div class="pswp__counter"></div>
+
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <!-- <button class="pswp__button pswp__button--share" title="Share"></button>
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button> -->
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
+
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+        </button>
+
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+        </button>
+
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- shopping   -->
+    <div class='navbar-toggle' style="display: none" title='Menu'>
+    </div>
+    <nav class="nav-hide">
+        <table style="width: 100%;">
+            <tr>
+                <td style="padding-bottom: 15px !important;border-bottom: 1px solid;font-size: 20px;padding: 20px;">
+                    Product Categories
+                </td>
+            </tr>
+        </table>
+    </nav>
+    <!-- End shopping   -->
+    <div class="my-overlay" padding style="display: none;">
+        <img class="imgBackdrop" src="./assets/imgs/aveBackdrop2.png" alt="">
+    </div>
+    <script type='text/javascript'>
+        var htmlTOcanvas = html2canvas;
+        var Omise = Omise;
+        var PhotoSwipe = PhotoSwipe;
+        var PhotoSwipeUI_Default = PhotoSwipeUI_Default;
+        var EXIF = EXIF;
+    </script>
+
+</body>
+
+</html>

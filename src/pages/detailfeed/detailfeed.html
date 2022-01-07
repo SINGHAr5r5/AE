@@ -1,0 +1,418 @@
+<ion-header>
+    <!-- <div id="toolbarProfile" class="toolbar-background toolbar-backgrounds" *ngIf='gd.platformtype=="ios"'
+    style="height: 30px;width: 100%;z-index: 999999;position: relative;"></div> -->
+    <ion-navbar id="default_Bar">
+        <ion-grid style="padding: 0;">
+            <ion-row>
+                <ion-col col-6 style="padding: 0;" class="col60">
+                    <ion-buttons start>
+                        <ion-buttons start>
+                            <button ion-button icon-only navPop class="icon_back" style="vertical-align: middle;" *ngIf="viewMode == 1">
+                                 <ion-icon name="arrow-back"></ion-icon>
+                            </button>
+                            <button ion-button icon-only class="icon_back" style="vertical-align: middle;" *ngIf="viewMode == 2" (click)="change_mode(1,'','')">
+                                <ion-icon name="arrow-back"></ion-icon>
+                            </button>
+                            <div style="overflow: hidden;width: 78%;padding-right: 5px;text-overflow: clip;white-space: nowrap;padding-right: 8px;display: inline-block;vertical-align: middle;" class="textHeader">
+                                <span *ngIf="img != undefined && img.user_firstname != undefined" class="" [innerHtml]="img.user_firstname"></span>
+                                <span *ngIf="img != undefined && img.user_lastname != undefined" class="" [innerHtml]="img.user_lastname"></span>
+                            </div>
+                        </ion-buttons>
+                    </ion-buttons>
+                </ion-col>
+                <ion-col col-6 style="padding: 0;" class="col40">
+                    <ion-buttons end>
+                        <button ion-button icon-only style="" class="" (click)="saerchPage()">
+                            <img style="position: relative;margin-right: 10px;width: 20px;" src="./assets/icon/search-icon.svg" alt="">
+                        </button>
+                        <button ion-button icon-only style="position: relative;" class="" (click)="gonoti()">
+                            <img style="position: relative;margin-right: 10px;width: 20px;" src="./assets/icon/Inoti.svg" alt="">
+                            <div class="numberNoti" *ngIf="gd.sumNoti > 0">
+                                <div style="margin: auto;">{{gd.sumNoti}}</div>
+                            </div>
+                        </button>
+                        <button ion-button icon-only style="" class="" (click)="goprofile()">
+                                <img style="position: relative;margin-right: 10px;height: 30px;width: 30px;" id="img_profile" class="imgpros" [src]="gd.userProfile.user_path_img"/>
+                        </button>
+                        <button ion-button icon-only style="" class="" (click)="presentPopover($event)">
+                            <img style="position: relative;margin-right: 10px;" src="./assets/icon/menu-icon.svg" alt="">
+                        </button>
+                    </ion-buttons>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-navbar>
+</ion-header>
+
+<ion-content overflow-scroll="true" id="detailContent" #pageContent>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <!-- <input type="hidden" id="leng" name="" value="20">
+  <input type="hidden" id="idCard" name="" value="0" [(ngModel)]="numPage" (click)="setVal()"> -->
+    <div class="subcardslide countSlide" *ngFor="let img of dataFeed;let i = index;" style="">
+        <div *ngIf="img != undefined && img != {}">
+            <div #part1 id="part1" class="ddddddddd">
+                <!-- profile, caption of post -->
+                <ion-grid style="text-align: left;padding: 0;padding-left: 5px;padding-right: 5px;margin-bottom: 10px;">
+                    <ion-row>
+                        <ion-col class="" style="padding: 0px !important;">
+                            <ion-grid class=" Montserrat" style="width: 100%;padding-left: 0px;padding-right: 0px;">
+                                <ion-row>
+                                    <ion-col style="padding-left: 0px;width: 12%;" (click)="GoPage('ProfilePage',img,'')" col-8 class="ipad">
+                                        <img class="imgpro" [src]="img.user_img" style="position: relative !important;vertical-align: middle;" />
+                                        <div style="display: inline-block;width: 70%;vertical-align: middle;">
+                                            <span class="fullName">
+                        <span *ngIf="img != undefined && img.user_firstname != undefined" class="color4D" [innerHtml]="img.user_firstname"></span>
+                                            <span *ngIf="img != undefined && img.user_lastname != undefined" class="color4D" [innerHtml]="img.user_lastname"></span>
+                                            </span>
+                                            <span class="color87" style="font-size: 13px;">
+                        <span style="color: #1B75BB;">{{img.country_name_en}}</span> &bull;
+                                            <span style="font-size: 12px;">{{img.time}} ago</span>
+                                            </span>
+                                        </div>
+                                    </ion-col>
+                                    <ion-col style="text-align: right;display: grid;" col-4>
+                                        <div style="margin: auto;width: 100%;">
+                                            <div style="display: inline-block;text-align: center;position: relative;vertical-align: middle;" *ngIf="img.user_id!=gd.userProfile['user_id'] && img.user_id != 'TAT'">
+                                                <div style="margin-right: 10px;display: inline-block;text-align: center;position: relative;" (click)="follow(1,img)" *ngIf="img.follow == 0">
+                                                    <img style="height: 20px;" src="./assets/icon/follow_icon+.svg" alt="">
+                                                    <div style="left: -4px;" class="text_icon">Follow</div>
+                                                </div>
+                                                <div style="margin-right: 10px;display: inline-block;text-align: center;position: relative;" (click)="follow(2,img)" *ngIf="img.follow == 1">
+                                                    <img style="height: 20px;" src="./assets/icon/follow_icon-.svg" alt="">
+                                                    <div class="text_icon" style="left: -10px;color: #979797;">Following</div>
+                                                </div>
+                                            </div>
+                                            <div style="display: inline-block;text-align: center;position: relative;vertical-align: middle;" (click)="gd.presentPopover($event,img)">
+                                                <img style="height: 20px;" src="./assets/icon/share_icon.svg" alt="">
+                                                <div class="text_icon">Share</div>
+                                            </div>
+                                            <div style="display: inline-block;text-align: center;position: relative;margin-left: 10px;vertical-align: middle;" *ngIf="img.user_id==gd.userProfile['user_id'] && img.user_id != 'TAT'">
+                                                <img style="height: 25px;" src="./img/seting_img.png" alt="" (click)="presentActionSheet()">
+                                            </div>
+                                            <div style="display: inline-block;text-align: center;position: relative;margin-left: 10px;vertical-align: middle;" *ngIf="img.user_id!=gd.userProfile['user_id'] && gd.showbtn == 1 && img.user_id != 'TAT'">
+                                                <img style="height: 25px;" src="./img/seting_img.png" alt="" (click)="presentReport(img)">
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                            <span style="margin-top: 6px;" class="Montserrat color4D font16" [innerHtml]="img.hashtag"></span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <!-- profile, caption of post -->
+
+                <!-- Picture-->
+                <div *ngIf="img != undefined" style="background: #e6e6e6;position: relative;" id="image" class="mode1">
+                    <div *ngIf="img.user_id != 'TAT'" style="font-size: 0;">
+                        <img [src]="img.pictureResize[0].path_full" class="imgslide" (click)="change_mode(2,img,0)" *ngIf="img.pictureResize[0].type == 1">
+                        <video *ngIf="img.pictureResize[0].type == 2" [src]="img.pictureResize[0].path_resize" style="width: 100%;top: 0;bottom: 0;margin: auto;" (click)="change_mode(2,img,0)" controls></video>
+
+                        <span *ngIf="viewMode == 2">
+                            <span *ngFor="let image of img.pictureResize | slice:1:10;let i = index">
+                                <img *ngIf="image.type == 1" [src]="image.path_full" class="imgslide" style="margin-top: 5px;" (click)="change_mode(2,img,i+1)">
+                                <video *ngIf="image.type == 2" [src]="image.path_full" style="width: 100%;top: 0;bottom: 0;margin: auto;margin-top: 5px;"(click)="change_mode(2,img,i+1)" controls></video>
+                            </span>
+                        </span>
+                    </div>
+                    <img id="imge" style="width: 100%; text-align: center;border-radius: unset;" [src]="img.photo_img_Full" (click)='change_mode(2,img,i+1)' class="resize" [ngStyle]="{'height': img.sizeFullheight+'px'}" *ngIf="img.user_id == 'TAT'" />
+
+                    <div class="frameFeel" *ngIf="img.user_id != 'TAT'">
+                        <div class="frameFeeling">
+                            <div class="innerFeeling">{{img.feeling_name}}</div>
+                        </div>
+                    </div>
+                    <div class="frameHeart">
+                        <img src="./assets/icon/icon-hearts6t.png" style="width: 30px;" (click)="bookmark(img,1)" *ngIf="img.status_bookmark">
+                        <img src="./assets/icon/icon-hearts6.png" style="width: 30px;" (click)="bookmark(img,2)" *ngIf="!img.status_bookmark">
+                    </div>
+                    <div class="moreimg_back" *ngIf="img.user_id != 'TAT' && countImg >= 1 && viewMode == 1" (click)="change_mode(2,img,'')">
+                        <div style="position: absolute;bottom: 10px;">
+                            <img style="border-radius: unset;width: 20px;vertical-align: middle;" src="./assets/icon/photoAll.svg" alt="">
+                            <span style="vertical-align: bottom;font-weight: normal;">All Photo({{countImg}})</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Picture-->
+
+                <!-- Location-->
+                <div class="box_location" *ngIf="viewMode == 2" style="margin-top: 10px !important;">
+                    <ion-grid style="background: transparent;padding: 10px 5px;">
+                        <ion-row>
+                            <ion-col col-1 style="padding: 0;display: grid;">
+                                <img src="./assets/icon/ping-icon.svg" alt="" class="inline" style="border-radius: 0px;height: 15px;width: 15px;margin: auto;">
+                                <!-- <img *ngIf="img.user_id != 'TAT'" [src]="img.pictureFull[0]" alt="" class="inline" style="border-radius: 0px;height: 32px;width: 32px;">
+                <img *ngIf="img.user_id == 'TAT'" [src]="img.photo_img_Full" alt="" class="inline" style="border-radius: 0px;height: 32px;width: 32px;"> -->
+                            </ion-col>
+                            <ion-col col-8 style="padding: 0;">
+                                <div class="inline font_12" style="width: 100%;">
+                                    <div class="Montserrat text_1line" style="width: 96%" [innerHTML]="img.photo_locationText"></div>
+                                    <div class="Montserrat text_1line" style="max-width:60%;font-style: normal;font-weight: bold;display: inline-flex;" [innerHTML]="img.photo_province"></div>
+                                    <div class="Montserrat text_1line" style="color: #0076d0;font-size: 12px;font-weight: bold;margin-right: 5px;float: right;display: inline-block;">
+                                        {{img.distant}} km.</div>
+                                </div>
+                            </ion-col>
+                            <ion-col col-3 style="padding: 0;display: grid;">
+                                <img src="./assets/icon/let'sgo.svg" alt="" style="border-radius: 0px;margin: auto;width: 90px;" class="inline" (click)="startExternalMap(img)">
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </div>
+                <!-- Location-->
+
+                <!-- Location-->
+                <div class="box_location" *ngIf="viewMode == 1" style="">
+                    <ion-grid style="background: transparent;padding: 10px 5px;">
+                        <ion-row>
+                            <ion-col col-1 style="padding: 0;display: grid;">
+                                <img src="./assets/icon/ping-icon.svg" alt="" class="inline" style="border-radius: 0px;height: 15px;width: 15px;margin: auto;">
+                                <!-- <img *ngIf="img.user_id != 'TAT'" [src]="img.pictureFull[0]" alt="" class="inline" style="border-radius: 0px;height: 32px;width: 32px;">
+                <img *ngIf="img.user_id == 'TAT'" [src]="img.photo_img_Full" alt="" class="inline" style="border-radius: 0px;height: 32px;width: 32px;"> -->
+                            </ion-col>
+                            <ion-col col-8 style="padding: 0;">
+                                <div class="inline" style="width: 100%;font-size: 13px;">
+                                    <div class="Montserrat text_1line" style="width: 96%" [innerHTML]="img.photo_locationText"></div>
+                                    <div class="Montserrat text_1line" style="max-width:60%;font-style: normal;display: inline-flex;" [innerHTML]="img.photo_province"></div>
+                                    <div class="Montserrat text_1line" style="color: #0076d0;margin-right: 5px;float: right;display: inline-block;">
+                                        {{img.distant}} km.</div>
+                                </div>
+                            </ion-col>
+                            <ion-col col-3 style="padding: 0;display: grid;">
+                                <img src="./assets/icon/let'sgo.svg" alt="" style="border-radius: 0px;margin: auto;width: 90px;" class="inline" (click)="startExternalMap(img)">
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </div>
+                <!-- Location-->
+
+                <!-- coconuts ,comments icon and budge -->
+                <ion-grid class="gridComment" *ngIf="viewMode == 2" style="padding-top: 0px;padding-bottom: 0px;">
+                    <ion-row style="border-bottom: 1px solid #e4e4e4;padding:0px;">
+                        <ion-col col-6 style="padding-top: 9px;padding-bottom: 8px;">
+                            <img src="./img/icon_coconut_gray.svg" style="width: 25px;vertical-align: middle;" alt="" (click)="like(img,2,i,1)" *ngIf="!img.status_like">
+                            <div id="like{{img.photo_id}}" *ngIf="img.status_like" style="display: inline-block ;" (click)="like(img,1,i,1)">
+                                <img src="./img/icon_coconut.png" style="width: 25px;vertical-align: middle;" alt="">
+                                <span class='like-iconTNew'>
+                <div class='heart-animation-1'></div>
+                <div class='heart-animation-2'></div>
+              </span>
+                            </div>
+                            <!-- <div (click)="coconut(img)" style="margin-left: 5px;display: inline-block;position: relative;width: 25px;height: 25px;vertical-align: middle;left: -5px;"
+              *ngIf="img.imageLike.length != 0 && img.user_id != 'TAT'" [ngClass]="[(img.imageLike.length == 1) ? 'Like1Users' : '',  (img.imageLike.length == 2) ? 'Like2Users': '', (img.imageLike.length > 2) ? 'Like3Users' : '']">
+
+              <div class="userLike" *ngIf="img.imageLike[0]" [ngStyle]="{'background': 'url('+img.imageLike[0]+')'}">
+              </div>
+              <div class="userLike" style="left: 12px;" *ngIf="img.imageLike[1]" [ngStyle]="{'background': 'url('+img.imageLike[1]+')'}"></div>
+              <div class="userLike" style="left: 24px;display: grid;" *ngIf="img.imageLike[2]">
+                <div style="margin: auto;font-size: 18px;font-style: normal;">+</div>
+              </div>
+            </div> -->
+
+                            <div style="display: inline-block;position: relative;height: 20px;vertical-align: middle;margin-left: -10px;" *ngIf="img.imageLike.length != 0">
+                                <div class="userLike" style="display: grid;min-width: 20px;height: 20px;font-size: 16px;">
+                                    <span class="sumLike" style="font-size: 12px;">{{img.sum_like}}</span>
+                                </div>
+                            </div>
+                            <span (click)="coconut(img)" style="color: #777777;font-style: normal;vertical-align: middle;font-weight: bold;font-size: 14px;" class="fontnormal">Coconut</span>
+                        </ion-col>
+
+                        <ion-col col-6 style="padding-top: 9px;padding-bottom: 8px;" (click)="commentV2()">
+                            <img src="./assets/icon/icon-comment-new-f.svg" alt="" style="width: 25px;vertical-align: middle;" *ngIf="!img.status_comment">
+                            <img src="./assets/icon/icon-comment-new-t.svg" alt="" style="width: 25px;vertical-align: middle;" *ngIf="img.status_comment">
+                            <div style="display: inline-block;position: relative;height: 20px;vertical-align: middle;margin-left: -10px;" *ngIf="img.countComment != 0">
+                                <div class="userLike" style="display: grid;min-width: 20px;height: 20px;font-size: 16px;">
+                                    <span class="sumLike" style="font-size: 12px;">{{img.countComment}}</span>
+                                </div>
+                            </div>
+                            <span style="color: #777777;font-style: normal;vertical-align: middle;font-size: 14px;font-weight: bold;" class="fontnormal">Comment</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <!-- coconuts ,comments icon and budge -->
+
+                <!-- coconuts ,comments icon and budge -->
+                <ion-grid class="gridComment" *ngIf="viewMode == 1" style="padding-top: 0px;padding-bottom: 0px;">
+                    <ion-row style="border-bottom: 1px solid #e4e4e4;padding:0px;">
+                        <ion-col col-6 style="padding-top: 9px;padding-bottom: 8px;">
+                            <img src="./img/icon_coconut_gray.svg" style="width: 25px;vertical-align: middle;" alt="" (click)="like(img,2,i,1)" *ngIf="!img.status_like">
+                            <div id="like{{img.photo_id}}" *ngIf="img.status_like" style="display: inline-block ;" (click)="like(img,1,i,1)">
+                                <img src="./img/icon_coconut.png" style="width: 25px;vertical-align: middle;" alt="">
+                                <span class='like-iconTNew'>
+                    <div class='heart-animation-1'></div>
+                    <div class='heart-animation-2'></div>
+                </span>
+                            </div>
+
+                            <div style="display: inline-block;position: relative;height: 20px;vertical-align: middle;margin-left: -10px;" *ngIf="img.imageLike.length != 0">
+                                <div class="userLike" style="display: grid;min-width: 20px;height: 20px;font-size: 16px;">
+                                    <span class="sumLike" style="font-size: 12px;">{{img.sum_like}}</span>
+                                </div>
+                            </div>
+                            <span (click)="coconut(img)" style="color: #777777;font-style: normal;vertical-align: middle;font-weight: bold;font-size: 14px;" class="fontnormal">Coconut</span>
+                        </ion-col>
+
+                        <ion-col col-6 style="padding-top: 9px;padding-bottom: 8px;" (click)="comment()">
+                            <img src="./assets/icon/icon-comment-new-f.svg" alt="" style="width: 25px;vertical-align: middle;" *ngIf="!img.status_comment">
+                            <img src="./assets/icon/icon-comment-new-t.svg" alt="" style="width: 25px;vertical-align: middle;" *ngIf="img.status_comment">
+                            <div style="display: inline-block;position: relative;height: 20px;vertical-align: middle;margin-left: -10px;" *ngIf="img.countComment != 0">
+                                <div class="userLike" style="display: grid;min-width: 20px;height: 20px;font-size: 16px;">
+                                    <span class="sumLike" style="font-size: 12px;">{{img.countComment}}</span>
+                                </div>
+                            </div>
+                            <span style="color: #777777;font-style: normal;vertical-align: middle;font-size: 14px;font-weight: bold;" class="fontnormal">Comment</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <!-- coconuts ,comments icon and budge -->
+            </div>
+
+            <div #commentBox id="commentBox" class="ccccc">
+                <!-- comment  -->
+                <div *ngIf="viewMode == 2 && commentMode">
+                    <div *ngFor="let comment of commentlist; let i = index;">
+                        <div style="padding: 10px 15px 0px 15px;position: relative;" *ngIf="comment.status != 1">
+                            <img class="imgproComment" [src]="comment.userUrl" *ngIf="comment.userUrl" />
+                            <div style="display: inline-block;max-width: 80%;">
+                                <div class="comment_box">
+                                    <span style="font-weight: bold;" [innerHtml]="comment.fullname"></span>
+                                    <span [innerHtml]="comment.comment"></span>
+                                </div>
+                                <div class="time_comment">
+                                    <span>{{comment.date | timeComment}}</span>
+                                </div>
+                                <!-- <ion-textarea  placeholder="Enter a description"></ion-textarea> -->
+                            </div>
+                            <i class="icon_setting_img reportComment" (click)="presentActionSheetComment(comment,i)" *ngIf="img.user_id == userglobal || userglobal == comment.userId"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- comment -->
+
+                <!-- Write a comment -->
+                <div id="writeComment" style="padding: 0px 15px;position: relative;" (click)="commentV2()" *ngIf="viewMode == 2 && commentMode">
+                    <div style="height: 45px;">
+                        <span *ngIf="!st_focus">
+                                <img class="imgproComment" [src]="gd.userProfile.user_path_img" style="vertical-align: middle;" />
+                                <div style="display: inline-block;max-width: 80%;width: 80%;vertical-align: middle;">
+                                  <div class="emtyComment">
+                                    <div style="margin: auto;margin-left: 15px;color: #4c4c4c;">
+                                      Write a comment
+                                    </div>
+                                  </div>
+                                </div>
+                              </span>
+                    </div>
+                </div>
+                <!-- Write a comment -->
+
+                <!-- comment -->
+                <div *ngIf="viewMode == 1">
+                    <div *ngFor="let comment of commentlist; let i = index">
+                        <div style="padding: 10px 15px 0px 15px;position: relative;" *ngIf="comment.status != 1">
+                            <img class="imgproComment" [src]="comment.userUrl" *ngIf="comment.userUrl" />
+                            <div style="display: inline-block;max-width: 80%;">
+                                <div *ngIf="!isEnabled[i]" class="comment_box">
+                                    <span style="font-weight: bold;" [innerHtml]="comment.fullname"></span>
+                                    <span [innerHtml]="comment.comment"></span>
+                                </div>
+                                <ion-textarea #editComments *ngIf="isEnabled[i]" [(ngModel)]="yourComments" style="margin: 0 !important; padding:5px; border-radius: 10px; border: solid 1px dimgray;" placeholder="" autosize autofocus></ion-textarea>
+                                <div class="time_comment">
+                                    <span>{{comment.date | timeComment}}</span>
+                                    <span *ngIf="comment.status == 2 && !isEnabled[i]">Edited</span>
+                                    <span *ngIf="isEnabled[i]">
+                              <button class="btn-edit-comment" (click)="btnCancel(comment, i)" ion-button round color="light" >Cancel</button>
+                              <button class="btn-edit-comment" (click)="btnConfirm(comment, i)" ion-button round color="primary" >Confirm</button>
+                            </span>
+                                </div>
+                            </div>
+                            <i class="icon_setting_img reportComment" (click)="presentActionSheetComment(comment,i)" *ngIf="img.user_id == userglobal || userglobal == comment.userId">
+                        </i>
+                        </div>
+                    </div>
+                </div>
+                <!-- comment -->
+
+
+                <!-- Write a comment -->
+                <div id="writeComment" style="padding: 10px 15px;position: relative;" (click)="comment()" *ngIf="viewMode == 1">
+                    <div style="height: 45px;">
+                        <span *ngIf="!st_focus">
+                                        <img class="imgproComment" [src]="gd.userProfile.user_path_img" style="vertical-align: middle;" />
+                                        <div style="display: inline-block;max-width: 80%;width: 80%;vertical-align: middle;">
+                                        <div class="emtyComment">
+                                            <div style="margin: auto;margin-left: 15px;color: #4c4c4c;">
+                                            Write a comment
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </span>
+                    </div>
+                </div>
+                <!-- Write a comment -->
+            </div>
+
+            <div id="contentBottom">
+                <!-- Same place -->
+                <ion-grid style="padding: 0px 15px 10px 15px;margin-top: 30px;" *ngIf="img.samelength > 1 && viewMode == 1 && textTitle != ''">
+                    <ion-row>
+                        <ion-col style="border-bottom: 1px solid #e4e4e4;font-weight: bold;color: #464646;">
+                            <!-- <img src="./assets/icon/pleat_icon.png" style="width: 15px;vertical-align: middle;" alt=""> -->
+                            <div style="width: 65%; vertical-align: middle;display: inline-block;overflow: hidden;text-overflow: clip;white-space: nowrap;" [innerHtml]="textTitle"></div>
+                            <div style="display: inline-block;float:right;vertical-align: middle;color: #FA6980;" (click)="gd.nextpage(navCtrl,'NewsfeedPage',{'data':{'photo': img, 'data': SamePlace,'formpage':img.photo_location,'type':'1','filter': filter}})">
+                                More
+                                <ion-icon name="ios-arrow-forward" style="vertical-align: middle;"></ion-icon>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+
+                <ion-slides pager slidesPerView='2.5' style="padding: 0px 15px;" *ngIf="img.samelength > 1 && viewMode == 1 && textTitle != ''">
+                    <span *ngFor="let SamePlace of SamePlace;let i = index;">
+                    <ion-slide class="slide_width" style="padding: 5px;width: 184.5px !important;" (click)="GoPage('DetailfeedPage',SamePlace,'samePlace')" *ngIf="SamePlace.photo_id != img.photo_id">
+                        <div *ngIf="SamePlace != undefined && SamePlace != {} " class="Same">
+                        <img *ngIf="SamePlace.pictureResize[0].type == 1" [src]="SamePlace.pictureResize[0].path_resize" style="object-fit: cover;height: 100%;width: 100%;">
+                        <video *ngIf="SamePlace.pictureResize[0].type == 2" [src]="SamePlace.pictureResize[0].path_full" style="width: 100%;top: 0;bottom: 0;margin: auto;margin-top: 5px;"></video>
+                        </div>
+                    </ion-slide>
+                    </span>
+                </ion-slides>
+                <!-- Same place -->
+
+                <!-- Nearby places -->
+                <ion-grid style="padding: 0px 15px 10px 15px;margin-top: 30px;" *ngIf="viewMode == 1">
+                    <ion-row>
+                        <ion-col style="border-bottom: 1px solid #e4e4e4;font-weight: bold;color: #464646;">
+                            <!-- <img src="./assets/icon/pleat_icon.png" style="width: 15px;vertical-align: middle;" alt=""> -->
+                            <div style="width: 65%; vertical-align: middle;display: inline-block;overflow: hidden;text-overflow: clip;white-space: nowrap;">Nearby Places</div>
+                            <div style="display: inline-block;float:right;vertical-align: middle;color: #FA6980;" (click)="gd.nextpage(navCtrl,'NewsfeedPage',{'data':{'photo': img, 'data': dataNearby,'formpage':img.photo_location,'type':'1','filter': filter2}})">
+                                More
+                                <ion-icon name="ios-arrow-forward" style="vertical-align: middle;"></ion-icon>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+                <ion-slides pager slidesPerView='2.5' style="padding: 0px 15px;" *ngIf="viewMode == 1">
+                    <ion-slide class="slide_width" style="padding: 5px;width: 184.5px !important;" *ngFor="let SamePlace of dataNearby;let i = index;" (click)="GoPage('DetailfeedPage',SamePlace,'samePlace')">
+                        <div *ngIf="SamePlace != undefined && SamePlace != {} " class="Same">
+                            <img *ngIf="SamePlace.pictureResize[0].type == 1" [src]="SamePlace.pictureResize[0].path_resize" style="object-fit: cover;height: 100%;width: 100%;">
+                            <video *ngIf="SamePlace.pictureResize[0].type == 2" [src]="SamePlace.pictureResize[0].path_full" style="width: 100%;top: 0;bottom: 0;margin: auto;margin-top: 5px;"></video>
+                        </div>
+                    </ion-slide>
+                </ion-slides>
+                <!-- Nearby places -->
+            </div>
+
+        </div>
+        <div style="height: 50px;"></div>
+    </div>
+</ion-content>
+<ion-footer>
+    <div *ngIf="!disabledEditDelete" style="padding: 10px 15px;" class="input_Comment" id="commentFame">
+        <ion-input type="" placeholder="Write a comment" id="inputFocus" #myInput [(ngModel)]="textComment" (ionFocus)="checkFocus()" (ionBlur)="checkBlur()"></ion-input>
+        <img src="./assets/icon/send_icon.svg" alt="" style="vertical-align: middle;padding: 1em;margin: -1em;" (click)="sendComment_comment()" class="send_btn">
+    </div>
+</ion-footer>

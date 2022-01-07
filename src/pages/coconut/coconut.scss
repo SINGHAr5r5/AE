@@ -1,0 +1,38 @@
+page-coconut {
+    #profile {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 70px;
+    }
+
+    .item-md ion-thumbnail {
+        min-width: 0px;
+        min-height: 0px;
+    }
+
+    .item-md.item-block .item-inner {
+        border-bottom: transparent !important;
+        padding-right: 0px;
+    }
+
+    .item-block .item-inner {
+        border: none !important;
+    }
+
+    .follow {
+        text-transform: none;
+        // font-size: 10px;background-color: #488aff;
+        color: white;
+        width: 85px;
+        background-image: url(../img/btn_datailfeed.png);
+    }
+
+    .Following:before {
+        right: 20px;
+    }
+
+    .Follow:before {
+        right: 25px;
+    }
+}

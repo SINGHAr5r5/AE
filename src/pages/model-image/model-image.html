@@ -1,0 +1,52 @@
+<!--
+  Generated template for the ModelImagePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <!-- <ion-title>modelImage</ion-title> -->
+        <ion-buttons start style="width: 100%;">
+            <ion-grid style="padding: 0px;">
+                <ion-row>
+                    <ion-col col-6 style="padding: 0px;display: grid;">
+                        <button ion-button clear small (click)="cloces()" style="margin: auto;margin-left: 0;">
+              <ion-icon name="close"></ion-icon>
+            </button>
+                    </ion-col>
+                    <ion-col col-6 style="text-align: right; padding: 0px;">
+                        <button ion-button clear small (click)="cloce()" style="font-size: 16px;">
+              Done
+            </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <!-- <img src="" id="imageTest" alt="" style=""> -->
+    <canvas id="canvas" style="display: none;"></canvas>
+    <ion-grid>
+        <!-- imgPath = imageLoop, imageLoop = dataPush -->
+        <ion-row *ngIf=" isShowImg && image != undefined && image.length > 0">
+            <ion-col col-4 *ngFor="let img of image">
+                <div class="imgChooser" (click)="chooserImage(img)" style="">
+                    <img *ngIf="img != undefined && img.thumbnail != undefined && img.type == 2" [src]="img.thumbnail" alt="" style="width: 100%;height: 100%;object-fit: cover;">
+                    <video controls preload="metadata" playsinline [poster]="img.thumbnail" *ngIf="img != undefined && img.type == 3" alt="" style="width: 100%;height: 100%;object-fit: cover;">
+                        <source [src]="img.videoPath | cdvphotolibrary"  type="video/mp4" />
+                    </video>
+                    <div *ngIf="img != undefined && img.statusChooser == 1" class="active">
+                        <div class="inactive">
+                            <div class="textactive">{{img.number}}</div>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-infinite-scroll *ngIf="isShow && (numload*30 <= allImage.length)" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
